@@ -23,7 +23,6 @@ namespace PlayAssistant
         public MainWindow()
         {
             InitializeComponent();
-            Application.Current.MainWindow.Content = new RandomGenerator();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -117,6 +116,11 @@ namespace PlayAssistant
             {
                 item.Refresh();
             }
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
