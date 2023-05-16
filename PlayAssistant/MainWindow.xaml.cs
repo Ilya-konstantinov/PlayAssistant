@@ -34,11 +34,13 @@ namespace PlayAssistant
         {
             InitializeComponent();
 
-            mainWindow = Application.Current.MainWindow.Content;
+            Application.Current.MainWindow.Content = new CounterElement();
+
+            /*mainWindow = Application.Current.MainWindow.Content;
 
             Application.Current.MainWindow.Content = gcm;
 
-            this.Closing += MainWindow_Closing;
+            this.Closing += MainWindow_Closing;*/
         }
         //  1 -- персонажи 2 -- лист генеральных характеристик 3 -- лист игровых модулей
         // Pair<Pair<ChrListDataType, MdListDataType> MdListDataType>
