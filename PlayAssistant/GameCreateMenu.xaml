@@ -17,7 +17,7 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Button x:Name="Back_btn" Content="Back" HorizontalAlignment="Stretch" Margin="20,20,20,20" VerticalAlignment="Stretch" Click="Back_btn_Click"/>
-        <TextBox Text="Game name" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20, 20, 20, 20" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="ElTitle" Text="Game name" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20, 20, 20, 20" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="Create_btn" Content="Create" HorizontalAlignment="Stretch" Margin="20,20,20,20" VerticalAlignment="Stretch" Grid.Column="2" Click="Create_btn_Click"/>
         <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0, 0, 0, 0" Panel.ZIndex="-7" Fill="White" />
     </Grid>

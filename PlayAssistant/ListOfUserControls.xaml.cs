@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceLibrary;
 
 namespace PlayAssistant
 {
@@ -37,14 +38,28 @@ namespace PlayAssistant
         {
             MainWindow parentWindow = Window.GetWindow(this) as MainWindow;
             var selected = (IReturnValue)MainList.SelectedItem;
+            if (selected == null)
+                return;
             selected.Title = ElementTitle.Text;
             if (IsPSList)
             {
-                parentWindow.AddPS(selected);
+                parentWindow.AddPS((IReturnValue)
+                    Activator.CreateInstance(
+                        selected.GetType(),
+                        selected.Title,
+                        "")
+                    );
             }
             else
             {
-                curCh.AddAttribute(selected);
+                if (curCh == null)
+                {
+                    Character.AddGeneralAttributes(selected);
+                }
+                else
+                {
+                    curCh.AddAttribute(selected);
+                }
                 parentWindow.Refrash();
             }
             parentWindow.RemoveList(InMainWindow);

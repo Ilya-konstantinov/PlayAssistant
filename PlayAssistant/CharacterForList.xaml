@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PlayAssistant"
              mc:Ignorable="d" Height="102" Width="302">
     <Grid x:Name="grid" Background="White" MouseDown="Grid_MouseDown">
-        <TextBox x:Name="Name" Text="Name" HorizontalAlignment="Left" Margin="197,10,0,0" VerticalAlignment="Top" Height="34" Width="95"/>
+        <Label x:Name="Name" Content="Name" HorizontalAlignment="Left" Margin="197,10,0,0" VerticalAlignment="Top" Height="34" Width="95"/>
         <Image x:Name="Avatar" HorizontalAlignment="Left" Height="77" Margin="10,10,0,0" VerticalAlignment="Top" Width="166" Source="/avatar-example.png" Stretch="Fill"/>
         <Button Content="AddAtr" HorizontalAlignment="Left" Margin="197,44,0,0" VerticalAlignment="Top" Height="43" Width="95" Click="Button_Click"/>
 

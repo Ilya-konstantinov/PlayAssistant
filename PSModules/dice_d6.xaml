@@ -37,6 +37,7 @@
             <Image x:Name="dice_img" Source="/Images/1.png"/>
         </Border>
         <CheckBox x:Name="animation_checkbox" Grid.Column="1" Content="Animation" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="{DynamicResource LabelFontSize}"/>
+        <Label x:Name="ElTile" Grid.Column="1" Content="Title" HorizontalAlignment="Center" VerticalAlignment="Center" Height="73" Width="428"/>
 
     </Grid>
 </UserControl>

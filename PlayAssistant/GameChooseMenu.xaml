@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="9*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBox HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" Margin="10,35,10,20"/>
+                <TextBox x:Name="Search_textbox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" Margin="10,35,10,20"/>
                 <Button x:Name="Search_btn" Content="S" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Margin="0,35,10,20"/>
             </Grid>
         </Grid>

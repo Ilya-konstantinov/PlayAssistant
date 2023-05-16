@@ -22,16 +22,14 @@ namespace PlayAssistant
     {
         private List<GameBtn> btn_list = new List<GameBtn>();
 
-        private int btn_cnt = 5;
-
-        public GameList()
+        public GameList(List<string> titles)
         {
             InitializeComponent();
 
-            for (int i = 0;i < btn_cnt;i++)
-                btn_list.Add(new GameBtn("TestGame" + i.ToString()));
+            foreach(var title in titles)
+                btn_list.Add(new GameBtn(title));
 
-            for (int i = 0;i < btn_list.Count;i++)
+            for (int i = 0;i < titles.Count;i++)
             {
                 MainGrid.ColumnDefinitions.Add(new ColumnDefinition() { 
                     Width = new GridLength(1, GridUnitType.Star)

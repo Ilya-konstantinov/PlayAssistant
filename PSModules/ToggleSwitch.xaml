@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="PSModules.ToggleSwitch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PSModules"
+             mc:Ignorable="d" 
+             SizeChanged="Element_Resized"
+             d:DesignHeight="100" d:DesignWidth="200" 
+             Name="ToggleUserControl">
+    <Grid Name="ToggleGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="43*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Name="Rect" Stroke="Black" Margin="0,0,0,0" StrokeThickness="4" Fill="Gray" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+        <Ellipse x:Name="Circle" Stroke="Black" Fill="LightBlue"  Stretch="Uniform" MouseLeftButtonUp="Circle_MouseLeftButtonUp" Grid.Row="1" HorizontalAlignment="Left" Width="{DynamicResource CircleSize}"/>
+        <Label x:Name="ElTitle" Content="" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="92" Grid.RowSpan="1" Grid.Row="0"/>
+    </Grid>
+</UserControl>

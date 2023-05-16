@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,15 +14,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PSModules;
+using ServiceLibrary;
 
 namespace PlayAssistant
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    using MdListDataType = List<Pair<Type, ReturnValue>>;
+    using ChrListDataType = List<CharacterBase>;
+    using SessinDataType = Pair<Pair<List<CharacterBase>, List<Pair<Type, ReturnValue>>>, List<Pair<Type, ReturnValue>>>;
     public partial class MainWindow : Window
     {
-        GameChooseMenu gcm = new GameChooseMenu();
+        GameChooseMenu gcm = new GameChooseMenu(SessionService.SessionsList());
         object mainWindow;
 
         public MainWindow()
@@ -30,6 +37,55 @@ namespace PlayAssistant
             mainWindow = Application.Current.MainWindow.Content;
 
             Application.Current.MainWindow.Content = gcm;
+
+            this.Closing += MainWindow_Closing;
+        }
+        //  1 -- персонажи 2 -- лист генеральных характеристик 3 -- лист игровых модулей
+        // Pair<Pair<ChrListDataType, MdListDataType> MdListDataType>
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (SessionService.SessionName == null)
+            {
+                return;
+            }
+            var GenAttr = SessionService.IntRVtoStruct(Character.ListGeneralAttributes);
+            var ChrData = new Pair<ChrListDataType, MdListDataType>(new ChrListDataType(
+                    characters()),
+                    GenAttr
+                );
+            var MdData = new MdListDataType(
+                    SessionService.IntRVtoStruct(PSMList.Items.OfType<IReturnValue>().ToList())
+                    );
+            SessionService.SaveSession(new SessinDataType(ChrData, MdData) );
+        }
+        public ChrListDataType characters()
+        {
+            var list = new ChrListDataType();
+            var lstchr = lb_players.Items.OfType<CharacterForList>().ToList();
+            foreach(var item in lstchr)
+            {
+                list.Add(SessionService.ChrSave(item.character));
+            }
+            return list;
+        }
+        
+        public void StartSession()
+        {
+            var arg = SessionService.LoadSession();
+            var ChrData = arg.First;
+            var MdData = arg.Second;
+            Character.ListGeneralAttributes = SessionService.StructRVToInt( ChrData.Second );
+            if (ChrData.First != null ) { 
+                foreach(var item in ChrData.First){
+                    lb_players.Items.Add( new CharacterForList( SessionService.ChrLoad( item ) ) );
+                }
+            }
+            if (MdData != null) { 
+                foreach (var item in SessionService.StructRVToInt( MdData ))
+                {
+                    PSMList.Items.Add(item);
+                }
+            }
         }
 
         public void OpenGameCreationWindow()
@@ -42,16 +98,6 @@ namespace PlayAssistant
             Application.Current.MainWindow.Content = gcm;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //code
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            //code
-        }
-
         internal void AddCharacter(Character character)
         {
             lb_players.Items.Add(new CharacterForList(character));
@@ -60,7 +106,7 @@ namespace PlayAssistant
 
         public void AddPS(IReturnValue PS)
         {
-            return;
+            PSMList.Items.Add(PS); return;
         }
 
         public void RemoveList(bool NeedToHide)
@@ -90,11 +136,11 @@ namespace PlayAssistant
             var list = new List<IReturnValue>();
             if (IsPSList)
             {
-                list = HelpfulClass.GetParams();
+                list = SessionService.GetParams();
             }
             else
             {
-                list = HelpfulClass.GetAttributes();
+                list = SessionService.GetAttributes();
             }
 
             Stels();
@@ -135,6 +181,11 @@ namespace PlayAssistant
             }
         }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Stels();
+            CreateList(false, true);
+        }
         public void OpenGameCreate(object sender, RoutedEventArgs e)
         {
             Stels();

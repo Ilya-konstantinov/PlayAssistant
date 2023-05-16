@@ -20,11 +20,11 @@ namespace PlayAssistant
     /// </summary>
     public partial class GameChooseMenu : Page
     {
-        public GameChooseMenu()
+        public GameChooseMenu(List<string> titles)
         {
             InitializeComponent();
 
-            GameList gameList = new GameList();
+            GameList gameList = new GameList(titles);
             GameList_frame.Content = gameList;
         }
 

@@ -8,9 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="PSModules">
-      <HintPath>..\PSModules\PSModules\bin\Debug\net6.0-windows\PSModules.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\CHRSModules\CHRSModules.csproj" />
+    <ProjectReference Include="..\PSModules\PSModules.csproj" />
+    <ProjectReference Include="..\ServiceLibrary\ServiceLibrary.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="avatar-example.png" />
+  </ItemGroup>
+	
 
 </Project>

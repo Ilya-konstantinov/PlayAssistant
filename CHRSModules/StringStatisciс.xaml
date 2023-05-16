@@ -1,15 +1,12 @@
-﻿<UserControl x:Class="PlayAssistant.DigitalStatiscic"
+﻿<UserControl x:Class="CHRSModules.StringStatiscic"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PlayAssistant"
+             xmlns:local="clr-namespace:CHRSModules"
              mc:Ignorable="d" Height="92" Width="264" Background="White">
     <Grid>
+        <TextBox x:Name="Field"  HorizontalAlignment="Center" TextWrapping="Wrap" Text="Field" VerticalAlignment="Top" Width="244" Height="52" Margin="0,30,0,0" BorderBrush="#FF0B48FF" TextChanged="Field_TextChanged" />
         <Label x:Name="ElTitle" Content="Title&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" Width="162" Height="26" BorderBrush="#FFD81515" OpacityMask="#FFFF0F0F" Background="White"/>
-        <TextBox x:Name ="ElValue" HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap" Text="Value" VerticalAlignment="Top" Width="203" Height="52" TextChanged="Value_TextChanged"/>
-        <Button x:Name="UpBtn" Content="Up" HorizontalAlignment="Left" Margin="218,30,0,0" VerticalAlignment="Top" Width="36" Height="26" Click="UpBtn_Click"/>
-        <Button x:Name ="DownBtn" Content="Down" HorizontalAlignment="Left" Margin="218,56,0,0" VerticalAlignment="Top" Height="26" Width="36" Click="DownBtn_Click"/>
-
     </Grid>
 </UserControl>

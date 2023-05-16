@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceLibrary;
 
 namespace PlayAssistant
 {
@@ -21,13 +22,13 @@ namespace PlayAssistant
     public enum Status { Open, Close }
     public partial class CharacterForList : UserControl
     {
-        Character character;
+        public Character character;
         Status st = Status.Close;
         internal CharacterForList(Character character)
         {
             InitializeComponent();
             this.character = character;
-            Name.Text= character.Name;
+            Name.Content= character.Name;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
