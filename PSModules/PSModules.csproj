@@ -10,4 +10,8 @@
 		<ProjectReference Include="..\ServiceLibrary\ServiceLibrary.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="PSModules\obj\Debug\net7.0-windows\" />
+	</ItemGroup>
+
 </Project>
