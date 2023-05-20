@@ -96,7 +96,7 @@ public partial class MainWindow : Window
     public void RemoveList(bool NeedToHide)
     {
         var lst = MainGrid.Children.OfType<ListOfUserControls>().ToList();
-        foreach (var item in lst) MainGrid.Children.Remove(item);
+        foreach (var item in lst) PSMPicker.Children.Remove(item);
 
         if (NeedToHide) UnStels();
     }
@@ -104,7 +104,7 @@ public partial class MainWindow : Window
     public void RemoveCreateCharacter()
     {
         var lst = MainGrid.Children.OfType<CharacterCreate>().ToList();
-        foreach (var item in lst) MainGrid.Children.Remove(item);
+        foreach (var item in lst) PSMPicker.Children.Remove(item);
 
         UnStels();
     }
