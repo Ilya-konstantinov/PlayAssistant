@@ -4,9 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             Width="342">
-    <Grid Background="#2D283E">
+             d:DesignHeight="450">
+    <Grid Background="#453c5d">
         <Grid.RowDefinitions>
             <RowDefinition Height="383*" />
             <RowDefinition Height="67*" />
@@ -14,7 +13,7 @@
         <ListBox x:Name="MainList"
                  Margin="30,49,30,2"
                  MouseDoubleClick="MainList_MouseDoubleClick" />
-        <Button Content="Conf"
+        <Button Content="Закрыть"
                 HorizontalAlignment="Center"
                 Margin="0,3,0,0"
                 VerticalAlignment="Top"

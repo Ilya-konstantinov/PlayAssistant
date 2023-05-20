@@ -118,7 +118,7 @@ public partial class MainWindow : Window
             list = SessionService.GetAttributes();
 
         Stels();
-        MainGrid.Children.Add(new ListOfUserControls(list, IsPSList, InMainWindow, curCh));
+        PSMPicker.Children.Add(new ListOfUserControls(list, IsPSList, InMainWindow, curCh));
     }
 
     public void Stels()
