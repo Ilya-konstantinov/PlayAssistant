@@ -168,7 +168,7 @@ internal static class SessionService
             }
         }
         // На случай, если файла titles.json не существует
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException)
         {
             File.Create("titles.json");
             return new List<string>();

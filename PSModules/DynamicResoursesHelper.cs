@@ -27,7 +27,7 @@ public static class DynamicResourcesHelper
         {
             App.MainWindow.Resources.Add(name, value);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             if (App.MainWindow.Resources.Contains(name)) return 1; // Element already created
             return 2; // Unknown error
@@ -45,7 +45,7 @@ public static class DynamicResourcesHelper
         {
             App.MainWindow.Resources[name] = value;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             if (!App.MainWindow.Resources.Contains(name)) return 1; // Element does not exist
 
