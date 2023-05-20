@@ -10,7 +10,7 @@ namespace PlayAssistant;
 /// </summary>
 public partial class CharacterCreate : UserControl
 {
-    private readonly Character _character = new("");
+    private readonly Character _character = new("","");
 
     public CharacterCreate()
     {
