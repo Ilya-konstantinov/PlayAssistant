@@ -32,6 +32,10 @@ namespace PlayAssistant
             IsPSList = _IsPSList;
             InMainWindow = _InMainWindow;
             curCh= _curCh;
+
+            var t = MainList.Items.OfType<UIElement>().ToList();
+            foreach(var item in t)
+                item.IsEnabled = false;
         }
 
         private void MainList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
