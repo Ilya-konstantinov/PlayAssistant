@@ -32,11 +32,6 @@
                 Width="257"
                 Height="124"
                 Click="Button_Click_2" Grid.Row="1" />
-        <Rectangle x:Name="Hide"
-                   Grid.ColumnSpan="2"
-                   Fill="#4CA9A9A9"
-                   IsEnabled="False"
-                   Visibility="Hidden" Grid.RowSpan="2" />
         <ListBox x:Name="PSMList"
                  Margin="10,10,10,15" />
         <Button Grid.Column="1"
@@ -81,5 +76,10 @@
                 Height="86"
                 Width="91"
                 Click="Exit_btn_Click" Grid.Row="1" />
+        <Rectangle x:Name="Hide"
+                   Grid.ColumnSpan="2"
+                   Fill="#4CA9A9A9"
+                   IsEnabled="False"
+                   Visibility="Hidden" Grid.RowSpan="2" />
     </Grid>
 </Window>

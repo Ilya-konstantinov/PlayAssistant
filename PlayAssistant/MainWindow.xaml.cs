@@ -13,7 +13,7 @@ namespace PlayAssistant;
 /// </summary>
 using MdListDataType = List<Pair<Type, ReturnValue>>;
 using ChrListDataType = List<CharacterBase>;
-using SessinDataType =
+using SessionDataType =
     Pair<Pair<List<CharacterBase>, List<Pair<Type, ReturnValue>>>, List<Pair<Type, ReturnValue>>>;
 
 public partial class MainWindow : Window
@@ -38,6 +38,12 @@ public partial class MainWindow : Window
     {
         if (SessionService.SessionName == null) return;
 
+        
+        SessionService.SaveSession(SessionData());
+    }
+
+    public SessionDataType SessionData()
+    {
         var GenAttr = SessionService.IntRVtoStruct(Character.ListGeneralAttributes);
         var ChrData = new Pair<ChrListDataType, MdListDataType>(new ChrListDataType(
                 characters()),
@@ -46,7 +52,7 @@ public partial class MainWindow : Window
         var MdData = new MdListDataType(
             SessionService.IntRVtoStruct(PSMList.Items.OfType<IReturnValue>().ToList())
         );
-        SessionService.SaveSession(new SessinDataType(ChrData, MdData));
+        return new SessionDataType(ChrData, MdData);
     }
 
     public ChrListDataType characters()
@@ -80,6 +86,8 @@ public partial class MainWindow : Window
 
     public void OpenGameChoosePage()
     {
+        lb_players.Items.Clear();
+        PSMList.Items.Clear();
         Application.Current.MainWindow.Content = gcm;
     }
 
@@ -182,6 +190,8 @@ public partial class MainWindow : Window
 
     private void Exit_btn_Click(object sender, RoutedEventArgs e)
     {
+        SessionService.SaveSession(SessionData());
+        SessionService.SessionName = null;
         OpenGameChoosePage();
     }
 }

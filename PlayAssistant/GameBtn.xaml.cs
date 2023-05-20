@@ -14,7 +14,7 @@ public partial class GameBtn : UserControl
     {
         InitializeComponent();
 
-        game = _game_name.ToLower();
+        game = _game_name;
 
         Select_btn.Content = _game_name;
     }
