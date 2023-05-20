@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ServiceLibrary;
@@ -145,13 +144,10 @@ public partial class DiceD6 : IReturnValue
 
     public void SetValue(string value)
     {
-        if (value == "")
-        {
-            value = "0";
-        }
-        var val = Int32.Parse(value);
-        this._value = Clamp(val, 1, 6);
-        dice_img.Source = new BitmapImage(new Uri($"/Images/{this._value}.png", UriKind.Relative));
+        if (value == "") value = "0";
+        var val = int.Parse(value);
+        _value = Clamp(val, 1, 6);
+        dice_img.Source = new BitmapImage(new Uri($"/Images/{_value}.png", UriKind.Relative));
     }
 
 

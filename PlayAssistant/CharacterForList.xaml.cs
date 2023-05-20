@@ -23,7 +23,7 @@ public partial class CharacterForList : UserControl
     internal CharacterForList(Character character)
     {
         InitializeComponent();
-        this.Character = character;
+        Character = character;
         Name.Content = character.Name;
     }
 

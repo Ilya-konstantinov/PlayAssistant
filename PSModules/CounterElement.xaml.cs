@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using ServiceLibrary;
 
 namespace PSModules;
@@ -36,7 +35,7 @@ public partial class CounterElement : IReturnValue
     public string Value
     {
         get => _value.ToString();
-        set => this._value = int.Parse(value);
+        set => _value = int.Parse(value);
     }
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
@@ -91,6 +90,6 @@ public partial class CounterElement : IReturnValue
 
     public void SetValue(int value)
     {
-        this._value = value;
+        _value = value;
     }
 }

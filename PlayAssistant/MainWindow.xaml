@@ -45,8 +45,7 @@
         <Grid x:Name="PSMPicker"
               Grid.Row="1"
               Grid.Column="1"
-              ZIndex="1">
-        </Grid>
+              ZIndex="1" />
 
 
         <StackPanel Grid.Column="2"
@@ -66,8 +65,7 @@
                     Click="btn1_Click" />
         </StackPanel>
 
-        <Grid
-              x:Name="GameCreate_grid"
+        <Grid x:Name="GameCreate_grid"
               Margin="10,10,10,10"
               Grid.ColumnSpan="4"
               Visibility="Hidden"
@@ -85,7 +83,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
         </Grid>
-        
+
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
@@ -96,13 +94,11 @@
                     Margin="0, 0, 30, 0"
                     Click="Button_Click_3" />
             <Button x:Name="Exit_btn"
-                    Grid.Column="1"
                     Content="Exit"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Click="Exit_btn_Click"
-                    Margin="0, 0, 30, 0"
-                    Grid.Row="2" />
+                    Margin="0, 0, 30, 0" />
         </StackPanel>
     </Grid>
 </Window>

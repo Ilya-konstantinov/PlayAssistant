@@ -13,9 +13,9 @@ namespace PlayAssistant;
 /// </summary>
 public partial class ListOfUserControls : UserControl
 {
+    private readonly bool _isPsList;
     public readonly Character CurCh;
     public readonly bool InMainWindow;
-    private readonly bool _isPsList;
 
     public ListOfUserControls(List<IReturnValue> userControls, bool isPsList, bool inMainWindow,
         Character curCh = null)
@@ -30,7 +30,6 @@ public partial class ListOfUserControls : UserControl
         var t = MainList.Items.OfType<UIElement>().ToList();
         foreach (var item in t)
             item.IsEnabled = false;
-
     }
 
     private void MainList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

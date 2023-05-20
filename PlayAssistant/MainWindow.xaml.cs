@@ -38,7 +38,7 @@ public partial class MainWindow : Window
     {
         if (SessionService.SessionName == null) return;
 
-        
+
         SessionService.SaveSession(SessionData());
     }
 

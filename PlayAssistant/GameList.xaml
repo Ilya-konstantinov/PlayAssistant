@@ -10,7 +10,5 @@
       Title="GameList">
 
     <Grid x:Name="MainGrid"
-          Background="#2D283E">
-
-    </Grid>
+          Background="#2D283E" />
 </Page>
