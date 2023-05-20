@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,11 @@ public partial class ListOfUserControls : UserControl
         IsPSList = _IsPSList;
         InMainWindow = _InMainWindow;
         curCh = _curCh;
+
+        var t = MainList.Items.OfType<UIElement>().ToList();
+        foreach (var item in t)
+            item.IsEnabled = false;
+
     }
 
     private void MainList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -36,14 +42,11 @@ public partial class ListOfUserControls : UserControl
         selected.Title = ElementTitle.Text;
         if (IsPSList)
         {
-            var instance = Activator.CreateInstance(
-                selected.GetType(),
-                selected.Title,
-                "");
-            ((UserControl)instance).SetValue(Grid.ColumnProperty, 1);
-            ((UserControl)instance).SetValue(Grid.RowProperty, 1);
             parentWindow.AddPS((IReturnValue)
-                instance
+                Activator.CreateInstance(
+                    selected.GetType(),
+                    selected.Title,
+                    "")
             );
         }
         else
@@ -63,5 +66,6 @@ public partial class ListOfUserControls : UserControl
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
         parentWindow.RemoveList(InMainWindow);
+        parentWindow.CloseOverlayed();
     }
 }
