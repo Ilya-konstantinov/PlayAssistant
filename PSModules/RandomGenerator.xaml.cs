@@ -1,79 +1,89 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media; 
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ServiceLibrary;
 
-namespace PSModules
+namespace PSModules;
+
+/// <summary>
+///     Логика взаимодействия для Random.xaml
+/// </summary>
+public partial class RandomGenerator : IReturnValue
 {
-    /// <summary>
-    /// Логика взаимодействия для Random.xaml
-    /// </summary>
-    public partial class RandomGenerator : UserControl, IReturnValue
+    private readonly Random rand = new();
+
+    private double btnFontSize = 6; // процент от высоты окна
+    private double labelFontSize = 12;
+    private int last_value;
+
+    public RandomGenerator()
     {
-        private readonly Random rand = new Random();
-        private int last_value = 0;
+        InitializeComponent();
+    }
 
-        double btnFontSize = 6;         // процент от высоты окна
-        double labelFontSize = 12;
+    public RandomGenerator(string _Title, string _Value)
+    {
+        InitializeComponent();
+        Title = _Title;
+        if (_Value == "")
+            _Value = "0";
+        Value = _Value;
+    }
 
-        private void Element_Resized(object sender, SizeChangedEventArgs e)
+    public string Title
+    {
+        get => (string)ElTitle.Content;
+        set => ElTitle.Content = value;
+    }
+
+    public string Value
+    {
+        get => last_value.ToString();
+        set => Set_Value(value);
+    }
+
+    private void Element_Loaded(object sender, RoutedEventArgs e)
+    {
+        /*
+                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
+                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
+                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
+                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
+                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
+                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+    }
+
+    private void Element_Resized(object sender, SizeChangedEventArgs e)
+    {
+        /*
+                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
+                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
+                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
+                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
+                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
+                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+    }
+
+    private void Generate_btn_Click(object sender, RoutedEventArgs e)
+    {
+        int from, to;
+
+        try
         {
-            double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
-            double btnfontsize = Application.Current.MainWindow.Height * (btnFontSize / 100);
-            if (Convert.ToBoolean(DynamicResourcesHelper.Update("LabelFontSize", labelfontsize)))
-                DynamicResourcesHelper.Create("LabelFontSize", labelfontsize);
-            if (Convert.ToBoolean(DynamicResourcesHelper.Update("BtnFontSize", btnfontsize)))
-                DynamicResourcesHelper.Create("BtnFontSize", btnfontsize);
+            from = Convert.ToInt32(From_textbox.Text);
+            to = Convert.ToInt32(To_textbox.Text);
+            last_value = rand.Next(from, to);
+            Result_textblock.Text = last_value.ToString();
         }
-
-        public RandomGenerator()
+        catch
         {
-            InitializeComponent();
+            Result_textblock.Text = "Not a number";
         }
-        public RandomGenerator(string _Title, string _Value)
-        {
-            InitializeComponent();
-            Title = _Title;
-            if (_Value == "")
-                _Value = "0";
-            Value = _Value;
-        }
+    }
 
-        private void Generate_btn_Click(object sender, RoutedEventArgs e)
-        {
-            int from, to;
-
-            try
-            {
-                from = Convert.ToInt32(From_textbox.Text);
-                to = Convert.ToInt32(To_textbox.Text);
-                last_value = rand.Next(from, to);
-                Result_textblock.Text = last_value.ToString();
-            }
-            catch {
-                Result_textblock.Text = "Not a number";
-            }
-
-        }
-
-        public string Title { get => (string)ElTitle.Content; set => ElTitle.Content = value; }
-        public string Value { get => last_value.ToString(); set => Set_Value(value); }
-
-        public void Set_Value(string _value)
-        {
-            Result_textblock.Text = _value;
-            last_value = Int32.Parse(_value);
-        }
+    public void Set_Value(string _value)
+    {
+        Result_textblock.Text = _value;
+        last_value = int.Parse(_value);
     }
 }

@@ -1,82 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ServiceLibrary;
 
-namespace PSModules
+namespace PSModules;
+
+/// <summary>
+///     Логика взаимодействия для CounterElement.xaml
+/// </summary>
+public partial class CounterElement : IReturnValue
 {
-    /// <summary>
-    /// Логика взаимодействия для CounterElement.xaml
-    /// </summary>
-    public partial class CounterElement : UserControl, IReturnValue
+    private double btnFontSize = 6; // процент от высоты окна
+    private double labelFontSize = 12;
+    public int value;
+
+    public CounterElement()
     {
-        public int value = 0;
+        InitializeComponent();
+    }
 
-        double btnFontSize = 6;         // процент от высоты окна
-        double labelFontSize = 12;
+    public CounterElement(string _Title, string _Value = "0")
+    {
+        InitializeComponent();
+        Title = _Title;
+        if (_Value == "")
+            _Value = "0";
+        Value = _Value;
+    }
 
-        public CounterElement()
-        {
-            InitializeComponent();
-        }
-        public CounterElement(string _Title, string _Value = "0")
-        {
-            InitializeComponent();
-            Title = _Title;
-            if (_Value == "")
-                _Value = "0";
-            Value = _Value;
-        }
+    public string Title
+    {
+        get => (string)ElTitle.Content;
+        set => ElTitle.Content = value;
+    }
 
-        private void Element_Resized(object sender, SizeChangedEventArgs e)
-        {
-            double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
-            double btnfontsize = Application.Current.MainWindow.Height * (btnFontSize / 100);
-            if (Convert.ToBoolean(DynamicResourcesHelper.Update("LabelFontSize", labelfontsize)))
-                DynamicResourcesHelper.Create("LabelFontSize", labelfontsize);
-            if (Convert.ToBoolean(DynamicResourcesHelper.Update("BtnFontSize", btnfontsize)))
-                DynamicResourcesHelper.Create("BtnFontSize", btnfontsize);
-        }
+    public string Value
+    {
+        get => value.ToString();
+        set => this.value = int.Parse(value);
+    }
 
-        private void Minus_btn_Click(object sender, RoutedEventArgs e)
-        {
-            value--;
-            Update_text();
-        }
+    private void Element_Loaded(object sender, RoutedEventArgs e)
+    {
+        /*
+                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
+                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
+                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
+                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
+                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
+                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+    }
 
-        private void Reset_btn_Click(object sender, RoutedEventArgs e)
-        {
-            value = 0;
-            Update_text();
-        }
+    private void Element_Resized(object sender, SizeChangedEventArgs e)
+    {
+        /*
+                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
+                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
+                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
+                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
+                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
+                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+    }
 
-        private void Plus_btn_Click(object sender, RoutedEventArgs e)
-        {
-            value++;
-            Update_text();
-        }
+    private void Minus_btn_Click(object sender, RoutedEventArgs e)
+    {
+        value--;
+        Update_text();
+    }
 
-        private void Update_text()
-        {
-            Value_label.Content = value.ToString();
-        }
+    private void Reset_btn_Click(object sender, RoutedEventArgs e)
+    {
+        value = 0;
+        Update_text();
+    }
 
-        public string Title { get => (string)ElTitle.Content; set => ElTitle.Content = value;  }
-        public string Value { get => value.ToString(); set => this.value = Int32.Parse(value); }
+    private void Plus_btn_Click(object sender, RoutedEventArgs e)
+    {
+        value++;
+        Update_text();
+    }
 
-        public int GetValue() => value;
+    private void Update_text()
+    {
+        Value_label.Content = value.ToString();
+    }
 
-        public void SetValue(int _value) => value = _value;
+    public int GetValue()
+    {
+        return value;
+    }
+
+    public void SetValue(int _value)
+    {
+        value = _value;
     }
 }

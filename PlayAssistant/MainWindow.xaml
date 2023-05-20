@@ -3,35 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PlayAssistant"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1600" WindowState="Maximized">
-    <Grid x:Name ="MainGrid">
+        Title="PlayAssistant"
+        Height="900"
+        Width="1600"
+        WindowState="Maximized">
+    <Grid x:Name="MainGrid"
+          Background="#2D283E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="735*"/>
+            <RowDefinition Height="149*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
 
-        <ListBox x:Name="lb_players" Grid.Column="1" Margin="0,10,0,164" HorizontalAlignment="Center" Width="431"/>
-        <Button Content="Чето слева в открытых характеристиках игрока" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="257" Height="124" Click="Button_Click_2"/>
-        <Rectangle x:Name="Hide" Grid.ColumnSpan="2" Fill="#4CA9A9A9" IsEnabled="False" Visibility="Hidden"/>
-        <ListBox x:Name="PSMList" Margin="10,10,10,164"/>
-        <Button Grid.Column="1" Content="Создать персонажа" HorizontalAlignment="Left" Margin="287,750,0,0" VerticalAlignment="Top" Height="124" Width="195" Click="btn1_Click"/>
-        <Button Grid.Column="1" Content="Добавить Глобальную харакреристику " HorizontalAlignment="Left" Margin="51,750,0,0" VerticalAlignment="Top" Height="124" Width="189" Click="Button_Click_3"/>
+        <ListBox x:Name="lb_players"
+                 Grid.Column="1"
+                 Margin="0,10,0,15"
+                 HorizontalAlignment="Center"
+                 Width="431" />
+        <Button Content="Чето слева в открытых характеристиках игрока"
+                HorizontalAlignment="Left"
+                Margin="10,0,0,10"
+                VerticalAlignment="Bottom"
+                Width="257"
+                Height="124"
+                Click="Button_Click_2" Grid.Row="1" />
+        <ListBox x:Name="PSMList"
+                 Margin="10,10,10,15" />
+        <Button Grid.Column="1"
+                Content="Создать персонажа"
+                HorizontalAlignment="Left"
+                Margin="287,15,0,0"
+                VerticalAlignment="Top"
+                Height="124"
+                Width="195"
+                Click="btn1_Click" Grid.Row="1" />
+        <Button Grid.Column="1"
+                Content="Добавить Глобальную харакреристику "
+                HorizontalAlignment="Left"
+                Margin="51,15,0,0"
+                VerticalAlignment="Top"
+                Height="124"
+                Width="189"
+                Click="Button_Click_3" Grid.Row="1" />
 
-        <Grid x:Name="GameCreate_grid" Margin="10,10,10,10" Grid.ColumnSpan="3" Visibility="Hidden" IsEnabled="False" Panel.ZIndex="10">
+        <Grid x:Name="GameCreate_grid"
+              Margin="10,10,10,10"
+              Grid.ColumnSpan="2"
+              Visibility="Hidden"
+              IsEnabled="False"
+              Panel.ZIndex="10" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
         </Grid>
-        <Button x:Name="Exit_btn" Content="Exit" HorizontalAlignment="Left" Margin="966,788,0,0" VerticalAlignment="Top" Height="86" Width="91" Click="Exit_btn_Click"/>
+        <Button x:Name="Exit_btn"
+                Content="Exit"
+                HorizontalAlignment="Left"
+                Margin="966,53,0,0"
+                VerticalAlignment="Top"
+                Height="86"
+                Width="91"
+                Click="Exit_btn_Click" Grid.Row="1" />
+        <Rectangle x:Name="Hide"
+                   Grid.ColumnSpan="2"
+                   Fill="#4CA9A9A9"
+                   IsEnabled="False"
+                   Visibility="Hidden" Grid.RowSpan="2" />
     </Grid>
 </Window>
