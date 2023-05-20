@@ -1,50 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 using ServiceLibrary;
 
-namespace CHRSModules
+namespace CHRSModules;
+
+/// <summary>
+///     Логика взаимодействия для StringStatiscic.xaml
+/// </summary>
+public partial class StringStatiscic : IReturnValue
 {
-    /// <summary>
-    /// Логика взаимодействия для StringStatiscic.xaml
-    /// </summary>
-    public partial class StringStatiscic : UserControl, IReturnValue
+    public StringStatiscic()
     {
-        public string Title { get => (string)ElTitle.Content; set => ElTitle.Content = value; }
-        public string Value { get => Field.Text; set => Field.Text = value; }
+        InitializeComponent();
+        ElTitle.Content = "";
+        Field.IsEnabled = false;
+    }
 
-        public StringStatiscic()
-        {
-            InitializeComponent();
-            ElTitle.Content = "";
-            Field.IsEnabled = false;
-        }
+    public StringStatiscic(string _Title = "", string _Value = "")
+    {
+        InitializeComponent();
+        ElTitle.Content = _Title;
+        Value = _Value;
+        if (_Title == _Value) Field.IsEnabled = false;
+    }
 
-        public StringStatiscic(String _Title = "", String _Value = "")
-        {
-            InitializeComponent();
-            this.ElTitle.Content = _Title;
-            Value = _Value;
-            if (_Title == _Value)
-            {
-                Field.IsEnabled = false;
-            }
-        }
+    public string Title
+    {
+        get => (string)ElTitle.Content;
+        set => ElTitle.Content = value;
+    }
 
-        private void Field_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Value= Field.Text;
-        }
+    public string Value
+    {
+        get => Field.Text;
+        set => Field.Text = value;
+    }
+
+    private void Field_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        Value = Field.Text;
     }
 }

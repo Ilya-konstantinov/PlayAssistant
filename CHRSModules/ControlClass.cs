@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace CHRSModules;
 
-namespace CHRSModules
+public class ControlClass
 {
-    public class ControlClass
-    {
-    }
 }
