@@ -1,25 +1,70 @@
 ﻿<UserControl x:Class="PlayAssistant.CharacterCreate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PlayAssistant"
-             mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="500">
-    <Grid x:Name="grid" Background="#2D283E" >
+             mc:Ignorable="d"
+             d:DesignHeight="350"
+             d:DesignWidth="500">
+    <Grid x:Name="grid"
+          Background="#2D283E">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBox Foreground="White" x:Name="Name" Margin="83,10,10,0" TextWrapping="Wrap" Text="Введите имя" VerticalAlignment="Top" Height="63" Grid.ColumnSpan="3" Grid.Column="2"/>
-        <Image x:Name="Avatar" HorizontalAlignment="Right" Height="100" Margin="0,10,93,0" VerticalAlignment="Top" Width="230" OpacityMask="#FFCE0606" Source="/avatar-example.png" Stretch="Fill" Grid.ColumnSpan="3"/>
-        <ListBox Foreground="White" x:Name="Characteristic" Margin="10,115,10,60" Grid.ColumnSpan="5"/>
-        <Button x:Name="AddGeneralCharacteriscit" Content="Добавить Характеристику" Margin="83,78,10,0" VerticalAlignment="Top" Height="32" Grid.ColumnSpan="3" Grid.Column="2" Click="AddCharacteriscit_Click"/>
-        <Button x:Name="Add" Content="Создать персонажа" HorizontalAlignment="Right" Margin="0,295,73,0" VerticalAlignment="Top" Height="45" Width="334" Grid.ColumnSpan="4" Click="Add_Click"/>
-        <Button Grid.Column="3" Content="Close" HorizontalAlignment="Left" Margin="16,295,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="45" Width="141" Click="Button_Click"/>
+        <TextBox x:Name="Name"
+                 Margin="83,10,10,0"
+                 TextWrapping="Wrap"
+                 Text="Введите имя"
+                 VerticalAlignment="Top"
+                 Height="63"
+                 Grid.ColumnSpan="3"
+                 Grid.Column="2"
+                 Foreground="White"
+                 FontSize="20" />
+        <Image x:Name="Avatar"
+               HorizontalAlignment="Right"
+               Height="100"
+               Margin="0,10,93,0"
+               VerticalAlignment="Top"
+               Width="230"
+               OpacityMask="#FFCE0606"
+               Source="/avatar-example.png"
+               Stretch="Fill"
+               Grid.ColumnSpan="3" />
+        <ListBox x:Name="Characteristic"
+                 Margin="10,115,10,60"
+                 Grid.ColumnSpan="5" />
+        <Button x:Name="AddGeneralCharacteriscit"
+                Content="Добавить Характеристику"
+                Margin="83,78,10,0"
+                VerticalAlignment="Top"
+                Height="32"
+                Grid.ColumnSpan="3"
+                Grid.Column="2"
+                Click="AddCharacteriscit_Click" />
+        <Button x:Name="Add"
+                Content="Создать персонажа"
+                HorizontalAlignment="Right"
+                Margin="0,295,73,0"
+                VerticalAlignment="Top"
+                Height="45"
+                Width="334"
+                Grid.ColumnSpan="4"
+                Click="Add_Click" />
+        <Button Grid.Column="3"
+                Content="Close"
+                HorizontalAlignment="Left"
+                Margin="16,295,0,0"
+                VerticalAlignment="Top"
+                Grid.ColumnSpan="2"
+                Height="45"
+                Width="141"
+                Click="Button_Click" />
 
     </Grid>
 </UserControl>
