@@ -22,7 +22,7 @@
             <RowDefinition Height="203*" />
         </Grid.RowDefinitions>
         <TextBox Foreground="White"
-                 x:Name="Hours_textbox"
+                 x:Name="HoursTextbox"
                  Grid.Row="2"
                  TextWrapping="Wrap"
                  Text="0"
@@ -33,7 +33,7 @@
                  TextChanged="Input_time"
                  FontSize="{DynamicResource LabelFontSize}" />
         <TextBox Foreground="White"
-                 x:Name="Minutes_textbox"
+                 x:Name="MinutesTextbox"
                  Margin="10"
                  Grid.Row="2"
                  TextWrapping="Wrap"
@@ -44,7 +44,7 @@
                  TextChanged="Input_time"
                  FontSize="{DynamicResource LabelFontSize}" />
         <TextBox Foreground="White"
-                 x:Name="Seconds_textbox"
+                 x:Name="SecondsTextbox"
                  Grid.Row="2"
                  TextWrapping="Wrap"
                  Text="5"
@@ -54,7 +54,7 @@
                  HorizontalContentAlignment="Center"
                  TextChanged="Input_time"
                  FontSize="{DynamicResource LabelFontSize}" />
-        <Button x:Name="HPlus_btn"
+        <Button x:Name="HPlusBtn"
                 Content="++"
                 Margin="10"
                 Height="auto"
@@ -64,7 +64,7 @@
                 HorizontalContentAlignment="Center"
                 Click="HPlus_btn_Click"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <Button x:Name="MPlus_btn"
+        <Button x:Name="MPlusBtn"
                 Content="++"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -76,7 +76,7 @@
                 Click="MPlus_btn_Click"
                 FontSize="{DynamicResource BtnFontSize}"
                 Margin="10" />
-        <Button x:Name="SPlus_btn"
+        <Button x:Name="SPlusBtn"
                 Content="++"
                 Margin="10"
                 Grid.Row="1"
@@ -88,7 +88,7 @@
                 Click="SPlus_btn_Click"
                 Height="auto"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <Button x:Name="HMinus_btn"
+        <Button x:Name="HMinusBtn"
                 Height="auto"
                 Content="--"
                 Margin="10"
@@ -98,7 +98,7 @@
                 HorizontalContentAlignment="Center"
                 Click="HMinus_btn_Click"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <Button x:Name="MMinus_btn"
+        <Button x:Name="MMinusBtn"
                 Height="auto"
                 Content="--"
                 Grid.Row="3"
@@ -108,7 +108,7 @@
                 Click="MMinus_btn_Click"
                 Margin="10"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <Button x:Name="SMinus_btn"
+        <Button x:Name="SMinusBtn"
                 Content="--"
                 Margin="10"
                 Grid.Row="3"
@@ -118,14 +118,14 @@
                 Height="auto"
                 Click="SMinus_btn_Click"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <Button x:Name="Start_btn"
+        <Button x:Name="StartBtn"
                 Content="Start"
                 Grid.Row="4"
                 Height="auto"
                 Margin="10, 10, 10, 10"
                 Click="Start_btn_Click"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <Button x:Name="Reset_btn"
+        <Button x:Name="ResetBtn"
                 Grid.Column="2"
                 Content="Reset"
                 Grid.Row="4"
@@ -133,7 +133,7 @@
                 Margin="10"
                 Click="Reset_btn_Click"
                 FontSize="{DynamicResource BtnFontSize}" />
-        <TextBlock x:Name="Error_textblock"
+        <TextBlock x:Name="ErrorTextblock"
                    Grid.Column="1"
                    Grid.Row="4"
                    TextWrapping="Wrap"

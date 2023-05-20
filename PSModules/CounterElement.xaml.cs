@@ -80,7 +80,7 @@ public partial class CounterElement : IReturnValue
 
     private void Update_text()
     {
-        Value_label.Content = _value.ToString();
+        ValueLabel.Content = _value.ToString();
     }
 
     public int GetValue()

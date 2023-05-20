@@ -25,7 +25,7 @@
 
         <!-- Список игроков -->
         <ListBox Grid.Row="1"
-                 x:Name="lb_players"
+                 x:Name="LbPlayers"
                  Grid.Column="2"
                  HorizontalAlignment="Stretch" />
         <Rectangle Grid.Row="1"
@@ -37,12 +37,12 @@
                    Visibility="Hidden" />
 
         <!-- Список игровых статистик -->
-        <ListBox x:Name="PSMList"
+        <ListBox x:Name="PsmList"
                  Grid.Row="1"
                  Grid.Column="1"
                  Margin="10,10,10,15" />
 
-        <Grid x:Name="PSMPicker"
+        <Grid x:Name="PsmPicker"
               Grid.Row="1"
               Grid.Column="1"
               ZIndex="1" />
@@ -65,7 +65,7 @@
                     Click="btn1_Click" />
         </StackPanel>
 
-        <Grid x:Name="GameCreate_grid"
+        <Grid x:Name="GameCreateGrid"
               Margin="10,10,10,10"
               Grid.ColumnSpan="4"
               Visibility="Hidden"
@@ -93,7 +93,7 @@
                     VerticalAlignment="Center"
                     Margin="0, 0, 30, 0"
                     Click="Button_Click_3" />
-            <Button x:Name="Exit_btn"
+            <Button x:Name="ExitBtn"
                     Content="Exit"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"

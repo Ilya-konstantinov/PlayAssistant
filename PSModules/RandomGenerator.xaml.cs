@@ -69,20 +69,20 @@ public partial class RandomGenerator : IReturnValue
 
         try
         {
-            from = Convert.ToInt32(From_textbox.Text);
-            to = Convert.ToInt32(To_textbox.Text);
+            from = Convert.ToInt32(FromTextbox.Text);
+            to = Convert.ToInt32(ToTextbox.Text);
             _lastValue = _rand.Next(from, to);
-            Result_textblock.Text = _lastValue.ToString();
+            ResultTextblock.Text = _lastValue.ToString();
         }
         catch
         {
-            Result_textblock.Text = "Not a number";
+            ResultTextblock.Text = "Not a number";
         }
     }
 
     public void Set_Value(string value)
     {
-        Result_textblock.Text = value;
+        ResultTextblock.Text = value;
         _lastValue = int.Parse(value);
     }
 }

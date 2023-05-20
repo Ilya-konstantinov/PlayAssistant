@@ -28,7 +28,7 @@ public partial class DiceD6 : IReturnValue
     public DiceD6(string title, string value)
     {
         InitializeComponent();
-        throw_btn.IsEnabled = false;
+        ThrowBtn.IsEnabled = false;
         Title = title;
         if (value == "")
             Value = "0";
@@ -38,7 +38,7 @@ public partial class DiceD6 : IReturnValue
     public DiceD6()
     {
         InitializeComponent();
-        throw_btn.IsEnabled = false;
+        ThrowBtn.IsEnabled = false;
     }
 
     public string Title { get; set; }
@@ -73,7 +73,7 @@ public partial class DiceD6 : IReturnValue
 
     private void throw_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (Convert.ToBoolean(animation_checkbox.IsChecked) && !_animationIsActive)
+        if (Convert.ToBoolean(AnimationCheckbox.IsChecked) && !_animationIsActive)
         {
             _animationIsActive = true;
             _timerTime = 0;
@@ -86,11 +86,11 @@ public partial class DiceD6 : IReturnValue
             animThread.IsBackground = true;
             animThread.Start();
         }
-        else if (!Convert.ToBoolean(animation_checkbox.IsChecked))
+        else if (!Convert.ToBoolean(AnimationCheckbox.IsChecked))
         {
             var rand = new Random().Next(1, 7);
             _value = rand;
-            dice_img.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
+            DiceImg.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
         }
     }
 
@@ -108,7 +108,7 @@ public partial class DiceD6 : IReturnValue
             _value = rand;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                dice_img.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
+                DiceImg.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
             }));
 
             _animationTimestamp = Stopwatch.GetTimestamp();
@@ -132,12 +132,12 @@ public partial class DiceD6 : IReturnValue
     {
         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
         {
-            dice_border.BorderBrush = new SolidColorBrush(Colors.Green);
+            DiceBorder.BorderBrush = new SolidColorBrush(Colors.Green);
         }));
         Thread.Sleep(TimeSpan.FromMilliseconds(300));
         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
         {
-            dice_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            DiceBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
         }));
         _animationIsActive = false;
     }
@@ -147,7 +147,7 @@ public partial class DiceD6 : IReturnValue
         if (value == "") value = "0";
         var val = int.Parse(value);
         _value = Clamp(val, 1, 6);
-        dice_img.Source = new BitmapImage(new Uri($"/Images/{_value}.png", UriKind.Relative));
+        DiceImg.Source = new BitmapImage(new Uri($"/Images/{_value}.png", UriKind.Relative));
     }
 
 

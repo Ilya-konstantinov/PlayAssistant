@@ -32,10 +32,10 @@ public partial class CharacterForList : UserControl
         if (_st == Status.Open)
         {
             _st = Status.Close;
-            var lst = grid.Children.OfType<ListBox>().ToList();
+            var lst = Grid.Children.OfType<ListBox>().ToList();
             Height /= 2;
             Character.Refrash(lst[0].Items.OfType<IReturnValue>().ToList());
-            foreach (var item in lst) grid.Children.Remove(item);
+            foreach (var item in lst) Grid.Children.Remove(item);
         }
         else
         {
@@ -47,7 +47,7 @@ public partial class CharacterForList : UserControl
             lst.Margin = new Thickness(
                 Width * 0.05, Avatar.Height * 1.2, Width * 0.05, Height * 0.05
             );
-            grid.Children.Add(lst);
+            Grid.Children.Add(lst);
         }
     }
 
@@ -61,8 +61,8 @@ public partial class CharacterForList : UserControl
     {
         if (_st == Status.Open)
         {
-            var lst = grid.Children.OfType<ListBox>().ToList();
-            foreach (var item in lst) grid.Children.Remove(item);
+            var lst = Grid.Children.OfType<ListBox>().ToList();
+            foreach (var item in lst) Grid.Children.Remove(item);
 
             var lstt = new ListBox();
             foreach (var item in Character.GetAttributes()) lstt.Items.Add(item);

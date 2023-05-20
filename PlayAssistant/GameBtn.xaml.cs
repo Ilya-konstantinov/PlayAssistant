@@ -16,7 +16,7 @@ public partial class GameBtn : UserControl
 
         Game = gameName;
 
-        Select_btn.Content = gameName;
+        SelectBtn.Content = gameName;
     }
 
     private void Select_btn_Click(object sender, RoutedEventArgs e)

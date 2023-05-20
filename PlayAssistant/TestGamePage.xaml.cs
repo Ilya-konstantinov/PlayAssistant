@@ -16,7 +16,7 @@ public partial class TestGamePage : Page
         InitializeComponent();
 
         _startTime = DateTime.Now;
-        Back_btn.Content = _startTime.ToString();
+        BackBtn.Content = _startTime.ToString();
     }
 
     public event EventHandler PageCloseClick;

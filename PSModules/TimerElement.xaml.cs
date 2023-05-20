@@ -87,7 +87,7 @@ public partial class TimerElement : IReturnValue
             _timer.Stop();
             _dispatcherTimer.Stop();
             _status = false;
-            Start_btn.Content = "Start";
+            StartBtn.Content = "Start";
         }
 
         Update_text(_tempTime);
@@ -98,26 +98,26 @@ public partial class TimerElement : IReturnValue
         if (setTime < 0) setTime = 0;
         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
         {
-            Seconds_textbox.Text = (setTime % 60).ToString();
-            Minutes_textbox.Text = Convert.ToInt32(setTime % 3600 / 60).ToString();
-            Hours_textbox.Text = Convert.ToInt32(setTime / 3600).ToString();
+            SecondsTextbox.Text = (setTime % 60).ToString();
+            MinutesTextbox.Text = Convert.ToInt32(setTime % 3600 / 60).ToString();
+            HoursTextbox.Text = Convert.ToInt32(setTime / 3600).ToString();
         }));
     }
 
     private void Input_time(object sender, TextChangedEventArgs e)
     {
-        if (Seconds_textbox != null && !_status)
+        if (SecondsTextbox != null && !_status)
         {
             _time = 0;
             try
             {
-                _time += Convert.ToInt32(Seconds_textbox.Text);
-                _time += Convert.ToInt32(Minutes_textbox.Text) * 60;
-                _time += Convert.ToInt32(Hours_textbox.Text) * 3600;
+                _time += Convert.ToInt32(SecondsTextbox.Text);
+                _time += Convert.ToInt32(MinutesTextbox.Text) * 60;
+                _time += Convert.ToInt32(HoursTextbox.Text) * 3600;
             }
             catch
             {
-                Error_textblock.Text = "Invalid input!!!";
+                ErrorTextblock.Text = "Invalid input!!!";
             }
 
             Update_text(_time);
@@ -192,7 +192,7 @@ public partial class TimerElement : IReturnValue
         if (!_status)
         {
             _status = true;
-            Start_btn.Content = "Stop";
+            StartBtn.Content = "Stop";
             _startTime = DateTime.Now;
             _timer.Start();
             _dispatcherTimer.Start();
@@ -200,7 +200,7 @@ public partial class TimerElement : IReturnValue
         else
         {
             _status = false;
-            Start_btn.Content = "Start";
+            StartBtn.Content = "Start";
             _tempTime = _time - Convert.ToInt32(Math.Round((DateTime.Now - _startTime).TotalSeconds));
             _timer.Stop();
             _dispatcherTimer.Stop();
@@ -210,7 +210,7 @@ public partial class TimerElement : IReturnValue
     private void Reset_btn_Click(object sender, RoutedEventArgs e)
     {
         _status = false;
-        Start_btn.Content = "Start";
+        StartBtn.Content = "Start";
         _tempTime = _time;
         Update_text(_tempTime);
         _timer.Stop();

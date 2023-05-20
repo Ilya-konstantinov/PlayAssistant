@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Height="102"
              Width="302">
-    <Grid x:Name="grid"
+    <Grid x:Name="Grid"
           Background="#2D283E"
           MouseDown="Grid_MouseDown">
         <Label x:Name="Name"

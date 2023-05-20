@@ -19,7 +19,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Label Foreground="White"
-               x:Name="Value_label"
+               x:Name="ValueLabel"
                Grid.ColumnSpan="3"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"
@@ -30,7 +30,7 @@
                Grid.Column="1"
                Margin="10,10,10,221"
                HorizontalAlignment="Center" />
-        <Button x:Name="Minus_btn"
+        <Button x:Name="MinusBtn"
                 Content="-"
                 HorizontalAlignment="Stretch"
                 Grid.Row="1"
@@ -38,7 +38,7 @@
                 Margin="10, 10, 10, 10"
                 FontSize="{DynamicResource BtnFontSize}"
                 Click="Minus_btn_Click" />
-        <Button x:Name="Reset_btn"
+        <Button x:Name="ResetBtn"
                 Grid.Column="1"
                 Content="R"
                 Margin="10, 10, 10, 10"
@@ -47,7 +47,7 @@
                 VerticalAlignment="Stretch"
                 FontSize="{DynamicResource BtnFontSize}"
                 Click="Reset_btn_Click" />
-        <Button x:Name="Plus_btn"
+        <Button x:Name="PlusBtn"
                 Grid.Column="2"
                 Content="+"
                 HorizontalAlignment="Stretch"
