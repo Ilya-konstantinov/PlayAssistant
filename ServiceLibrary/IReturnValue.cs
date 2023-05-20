@@ -9,10 +9,10 @@ public interface IReturnValue
 
 public struct ReturnValue
 {
-    public ReturnValue(string _Title, string _Value)
+    public ReturnValue(string title, string value)
     {
-        Title = _Title;
-        Value = _Value;
+        Title = title;
+        Value = value;
     }
 
     public string Title { get; set; }

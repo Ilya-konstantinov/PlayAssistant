@@ -12,36 +12,36 @@ namespace PSModules;
 /// </summary>
 public partial class TimerElement : IReturnValue
 {
-    private readonly DispatcherTimer dispatcherTimer = new();
-    private readonly Stopwatch timer = new();
+    private readonly DispatcherTimer _dispatcherTimer = new();
+    private readonly Stopwatch _timer = new();
 
-    private double btnFontSize = 6; // процент от высоты окна
-    private double labelFontSize = 12;
-    private DateTime start_time;
-    private bool status;
-    private int temp_time;
-    private int time = 5;
+    private double _btnFontSize = 6; // процент от высоты окна
+    private double _labelFontSize = 12;
+    private DateTime _startTime;
+    private bool _status;
+    private int _tempTime;
+    private int _time = 5;
 
     public TimerElement()
     {
         InitializeComponent();
 
-        temp_time = time;
+        _tempTime = _time;
 
-        dispatcherTimer.Tick += Timer_tick;
-        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+        _dispatcherTimer.Tick += Timer_tick;
+        _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
     }
 
-    public TimerElement(string _Title, string _Value)
+    public TimerElement(string title, string value)
     {
         InitializeComponent();
-        Title = _Title;
-        if (_Value == "")
-            _Value = "5";
-        Value = _Value;
+        Title = title;
+        if (value == "")
+            value = "5";
+        Value = value;
 
-        dispatcherTimer.Tick += Timer_tick;
-        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+        _dispatcherTimer.Tick += Timer_tick;
+        _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
     }
 
     public string Title
@@ -52,8 +52,8 @@ public partial class TimerElement : IReturnValue
 
     public string Value
     {
-        get => temp_time.ToString();
-        set => temp_time = int.Parse(value);
+        get => _tempTime.ToString();
+        set => _tempTime = int.Parse(value);
     }
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
@@ -80,140 +80,140 @@ public partial class TimerElement : IReturnValue
 
     private void Timer_tick(object sender, EventArgs e)
     {
-        temp_time -= 1;
-        if (temp_time <= 0)
+        _tempTime -= 1;
+        if (_tempTime <= 0)
         {
-            temp_time = time;
-            timer.Stop();
-            dispatcherTimer.Stop();
-            status = false;
+            _tempTime = _time;
+            _timer.Stop();
+            _dispatcherTimer.Stop();
+            _status = false;
             Start_btn.Content = "Start";
         }
 
-        Update_text(temp_time);
+        Update_text(_tempTime);
     }
 
-    private void Update_text(int set_time)
+    private void Update_text(int setTime)
     {
-        if (set_time < 0) set_time = 0;
+        if (setTime < 0) setTime = 0;
         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
         {
-            Seconds_textbox.Text = (set_time % 60).ToString();
-            Minutes_textbox.Text = Convert.ToInt32(set_time % 3600 / 60).ToString();
-            Hours_textbox.Text = Convert.ToInt32(set_time / 3600).ToString();
+            Seconds_textbox.Text = (setTime % 60).ToString();
+            Minutes_textbox.Text = Convert.ToInt32(setTime % 3600 / 60).ToString();
+            Hours_textbox.Text = Convert.ToInt32(setTime / 3600).ToString();
         }));
     }
 
     private void Input_time(object sender, TextChangedEventArgs e)
     {
-        if (Seconds_textbox != null && !status)
+        if (Seconds_textbox != null && !_status)
         {
-            time = 0;
+            _time = 0;
             try
             {
-                time += Convert.ToInt32(Seconds_textbox.Text);
-                time += Convert.ToInt32(Minutes_textbox.Text) * 60;
-                time += Convert.ToInt32(Hours_textbox.Text) * 3600;
+                _time += Convert.ToInt32(Seconds_textbox.Text);
+                _time += Convert.ToInt32(Minutes_textbox.Text) * 60;
+                _time += Convert.ToInt32(Hours_textbox.Text) * 3600;
             }
             catch
             {
                 Error_textblock.Text = "Invalid input!!!";
             }
 
-            Update_text(time);
+            Update_text(_time);
         }
     }
 
     private void HPlus_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            time += 3600;
-            Update_text(time);
-            temp_time = time;
+            _time += 3600;
+            Update_text(_time);
+            _tempTime = _time;
         }
     }
 
     private void MPlus_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            time += 60;
-            Update_text(time);
-            temp_time = time;
+            _time += 60;
+            Update_text(_time);
+            _tempTime = _time;
         }
     }
 
     private void SPlus_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            time += 1;
-            Update_text(time);
-            temp_time = time;
+            _time += 1;
+            Update_text(_time);
+            _tempTime = _time;
         }
     }
 
     private void HMinus_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            time -= 3600;
-            if (time < 0) time = 0;
-            Update_text(time);
-            temp_time = time;
+            _time -= 3600;
+            if (_time < 0) _time = 0;
+            Update_text(_time);
+            _tempTime = _time;
         }
     }
 
     private void MMinus_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            time -= 60;
-            if (time < 0) time = 0;
-            Update_text(time);
-            temp_time = time;
+            _time -= 60;
+            if (_time < 0) _time = 0;
+            Update_text(_time);
+            _tempTime = _time;
         }
     }
 
     private void SMinus_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            time -= 1;
-            if (time < 0) time = 0;
-            Update_text(time);
-            temp_time = time;
+            _time -= 1;
+            if (_time < 0) _time = 0;
+            Update_text(_time);
+            _tempTime = _time;
         }
     }
 
     private void Start_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (!status)
+        if (!_status)
         {
-            status = true;
+            _status = true;
             Start_btn.Content = "Stop";
-            start_time = DateTime.Now;
-            timer.Start();
-            dispatcherTimer.Start();
+            _startTime = DateTime.Now;
+            _timer.Start();
+            _dispatcherTimer.Start();
         }
         else
         {
-            status = false;
+            _status = false;
             Start_btn.Content = "Start";
-            temp_time = time - Convert.ToInt32(Math.Round((DateTime.Now - start_time).TotalSeconds));
-            timer.Stop();
-            dispatcherTimer.Stop();
+            _tempTime = _time - Convert.ToInt32(Math.Round((DateTime.Now - _startTime).TotalSeconds));
+            _timer.Stop();
+            _dispatcherTimer.Stop();
         }
     }
 
     private void Reset_btn_Click(object sender, RoutedEventArgs e)
     {
-        status = false;
+        _status = false;
         Start_btn.Content = "Start";
-        temp_time = time;
-        Update_text(temp_time);
-        timer.Stop();
-        dispatcherTimer.Stop();
+        _tempTime = _time;
+        Update_text(_tempTime);
+        _timer.Stop();
+        _dispatcherTimer.Stop();
     }
 }

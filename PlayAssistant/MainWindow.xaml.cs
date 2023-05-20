@@ -18,16 +18,16 @@ using SessionDataType =
 
 public partial class MainWindow : Window
 {
-    private readonly GameChooseMenu gcm = new(SessionService.SessionsList());
-    private readonly object mainWindow;
+    private readonly GameChooseMenu _gcm = new(SessionService.SessionsList());
+    private readonly object _mainWindow;
 
     public MainWindow()
     {
         InitializeComponent();
 
-        mainWindow = Application.Current.MainWindow.Content;
+        _mainWindow = Application.Current.MainWindow.Content;
 
-        Application.Current.MainWindow.Content = gcm;
+        Application.Current.MainWindow.Content = _gcm;
 
         Closing += MainWindow_Closing;
     }
@@ -44,22 +44,22 @@ public partial class MainWindow : Window
 
     public SessionDataType SessionData()
     {
-        var GenAttr = SessionService.IntRVtoStruct(Character.ListGeneralAttributes);
-        var ChrData = new Pair<ChrListDataType, MdListDataType>(new ChrListDataType(
-                characters()),
-            GenAttr
+        var genAttr = SessionService.IntRVtoStruct(Character.ListGeneralAttributes);
+        var chrData = new Pair<ChrListDataType, MdListDataType>(new ChrListDataType(
+                Characters()),
+            genAttr
         );
-        var MdData = new MdListDataType(
+        var mdData = new MdListDataType(
             SessionService.IntRVtoStruct(PSMList.Items.OfType<IReturnValue>().ToList())
         );
-        return new SessionDataType(ChrData, MdData);
+        return new SessionDataType(chrData, mdData);
     }
 
-    public ChrListDataType characters()
+    public ChrListDataType Characters()
     {
         var list = new ChrListDataType();
         var lstchr = lb_players.Items.OfType<CharacterForList>().ToList();
-        foreach (var item in lstchr) list.Add(SessionService.ChrSave(item.character));
+        foreach (var item in lstchr) list.Add(SessionService.ChrSave(item.Character));
 
         return list;
     }
@@ -67,28 +67,28 @@ public partial class MainWindow : Window
     public void StartSession()
     {
         var arg = SessionService.LoadSession();
-        var ChrData = arg.First;
-        var MdData = arg.Second;
-        Character.ListGeneralAttributes = SessionService.StructRVToInt(ChrData.Second);
-        if (ChrData.First != null)
-            foreach (var item in ChrData.First)
+        var chrData = arg.First;
+        var mdData = arg.Second;
+        Character.ListGeneralAttributes = SessionService.StructRvToInt(chrData.Second);
+        if (chrData.First != null)
+            foreach (var item in chrData.First)
                 lb_players.Items.Add(new CharacterForList(SessionService.ChrLoad(item)));
 
-        if (MdData != null)
-            foreach (var item in SessionService.StructRVToInt(MdData))
+        if (mdData != null)
+            foreach (var item in SessionService.StructRvToInt(mdData))
                 PSMList.Items.Add(item);
     }
 
     public void OpenGameCreationWindow()
     {
-        Application.Current.MainWindow.Content = mainWindow;
+        Application.Current.MainWindow.Content = _mainWindow;
     }
 
     public void OpenGameChoosePage()
     {
         lb_players.Items.Clear();
         PSMList.Items.Clear();
-        Application.Current.MainWindow.Content = gcm;
+        Application.Current.MainWindow.Content = _gcm;
     }
 
     internal void AddCharacter(Character character)
@@ -96,18 +96,18 @@ public partial class MainWindow : Window
         lb_players.Items.Add(new CharacterForList(character));
     }
 
-    public void AddPS(IReturnValue PS)
+    public void AddPs(IReturnValue ps)
     {
-        ((UIElement)PS).IsEnabled = true;
-        PSMList.Items.Add(PS);
+        ((UIElement)ps).IsEnabled = true;
+        PSMList.Items.Add(ps);
     }
 
-    public void RemoveList(bool NeedToHide)
+    public void RemoveList(bool needToHide)
     {
         var lst = MainGrid.Children.OfType<ListOfUserControls>().ToList();
         foreach (var item in lst) MainGrid.Children.Remove(item);
 
-        if (NeedToHide) CloseOverlayed();
+        if (needToHide) CloseOverlayed();
     }
 
     public void RemoveCreateCharacter()
@@ -120,15 +120,15 @@ public partial class MainWindow : Window
         UnStels();
     }
 
-    public void CreateList(bool IsPSList, bool InMainWindow, Character curCh = null)
+    public void CreateList(bool isPsList, bool inMainWindow, Character curCh = null)
     {
         var list = new List<IReturnValue>();
-        if (IsPSList)
+        if (isPsList)
             list = SessionService.GetParams();
         else
             list = SessionService.GetAttributes();
 
-        OpenOverlayed(new ListOfUserControls(list, IsPSList, InMainWindow, curCh));
+        OpenOverlayed(new ListOfUserControls(list, isPsList, inMainWindow, curCh));
     }
 
     public void Stels()
@@ -181,17 +181,17 @@ public partial class MainWindow : Window
         UnStels();
     }
 
-    public void OpenOverlayed(UIElement _content)
+    public void OpenOverlayed(UIElement content)
     {
         Stels();
 
         GameCreate_grid.Visibility = Visibility.Visible;
         GameCreate_grid.IsEnabled = true;
 
-        Grid.SetRow(_content, 1);
-        Grid.SetColumn(_content, 1);
+        Grid.SetRow(content, 1);
+        Grid.SetColumn(content, 1);
 
-        GameCreate_grid.Children.Add(_content);
+        GameCreate_grid.Children.Add(content);
     }
 
     public void CloseOverlayed()

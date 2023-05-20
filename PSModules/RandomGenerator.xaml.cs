@@ -10,24 +10,24 @@ namespace PSModules;
 /// </summary>
 public partial class RandomGenerator : IReturnValue
 {
-    private readonly Random rand = new();
+    private readonly Random _rand = new();
 
-    private double btnFontSize = 6; // процент от высоты окна
-    private double labelFontSize = 12;
-    private int last_value;
+    private double _btnFontSize = 6; // процент от высоты окна
+    private double _labelFontSize = 12;
+    private int _lastValue;
 
     public RandomGenerator()
     {
         InitializeComponent();
     }
 
-    public RandomGenerator(string _Title, string _Value)
+    public RandomGenerator(string title, string value)
     {
         InitializeComponent();
-        Title = _Title;
-        if (_Value == "")
-            _Value = "0";
-        Value = _Value;
+        Title = title;
+        if (value == "")
+            value = "0";
+        Value = value;
     }
 
     public string Title
@@ -38,7 +38,7 @@ public partial class RandomGenerator : IReturnValue
 
     public string Value
     {
-        get => last_value.ToString();
+        get => _lastValue.ToString();
         set => Set_Value(value);
     }
 
@@ -72,8 +72,8 @@ public partial class RandomGenerator : IReturnValue
         {
             from = Convert.ToInt32(From_textbox.Text);
             to = Convert.ToInt32(To_textbox.Text);
-            last_value = rand.Next(from, to);
-            Result_textblock.Text = last_value.ToString();
+            _lastValue = _rand.Next(from, to);
+            Result_textblock.Text = _lastValue.ToString();
         }
         catch
         {
@@ -81,9 +81,9 @@ public partial class RandomGenerator : IReturnValue
         }
     }
 
-    public void Set_Value(string _value)
+    public void Set_Value(string value)
     {
-        Result_textblock.Text = _value;
-        last_value = int.Parse(_value);
+        Result_textblock.Text = value;
+        _lastValue = int.Parse(value);
     }
 }

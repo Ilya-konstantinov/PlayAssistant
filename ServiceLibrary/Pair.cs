@@ -1,17 +1,17 @@
 ﻿namespace ServiceLibrary;
 
-public class Pair<T, U>
+public class Pair<T, TU>
 {
     public Pair()
     {
     }
 
-    public Pair(T first, U second)
+    public Pair(T first, TU second)
     {
         First = first;
         Second = second;
     }
 
     public T First { get; set; }
-    public U Second { get; set; }
+    public TU Second { get; set; }
 }

@@ -18,9 +18,9 @@ public partial class GameChooseMenu : Page
         GameList_frame.Content = gameList;
     }
 
-    public void SetPage(TestGamePage _page)
+    public void SetPage(TestGamePage page)
     {
-        GameList_frame.Content = _page;
+        GameList_frame.Content = page;
     }
 
     public void Stels()

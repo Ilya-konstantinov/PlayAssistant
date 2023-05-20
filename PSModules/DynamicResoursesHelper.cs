@@ -14,28 +14,28 @@ namespace PSModules
     /// </summary>
     public static class DynamicResourcesHelper
     {
-        public static Application app;
+        public static readonly Application App;
 
         static DynamicResourcesHelper()
         {
             /// <remarks>
             /// В значение параметра <c>_app</c> нужно передать Application.Current
             /// </remarks>
-            app = Application.Current;
+            App = Application.Current;
         }
 
-        public static int Create(string _name, double _value)
+        public static int Create(string name, double value)
         {
             /// <remarks>
             /// Создает новый динамический ресурс
             /// </remarks>
             try
             {
-                app.MainWindow.Resources.Add(_name, _value);
+                App.MainWindow.Resources.Add(name, value);
             }
             catch (Exception e)
             {
-                if (app.MainWindow.Resources.Contains(_name)) {
+                if (App.MainWindow.Resources.Contains(name)) {
                     return 1; // Element already created
                 }
                 return 2; // Unknown error
@@ -44,18 +44,18 @@ namespace PSModules
             return 0;
         }
 
-        public static int Update(string _name, double _value)
+        public static int Update(string name, double value)
         {
             /// <remarks>
             /// Изменяет значение динамического ресурса
             /// </remarks>
             try
             {
-                app.MainWindow.Resources[_name] = _value;
+                App.MainWindow.Resources[name] = value;
             }
             catch (Exception e) 
             {
-                if (!(app.MainWindow.Resources.Contains(_name)))
+                if (!(App.MainWindow.Resources.Contains(name)))
                 {
                     return 1; // Element does not exist
                 }

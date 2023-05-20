@@ -11,20 +11,20 @@ namespace PSModules;
 /// </summary>
 public partial class ToggleSwitch : IReturnValue
 {
-    private bool state;
+    private bool _state;
 
     public ToggleSwitch()
     {
         InitializeComponent();
     }
 
-    public ToggleSwitch(string _Title, string _Value = "0")
+    public ToggleSwitch(string title, string value = "0")
     {
         InitializeComponent();
-        Title = _Title;
-        if (_Value == "")
-            _Value = "0";
-        Value = _Value;
+        Title = title;
+        if (value == "")
+            value = "0";
+        Value = value;
     }
 
     public string Title
@@ -35,15 +35,15 @@ public partial class ToggleSwitch : IReturnValue
 
     public string Value
     {
-        get => state.ToString();
+        get => _state.ToString();
         set => bool.Parse(value);
     }
 
     private void Circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        state = !state;
+        _state = !_state;
 
-        if (state)
+        if (_state)
         {
             Circle.Margin = new Thickness(ToggleUserControl.ActualWidth - ToggleUserControl.ActualHeight, 0, 0, 0);
             Rect.Fill = new SolidColorBrush(Colors.Blue);

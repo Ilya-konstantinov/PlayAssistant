@@ -12,31 +12,31 @@ namespace PSModules;
 /// <summary>
 ///     Логика взаимодействия для dice_d6.xaml
 /// </summary>
-public partial class dice_d6 : IReturnValue
+public partial class DiceD6 : IReturnValue
 {
-    private const int anim_time = 500 * 10000;
-    private const int anim_step = 35 * 10000;
-    private bool animation_is_active;
-    private long animation_timestamp;
+    private const int AnimTime = 500 * 10000;
+    private const int AnimStep = 35 * 10000;
+    private bool _animationIsActive;
+    private long _animationTimestamp;
 
-    private double btnFontSize = 6; // процент от высоты окна
-    private int current_step;
-    private double labelFontSize = 6;
-    private long timer_start_time;
-    private int timer_time;
-    private int value;
+    private double _btnFontSize = 6; // процент от высоты окна
+    private int _currentStep;
+    private double _labelFontSize = 6;
+    private long _timerStartTime;
+    private int _timerTime;
+    private int _value;
 
-    public dice_d6(string _Title, string _Value)
+    public DiceD6(string title, string value)
     {
         InitializeComponent();
         throw_btn.IsEnabled = false;
-        Title = _Title;
-        if (_Value == "")
+        Title = title;
+        if (value == "")
             Value = "0";
-        Value = _Value;
+        Value = value;
     }
 
-    public dice_d6()
+    public DiceD6()
     {
         InitializeComponent();
         throw_btn.IsEnabled = false;
@@ -46,7 +46,7 @@ public partial class dice_d6 : IReturnValue
 
     public string Value
     {
-        get => value.ToString();
+        get => _value.ToString();
         set => SetValue(value);
     }
 
@@ -74,48 +74,48 @@ public partial class dice_d6 : IReturnValue
 
     private void throw_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (Convert.ToBoolean(animation_checkbox.IsChecked) && !animation_is_active)
+        if (Convert.ToBoolean(animation_checkbox.IsChecked) && !_animationIsActive)
         {
-            animation_is_active = true;
-            timer_time = 0;
-            timer_start_time = Stopwatch.GetTimestamp();
-            current_step = anim_step;
+            _animationIsActive = true;
+            _timerTime = 0;
+            _timerStartTime = Stopwatch.GetTimestamp();
+            _currentStep = AnimStep;
 
-            animation_timestamp = Stopwatch.GetTimestamp();
+            _animationTimestamp = Stopwatch.GetTimestamp();
 
-            var anim_thread = new Thread(throw_animation);
-            anim_thread.IsBackground = true;
-            anim_thread.Start();
+            var animThread = new Thread(throw_animation);
+            animThread.IsBackground = true;
+            animThread.Start();
         }
         else if (!Convert.ToBoolean(animation_checkbox.IsChecked))
         {
             var rand = new Random().Next(1, 7);
-            value = rand;
+            _value = rand;
             dice_img.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
         }
     }
 
     private void throw_animation()
     {
-        if (Stopwatch.GetTimestamp() - animation_timestamp >= current_step)
+        if (Stopwatch.GetTimestamp() - _animationTimestamp >= _currentStep)
         {
-            timer_time += current_step;
-            current_step += anim_step;
+            _timerTime += _currentStep;
+            _currentStep += AnimStep;
 
             var rand = new Random().Next(1, 7);
 
-            while (rand == value) rand = new Random().Next(1, 7);
+            while (rand == _value) rand = new Random().Next(1, 7);
 
-            value = rand;
+            _value = rand;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 dice_img.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
             }));
 
-            animation_timestamp = Stopwatch.GetTimestamp();
+            _animationTimestamp = Stopwatch.GetTimestamp();
         }
 
-        if (Stopwatch.GetTimestamp() - timer_start_time < anim_time)
+        if (Stopwatch.GetTimestamp() - _timerStartTime < AnimTime)
         {
             var tmp = new Thread(throw_animation);
             tmp.IsBackground = true;
@@ -140,18 +140,18 @@ public partial class dice_d6 : IReturnValue
         {
             dice_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
         }));
-        animation_is_active = false;
+        _animationIsActive = false;
     }
 
-    public void SetValue(string _value)
+    public void SetValue(string value)
     {
-        if (_value == "")
+        if (value == "")
         {
-            _value = "0";
+            value = "0";
         }
-        var val = Int32.Parse(_value);
-        value = Clamp(val, 1, 6);
-        dice_img.Source = new BitmapImage(new Uri($"/Images/{value}.png", UriKind.Relative));
+        var val = Int32.Parse(value);
+        this._value = Clamp(val, 1, 6);
+        dice_img.Source = new BitmapImage(new Uri($"/Images/{this._value}.png", UriKind.Relative));
     }
 
 

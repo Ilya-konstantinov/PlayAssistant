@@ -19,11 +19,11 @@ public partial class DigitalStatiscic : IReturnValue
         DownBtn.IsEnabled = false;
     }
 
-    public DigitalStatiscic(string _Title, string _Value)
+    public DigitalStatiscic(string title, string value)
     {
         InitializeComponent();
-        ElTitle.Content = _Title;
-        ElValue.Text = _Value;
+        ElTitle.Content = title;
+        ElValue.Text = value;
     }
 
 

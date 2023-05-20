@@ -8,20 +8,20 @@ namespace PlayAssistant;
 /// </summary>
 public partial class GameBtn : UserControl
 {
-    public string game = "TestGame";
+    public readonly string Game = "TestGame";
 
-    public GameBtn(string _game_name = "Game")
+    public GameBtn(string gameName = "Game")
     {
         InitializeComponent();
 
-        game = _game_name;
+        Game = gameName;
 
-        Select_btn.Content = _game_name;
+        Select_btn.Content = gameName;
     }
 
     private void Select_btn_Click(object sender, RoutedEventArgs e)
     {
-        SessionService.SessionName = game;
+        SessionService.SessionName = Game;
         var parentWindow = Window.GetWindow(this) as MainWindow;
         ((MainWindow)Application.Current.MainWindow).OpenGameCreationWindow();
         parentWindow.StartSession();

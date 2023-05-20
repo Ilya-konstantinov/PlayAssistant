@@ -17,31 +17,31 @@ public enum Status
 
 public partial class CharacterForList : UserControl
 {
-    public Character character;
-    private Status st = Status.Close;
+    public readonly Character Character;
+    private Status _st = Status.Close;
 
     internal CharacterForList(Character character)
     {
         InitializeComponent();
-        this.character = character;
+        this.Character = character;
         Name.Content = character.Name;
     }
 
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (st == Status.Open)
+        if (_st == Status.Open)
         {
-            st = Status.Close;
+            _st = Status.Close;
             var lst = grid.Children.OfType<ListBox>().ToList();
             Height /= 2;
-            character.Refrash(lst[0].Items.OfType<IReturnValue>().ToList());
+            Character.Refrash(lst[0].Items.OfType<IReturnValue>().ToList());
             foreach (var item in lst) grid.Children.Remove(item);
         }
         else
         {
-            st = Status.Open;
+            _st = Status.Open;
             var lst = new ListBox();
-            foreach (var item in character.GetAttributes()) lst.Items.Add(item);
+            foreach (var item in Character.GetAttributes()) lst.Items.Add(item);
 
             Height *= 2;
             lst.Margin = new Thickness(
@@ -54,18 +54,18 @@ public partial class CharacterForList : UserControl
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
-        parentWindow.CreateList(false, true, character);
+        parentWindow.CreateList(false, true, Character);
     }
 
     public void Refresh()
     {
-        if (st == Status.Open)
+        if (_st == Status.Open)
         {
             var lst = grid.Children.OfType<ListBox>().ToList();
             foreach (var item in lst) grid.Children.Remove(item);
 
             var lstt = new ListBox();
-            foreach (var item in character.GetAttributes()) lstt.Items.Add(item);
+            foreach (var item in Character.GetAttributes()) lstt.Items.Add(item);
 
             lstt.Margin = new Thickness(
                 Width * 0.05, Avatar.Height * 1.2, Width * 0.05, Height * 0.05
