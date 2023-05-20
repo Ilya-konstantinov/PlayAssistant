@@ -25,28 +25,20 @@
 
         <!-- Список игроков -->
         <ListBox Grid.Row="1"
-                 x:Name="lb_players"
+                 x:Name="LbPlayers"
                  Grid.Column="2"
                  HorizontalAlignment="Stretch" />
-        <Rectangle Grid.Row="1"
-                   x:Name="Hide"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="2"
-                   Fill="#4CA9A9A9"
-                   IsEnabled="False"
-                   Visibility="Hidden" />
 
         <!-- Список игровых статистик -->
-        <ListBox x:Name="PSMList"
+        <ListBox x:Name="PsmList"
                  Grid.Row="1"
                  Grid.Column="1"
                  Margin="10,10,10,15" />
 
-        <Grid x:Name="PSMPicker"
+        <Grid x:Name="PsmPicker"
               Grid.Row="1"
               Grid.Column="1"
-              ZIndex="1">
-        </Grid>
+              ZIndex="1" />
 
 
         <StackPanel Grid.Column="2"
@@ -58,7 +50,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="0, 0, 30, 0"
-                    Click="Button_Click_3" />
+                    Click="Button_Click_2" />
 
             <Button Content="Создать персонажа"
                     HorizontalAlignment="Left"
@@ -66,11 +58,10 @@
                     Click="btn1_Click" />
         </StackPanel>
 
-        <Grid
-              x:Name="GameCreate_grid"
-              Margin="10,10,10,10"
+        <Grid x:Name="GameCreateGrid"
+              Margin="10,10,0,0"
               Grid.ColumnSpan="4"
-              Visibility="Hidden"
+              Visibility="Visible"
               IsEnabled="False"
               Panel.ZIndex="10"
               Grid.RowSpan="3">
@@ -84,7 +75,32 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+
+            
         </Grid>
-        <Button x:Name="Exit_btn" Grid.Column="1" Content="Exit" HorizontalAlignment="Left" Margin="53,681,0,0" VerticalAlignment="Top" Height="86" Width="91" Click="Exit_btn_Click"/>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.Column="1">
+            <Button Content="Добавить игровую статистику"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="0, 0, 30, 0"
+                    Click="Button_Click_3" />
+            <Button x:Name="ExitBtn"
+                    Content="Exit"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Click="Exit_btn_Click"
+                    Margin="0, 0, 30, 0" />
+        </StackPanel>
+        <Rectangle x:Name="Hide"
+                   Grid.ColumnSpan="4" 
+                   Grid.RowSpan="3"
+                   Fill="#4CA9A9A9"
+                   IsEnabled="False"
+                   Visibility="Hidden" />
+
     </Grid>
 </Window>

@@ -15,12 +15,12 @@ public partial class GameChooseMenu : Page
         InitializeComponent();
 
         var gameList = new GameList(titles);
-        GameList_frame.Content = gameList;
+        GameListFrame.Content = gameList;
     }
 
-    public void SetPage(TestGamePage _page)
+    public void SetPage(TestGamePage page)
     {
-        GameList_frame.Content = _page;
+        GameListFrame.Content = page;
     }
 
     public void Stels()
@@ -38,41 +38,41 @@ public partial class GameChooseMenu : Page
     public void OpenGameCreate(object sender, RoutedEventArgs e)
     {
         Stels();
-        GameCreate_grid.Visibility = Visibility.Visible;
-        GameCreate_grid.IsEnabled = true;
+        GameCreateGrid.Visibility = Visibility.Visible;
+        GameCreateGrid.IsEnabled = true;
         var gcm = new GameCreateMenu();
 
         Grid.SetRow(gcm, 1);
         Grid.SetColumn(gcm, 1);
 
-        GameCreate_grid.Children.Add(gcm);
+        GameCreateGrid.Children.Add(gcm);
     }
 
     public void CloseGameCreate()
     {
-        GameCreate_grid.Visibility = Visibility.Hidden;
-        GameCreate_grid.IsEnabled = false;
+        GameCreateGrid.Visibility = Visibility.Hidden;
+        GameCreateGrid.IsEnabled = false;
 
-        GameCreate_grid.Children.Clear();
+        GameCreateGrid.Children.Clear();
 
         UnStels();
     }
 
     private void Search_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (Search_textbox.Text.Trim() == "")
-            ((GameList)GameList_frame.Content).ResetSearch();
+        if (SearchTextbox.Text.Trim() == "")
+            ((GameList)GameListFrame.Content).ResetSearch();
         else
-            ((GameList)GameList_frame.Content).Search(Search_textbox.Text.Trim());
+            ((GameList)GameListFrame.Content).Search(SearchTextbox.Text.Trim());
     }
 
     private void Search_textbox_KeyUp(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
 
-        if (Search_textbox.Text.Trim() == "")
-            ((GameList)GameList_frame.Content).ResetSearch();
+        if (SearchTextbox.Text.Trim() == "")
+            ((GameList)GameListFrame.Content).ResetSearch();
         else
-            ((GameList)GameList_frame.Content).Search(Search_textbox.Text.Trim());
+            ((GameList)GameListFrame.Content).Search(SearchTextbox.Text.Trim());
     }
 }

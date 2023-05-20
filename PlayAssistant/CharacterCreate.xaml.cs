@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ServiceLibrary;
@@ -10,12 +10,14 @@ namespace PlayAssistant;
 /// </summary>
 public partial class CharacterCreate : UserControl
 {
-    private readonly Character character = new("");
+    private readonly Character _character = new("");
 
     public CharacterCreate()
     {
         InitializeComponent();
-        Refrash();
+        var lst = _character.GetAttributes();
+        foreach (var attr in lst) Characteristic.Items.Add(attr);
+        foreach (var item in Characteristic.Items.OfType<UIElement>().ToList()) { item.IsEnabled = false; }
     }
 
     public bool NameCorrect()
@@ -31,9 +33,9 @@ public partial class CharacterCreate : UserControl
         {
             var parentWindow = Window.GetWindow(this) as MainWindow;
 
-            character.Name = Name.Text;
+            _character.Name = Name.Text;
 
-            parentWindow.AddCharacter(character);
+            parentWindow.AddCharacter(_character);
             parentWindow.RemoveCreateCharacter();
         }
     }
@@ -41,7 +43,7 @@ public partial class CharacterCreate : UserControl
     private void AddCharacteriscit_Click(object sender, RoutedEventArgs e)
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
-        parentWindow.CreateList(false, false, character);
+        parentWindow.CreateList(false, false, _character);
     }
 
     public void AddCharacter(IReturnValue chr)
@@ -58,12 +60,8 @@ public partial class CharacterCreate : UserControl
     public void Refrash()
     {
         Characteristic.Items.Clear();
-        var lst = character.GetAttributes();
+        var lst = _character.GetAttributes();
         foreach (var attr in lst) Characteristic.Items.Add(attr);
-
-
-        var t = Characteristic.Items.OfType<UIElement>().ToList();
-        foreach (var attr in t)
-            attr.IsEnabled = false;
+        foreach (var item in Characteristic.Items.OfType<UIElement>().ToList()) { item.IsEnabled = false; }
     }
 }

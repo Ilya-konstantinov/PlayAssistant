@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Height="102"
              Width="302">
-    <Grid x:Name="grid"
+    <Grid x:Name="Grid"
           Background="#2D283E"
           MouseDown="Grid_MouseDown">
         <Label x:Name="Name"
@@ -15,9 +15,8 @@
                Margin="197,10,0,0"
                VerticalAlignment="Top"
                Height="34"
-               Width="95" 
-               Foreground="White"
-               />
+               Width="95"
+               Foreground="White" />
         <Image x:Name="Avatar"
                HorizontalAlignment="Left"
                Height="77"

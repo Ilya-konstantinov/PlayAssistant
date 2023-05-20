@@ -9,14 +9,14 @@ namespace PlayAssistant;
 /// </summary>
 public partial class GameList : Page
 {
-    private readonly List<GameBtn> btn_list = new();
+    private readonly List<GameBtn> _btnList = new();
 
     public GameList(List<string> titles)
     {
         InitializeComponent();
 
         foreach (var title in titles)
-            btn_list.Add(new GameBtn(title));
+            _btnList.Add(new GameBtn(title));
 
         for (var i = 0; i < titles.Count; i++)
         {
@@ -24,8 +24,8 @@ public partial class GameList : Page
             {
                 Width = new GridLength(1, GridUnitType.Star)
             });
-            btn_list[i].SetValue(Grid.ColumnProperty, i);
-            MainGrid.Children.Add(btn_list[i]);
+            _btnList[i].SetValue(Grid.ColumnProperty, i);
+            MainGrid.Children.Add(_btnList[i]);
         }
     }
 
@@ -34,15 +34,15 @@ public partial class GameList : Page
         MainGrid.Children.Clear();
         MainGrid.ColumnDefinitions.Clear();
 
-        for (var i = 0; i < btn_list.Count; i++)
-            if (btn_list[i].game.ToLower().Contains(name.Trim().ToLower()))
+        for (var i = 0; i < _btnList.Count; i++)
+            if (_btnList[i].Game.Contains(name.Trim()))
             {
                 MainGrid.ColumnDefinitions.Add(new ColumnDefinition
                 {
                     Width = new GridLength(1, GridUnitType.Star)
                 });
-                btn_list[i].SetValue(Grid.ColumnProperty, i);
-                MainGrid.Children.Add(btn_list[i]);
+                _btnList[i].SetValue(Grid.ColumnProperty, i);
+                MainGrid.Children.Add(_btnList[i]);
             }
     }
 
@@ -51,14 +51,14 @@ public partial class GameList : Page
         MainGrid.Children.Clear();
         MainGrid.ColumnDefinitions.Clear();
 
-        for (var i = 0; i < btn_list.Count; i++)
+        for (var i = 0; i < _btnList.Count; i++)
         {
             MainGrid.ColumnDefinitions.Add(new ColumnDefinition
             {
                 Width = new GridLength(1, GridUnitType.Star)
             });
-            btn_list[i].SetValue(Grid.ColumnProperty, i);
-            MainGrid.Children.Add(btn_list[i]);
+            _btnList[i].SetValue(Grid.ColumnProperty, i);
+            MainGrid.Children.Add(_btnList[i]);
         }
     }
 }

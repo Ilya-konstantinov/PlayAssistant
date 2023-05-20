@@ -13,24 +13,23 @@ namespace PlayAssistant;
 /// </summary>
 public partial class ListOfUserControls : UserControl
 {
-    public Character curCh;
-    public bool InMainWindow;
-    private readonly bool IsPSList;
+    private readonly bool _isPsList;
+    public readonly Character CurCh;
+    public readonly bool InMainWindow;
 
-    public ListOfUserControls(List<IReturnValue> userControls, bool _IsPSList, bool _InMainWindow,
-        Character _curCh = null)
+    public ListOfUserControls(List<IReturnValue> userControls, bool isPsList, bool inMainWindow,
+        Character curCh = null)
     {
         InitializeComponent();
         foreach (var item in userControls) MainList.Items.Add(item);
 
-        IsPSList = _IsPSList;
-        InMainWindow = _InMainWindow;
-        curCh = _curCh;
+        _isPsList = isPsList;
+        InMainWindow = inMainWindow;
+        CurCh = curCh;
 
         var t = MainList.Items.OfType<UIElement>().ToList();
         foreach (var item in t)
             item.IsEnabled = false;
-
     }
 
     private void MainList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -40,7 +39,7 @@ public partial class ListOfUserControls : UserControl
         if (selected == null)
             return;
         selected.Title = ElementTitle.Text;
-        if (IsPSList)
+        if (_isPsList)
         {
             var instance = Activator.CreateInstance(
                 selected.GetType(),
@@ -48,16 +47,16 @@ public partial class ListOfUserControls : UserControl
                 "");
             ((UserControl)instance).SetValue(Grid.ColumnProperty, 1);
             ((UserControl)instance).SetValue(Grid.RowProperty, 1);
-            parentWindow.AddPS((IReturnValue)
+            parentWindow.AddPs((IReturnValue)
                 instance
             );
         }
         else
         {
-            if (curCh == null)
+            if (CurCh == null)
                 Character.AddGeneralAttributes(selected);
             else
-                curCh.AddAttribute(selected);
+                CurCh.AddAttribute(selected);
 
             parentWindow.Refrash();
         }

@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using ServiceLibrary;
 
 namespace PSModules;
@@ -9,22 +8,22 @@ namespace PSModules;
 /// </summary>
 public partial class CounterElement : IReturnValue
 {
-    private double btnFontSize = 6; // процент от высоты окна
-    private double labelFontSize = 12;
-    public int value;
+    private double _btnFontSize = 6; // процент от высоты окна
+    private double _labelFontSize = 12;
+    private int _value;
 
     public CounterElement()
     {
         InitializeComponent();
     }
 
-    public CounterElement(string _Title, string _Value = "0")
+    public CounterElement(string title, string value = "0")
     {
         InitializeComponent();
-        Title = _Title;
-        if (_Value == "")
-            _Value = "0";
-        Value = _Value;
+        Title = title;
+        if (value == "" || value == null)
+            value = "0";
+        Value = value;
     }
 
     public string Title
@@ -35,8 +34,12 @@ public partial class CounterElement : IReturnValue
 
     public string Value
     {
-        get => value.ToString();
-        set => this.value = int.Parse(value);
+        get => _value.ToString();
+        set
+        {
+            _value = int.Parse(value);
+            Update_text();
+        }
     }
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
@@ -63,34 +66,24 @@ public partial class CounterElement : IReturnValue
 
     private void Minus_btn_Click(object sender, RoutedEventArgs e)
     {
-        value--;
+        _value--;
         Update_text();
     }
 
     private void Reset_btn_Click(object sender, RoutedEventArgs e)
     {
-        value = 0;
+        _value = 0;
         Update_text();
     }
 
     private void Plus_btn_Click(object sender, RoutedEventArgs e)
     {
-        value++;
+        _value++;
         Update_text();
     }
 
     private void Update_text()
     {
-        Value_label.Content = value.ToString();
-    }
-
-    public int GetValue()
-    {
-        return value;
-    }
-
-    public void SetValue(int _value)
-    {
-        value = _value;
+        ValueLabel.Content = _value.ToString();
     }
 }

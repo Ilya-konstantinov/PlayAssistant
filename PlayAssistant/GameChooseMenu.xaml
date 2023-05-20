@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      x:Name="GameChooseMenu_element"
+      x:Name="GameChooseMenuElement"
       d:DesignHeight="450"
       d:DesignWidth="800"
       MinHeight="450"
@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button x:Name="CreateNewGame_btn"
+            <Button x:Name="CreateNewGameBtn"
                     Content="Создать игру"
                     Margin="20,20,20,20"
                     HorizontalAlignment="Stretch"
@@ -33,7 +33,7 @@
                     <ColumnDefinition Width="9*" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="Search_textbox"
+                <TextBox x:Name="SearchTextbox"
                          HorizontalAlignment="Stretch"
                          TextWrapping="Wrap"
                          Text=""
@@ -41,15 +41,17 @@
                          Margin="10,35,10,20"
                          Foreground="White"
                          FontSize="20" />
-                <Button x:Name="Search_btn"
+                <Button x:Name="SearchBtn"
                         Content="S"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Grid.Column="1"
-                        Margin="0,35,10,20" />
+                        Margin="0,35,10,20"
+                        Click="Search_btn_Click"
+                        />
             </Grid>
         </Grid>
-        <Frame x:Name="GameList_frame"
+        <Frame x:Name="GameListFrame"
                Content=""
                Grid.Row="1"
                NavigationUIVisibility="Hidden" />
@@ -60,7 +62,7 @@
                    IsEnabled="False"
                    Visibility="Hidden"
                    Panel.ZIndex="5" />
-        <Grid x:Name="GameCreate_grid"
+        <Grid x:Name="GameCreateGrid"
               Margin="0,0,0,0"
               Grid.ColumnSpan="3"
               Grid.RowSpan="3"

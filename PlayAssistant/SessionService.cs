@@ -17,7 +17,7 @@ public struct CharacterBase
 {
     public List<string> GenVal;
     public MdListDataType Attr;
-    public string name;
+    public string Name;
 }
 
 internal static class SessionService
@@ -27,7 +27,7 @@ internal static class SessionService
     public static List<IReturnValue> GetParams()
     {
         var ans = new List<IReturnValue>();
-        foreach (var t in Assembly.GetAssembly(typeof(PSModules.ControlClass)).GetTypes())
+        foreach (var t in Assembly.GetAssembly(typeof(ControlClass)).GetTypes())
             if (t.GetInterface("IReturnValue") != null)
                 ans.Add((IReturnValue)Activator.CreateInstance(t));
 
@@ -44,9 +44,9 @@ internal static class SessionService
         return ans;
     }
 
-    public static void CreateSession(string _SessionName)
+    public static void CreateSession(string sessionName)
     {
-        SessionName = _SessionName;
+        SessionName = sessionName;
         Directory.CreateDirectory(SessionName);
         var serializer = new JsonSerializer();
         using (FileStream chr = File.Create($@"{SessionName}/Characters.json"),
@@ -66,24 +66,24 @@ internal static class SessionService
 
         if (tmpTl == null)
             tmpTl = new List<string>();
-        tmpTl.Add(_SessionName);
+        tmpTl.Add(sessionName);
         using (var fs = new StreamWriter("titles.json"))
         {
             serializer.Serialize(fs, tmpTl);
         }
     }
 
-    public static void SaveSession(SessinDataType ChrAndMd)
+    public static void SaveSession(SessinDataType chrAndMd)
     {
-        var ChrData = ChrAndMd.First;
-        var MdData = ChrAndMd.Second;
+        var chrData = chrAndMd.First;
+        var mdData = chrAndMd.Second;
         using (StreamWriter chr = new(@$"{SessionName}/Characters.json"),
                md = new($@"{SessionName}/Modules.json"))
         {
             var serializer = new JsonSerializer();
             serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            serializer.Serialize(chr, ChrData);
-            serializer.Serialize(md, MdData);
+            serializer.Serialize(chr, chrData);
+            serializer.Serialize(md, mdData);
         }
     }
 
@@ -94,15 +94,15 @@ internal static class SessionService
                md = new($@"{SessionName}/Modules.json"))
         {
             var serializer = new JsonSerializer();
-            var ChrData =
+            var chrData =
                 serializer.Deserialize(chr, typeof(Pair<ChrListDataType, MdListDataType>)) as
                     Pair<ChrListDataType, MdListDataType>;
-            if (ChrData == null) ChrData = new Pair<ChrListDataType, MdListDataType>();
+            if (chrData == null) chrData = new Pair<ChrListDataType, MdListDataType>();
 
-            var MdData = serializer.Deserialize(md, typeof(MdListDataType)) as MdListDataType;
-            if (MdData == null) MdData = new MdListDataType();
+            var mdData = serializer.Deserialize(md, typeof(MdListDataType)) as MdListDataType;
+            if (mdData == null) mdData = new MdListDataType();
 
-            ans = new SessinDataType(ChrData, MdData);
+            ans = new SessinDataType(chrData, mdData);
         }
 
         return ans;
@@ -111,7 +111,7 @@ internal static class SessionService
     public static CharacterBase ChrSave(Character chr)
     {
         var ans = new CharacterBase();
-        ans.name = chr.Name;
+        ans.Name = chr.Name;
         ans.Attr = IntRVtoStruct(chr.ListAttributes);
         ans.GenVal = chr.GeneralAttributesValue;
         ;
@@ -120,9 +120,9 @@ internal static class SessionService
 
     public static Character ChrLoad(CharacterBase chr)
     {
-        var ans = new Character(chr.name);
+        var ans = new Character(chr.Name);
         ans.GeneralAttributesValue = chr.GenVal;
-        ans.ListAttributes = StructRVToInt(chr.Attr);
+        ans.ListAttributes = StructRvToInt(chr.Attr);
         return ans;
     }
 
@@ -139,7 +139,7 @@ internal static class SessionService
         return ans;
     }
 
-    public static List<IReturnValue> StructRVToInt(MdListDataType values)
+    public static List<IReturnValue> StructRvToInt(MdListDataType values)
     {
         var ans = new List<IReturnValue>();
         if (values != null)
@@ -168,7 +168,7 @@ internal static class SessionService
             }
         }
         // На случай, если файла titles.json не существует
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException)
         {
             File.Create("titles.json");
             ans = new List<string>();

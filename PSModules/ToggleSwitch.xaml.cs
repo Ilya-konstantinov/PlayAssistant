@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ServiceLibrary;
@@ -11,20 +10,20 @@ namespace PSModules;
 /// </summary>
 public partial class ToggleSwitch : IReturnValue
 {
-    private bool state;
+    private bool _state;
 
     public ToggleSwitch()
     {
         InitializeComponent();
     }
 
-    public ToggleSwitch(string _Title, string _Value = "0")
+    public ToggleSwitch(string title, string value = "false")
     {
         InitializeComponent();
-        Title = _Title;
-        if (_Value == "")
-            _Value = "0";
-        Value = _Value;
+        Title = title;
+        if (value == "")
+            value = "false";
+        Value = value;
     }
 
     public string Title
@@ -35,19 +34,23 @@ public partial class ToggleSwitch : IReturnValue
 
     public string Value
     {
-        get => state.ToString();
-        set => bool.Parse(value);
+        get => _state.ToString();
+        set => Change_st(_state = bool.Parse(value));
     }
 
     private void Circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        state = !state;
-
-        if (state)
+        _state = !_state;
+        Change_st(_state);
+        
+    }
+    public void Change_st(bool st)
+    {
+        if (st)
         {
             Circle.Margin = new Thickness(ToggleUserControl.ActualWidth - ToggleUserControl.ActualHeight, 0, 0, 0);
             Rect.Fill = new SolidColorBrush(Colors.Blue);
-        }
+}
         else
         {
             Circle.Margin = new Thickness(0, 0, 0, 0);

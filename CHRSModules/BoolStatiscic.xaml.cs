@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using ServiceLibrary;
 
@@ -10,7 +9,7 @@ namespace CHRSModules;
 /// </summary>
 public partial class BoolStatiscic : IReturnValue
 {
-    private bool st;
+    private bool _st;
 
     public BoolStatiscic()
     {
@@ -19,12 +18,12 @@ public partial class BoolStatiscic : IReturnValue
         Status.IsEnabled = false;
     }
 
-    public BoolStatiscic(string _Title = "", string _Value = "0")
+    public BoolStatiscic(string title = "", string value = "0")
     {
         InitializeComponent();
-        ElTitle.Content = _Title;
-        Value = _Value;
-        Title = _Title;
+        ElTitle.Content = title;
+        Value = value;
+        Title = title;
     }
 
     public string Title
@@ -35,27 +34,27 @@ public partial class BoolStatiscic : IReturnValue
 
     public string Value
     {
-        get => st.ToString();
+        get => _st.ToString();
         set => SetStatus(value);
     }
 
     public void SetStatus(string status)
     {
         if (status == "") status = "false";
-        st = bool.Parse(status);
+        _st = bool.Parse(status);
         Status.Background = new SolidColorBrush(
-            st ? Colors.Green : Colors.Red
+            _st ? Colors.Green : Colors.Red
         );
-        Status.Content = st ? "True" : "False";
+        Status.Content = _st ? "True" : "False";
     }
 
     public void ChangeSt()
     {
-        st = !st;
+        _st = !_st;
         Status.Background = new SolidColorBrush(
-            st ? Colors.Green : Colors.Red
+            _st ? Colors.Green : Colors.Red
         );
-        Status.Content = st ? "True" : "False";
+        Status.Content = _st ? "True" : "False";
     }
 
     private void Status_Click(object sender, RoutedEventArgs e)

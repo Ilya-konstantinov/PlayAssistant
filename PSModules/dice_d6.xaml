@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PSModules.dice_d6"
+﻿<UserControl x:Class="PSModules.DiceD6"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button x:Name="throw_btn"
+            <Button x:Name="ThrowBtn"
                     Content="throw"
                     Margin="1,1,1,1"
                     Grid.Column="1"
@@ -42,17 +42,17 @@
                     Click="throw_btn_Click"
                     FontSize="{DynamicResource BtnFontSize}" />
         </Grid>
-        <Border Name="dice_border"
+        <Border Name="DiceBorder"
                 BorderThickness="1"
                 Grid.Column="1"
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
-            <Image x:Name="dice_img"
+            <Image x:Name="DiceImg"
                    Source="/Images/1.png" />
         </Border>
         <CheckBox Foreground="White"
-                  x:Name="animation_checkbox"
+                  x:Name="AnimationCheckbox"
                   Grid.Column="1"
                   Content="Animation"
                   HorizontalAlignment="Stretch"

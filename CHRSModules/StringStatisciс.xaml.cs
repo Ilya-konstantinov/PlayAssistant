@@ -15,12 +15,12 @@ public partial class StringStatiscic : IReturnValue
         Field.IsEnabled = false;
     }
 
-    public StringStatiscic(string _Title = "", string _Value = "")
+    public StringStatiscic(string title = "", string value = "")
     {
         InitializeComponent();
-        ElTitle.Content = _Title;
-        Value = _Value;
-        if (_Title == _Value) Field.IsEnabled = false;
+        ElTitle.Content = title;
+        Value = value;
+        if (title == value) Field.IsEnabled = false;
     }
 
     public string Title

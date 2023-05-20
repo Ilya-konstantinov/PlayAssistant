@@ -9,21 +9,21 @@ namespace PlayAssistant;
 /// </summary>
 public partial class TestGamePage : Page
 {
-    private readonly DateTime start_time;
+    private readonly DateTime _startTime;
 
     public TestGamePage()
     {
         InitializeComponent();
 
-        start_time = DateTime.Now;
-        Back_btn.Content = start_time.ToString();
+        _startTime = DateTime.Now;
+        BackBtn.Content = _startTime.ToString();
     }
 
-    public event EventHandler PageClose_Click;
+    public event EventHandler PageCloseClick;
 
     private void PageClose(EventArgs e)
     {
-        if (PageClose_Click != null) PageClose_Click(this, e);
+        if (PageCloseClick != null) PageCloseClick(this, e);
     }
 
     private void Back_btn_Click(object sender, RoutedEventArgs e)

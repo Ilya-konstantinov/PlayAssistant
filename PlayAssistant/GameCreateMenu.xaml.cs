@@ -20,6 +20,8 @@ public partial class GameCreateMenu : UserControl
 
     private void Create_btn_Click(object sender, RoutedEventArgs e)
     {
+        if (SessionService.SessionsList().Contains(ElTitle.Text))
+            return;
         ((GameChooseMenu)Application.Current.MainWindow.Content).CloseGameCreate();
         SessionService.CreateSession(ElTitle.Text);
         ((MainWindow)Application.Current.MainWindow).OpenGameCreationWindow();
