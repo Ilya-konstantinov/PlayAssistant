@@ -115,10 +115,7 @@ public partial class MainWindow : Window
         var lst = MainGrid.Children.OfType<CharacterCreate>().ToList();
         foreach (var item in lst) MainGrid.Children.Remove(item);
 
-        GameCreate_grid.Visibility = Visibility.Hidden;
-        GameCreate_grid.IsEnabled = false;
-
-        GameCreate_grid.Children.Clear();
+        CloseOverlayed();
 
         UnStels();
     }
@@ -131,8 +128,7 @@ public partial class MainWindow : Window
         else
             list = SessionService.GetAttributes();
 
-        Stels();
-        MainGrid.Children.Add(new ListOfUserControls(list, IsPSList, InMainWindow, curCh));
+        OpenOverlayed(new ListOfUserControls(list, IsPSList, InMainWindow, curCh));
     }
 
     public void Stels()
@@ -149,15 +145,7 @@ public partial class MainWindow : Window
 
     private void btn1_Click(object sender, RoutedEventArgs e)
     {
-        Stels();
-        GameCreate_grid.Visibility = Visibility.Visible;
-        GameCreate_grid.IsEnabled = true;
-        var cc = new CharacterCreate();
-
-        Grid.SetRow(cc, 1);
-        Grid.SetColumn(cc, 1);
-
-        GameCreate_grid.Children.Add(cc);
+        OpenOverlayed(new CharacterCreate());
     }
 
     private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -180,18 +168,33 @@ public partial class MainWindow : Window
 
     public void OpenGameCreate(object sender, RoutedEventArgs e)
     {
-        Stels();
-        GameCreate_grid.Visibility = Visibility.Visible;
-        GameCreate_grid.IsEnabled = true;
-        var gcm = new GameCreateMenu();
-
-        Grid.SetRow(gcm, 1);
-        Grid.SetColumn(gcm, 1);
-
-        GameCreate_grid.Children.Add(gcm);
+        OpenOverlayed(new GameCreateMenu());
     }
 
     public void CloseGameCreate()
+    {
+        GameCreate_grid.Visibility = Visibility.Hidden;
+        GameCreate_grid.IsEnabled = false;
+
+        GameCreate_grid.Children.Clear();
+
+        UnStels();
+    }
+
+    public void OpenOverlayed(UIElement _content)
+    {
+        Stels();
+
+        GameCreate_grid.Visibility = Visibility.Visible;
+        GameCreate_grid.IsEnabled = true;
+
+        Grid.SetRow(_content, 1);
+        Grid.SetColumn(_content, 1);
+
+        GameCreate_grid.Children.Add(_content);
+    }
+
+    public void CloseOverlayed()
     {
         GameCreate_grid.Visibility = Visibility.Hidden;
         GameCreate_grid.IsEnabled = false;

@@ -66,5 +66,6 @@ public partial class ListOfUserControls : UserControl
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
         parentWindow.RemoveList(InMainWindow);
+        parentWindow.CloseOverlayed();
     }
 }
