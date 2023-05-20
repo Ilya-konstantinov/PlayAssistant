@@ -118,7 +118,10 @@ public partial class MainWindow : Window
             list = SessionService.GetAttributes();
 
         Stels();
-        PSMPicker.Children.Add(new ListOfUserControls(list, IsPSList, InMainWindow, curCh));
+        var listOfUserControls = new ListOfUserControls(list, IsPSList, InMainWindow, curCh);
+        listOfUserControls.SetValue(Grid.RowProperty, 1);
+        listOfUserControls.SetValue(Grid.ColumnProperty, 1);
+        MainGrid.Children.Add(listOfUserControls);
     }
 
     public void Stels()
@@ -136,7 +139,10 @@ public partial class MainWindow : Window
     private void btn1_Click(object sender, RoutedEventArgs e)
     {
         Stels();
-        MainGrid.Children.Add(new CharacterCreate());
+        var characterCreate = new CharacterCreate();
+        characterCreate.SetValue(Grid.ColumnProperty, 2);
+        characterCreate.SetValue(Grid.RowProperty, 1);
+        MainGrid.Children.Add(characterCreate);
     }
 
     private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -154,7 +160,7 @@ public partial class MainWindow : Window
     private void Button_Click_3(object sender, RoutedEventArgs e)
     {
         Stels();
-        CreateList(false, true);
+        CreateList(true, true);
     }
 
     public void OpenGameCreate(object sender, RoutedEventArgs e)

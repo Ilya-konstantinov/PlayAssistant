@@ -31,6 +31,7 @@
         <Rectangle Grid.Row="1"
                    x:Name="Hide"
                    Grid.Column="1"
+                   Grid.ColumnSpan="2"
                    Fill="#4CA9A9A9"
                    IsEnabled="False"
                    Visibility="Hidden" />
@@ -65,14 +66,14 @@
                     Click="btn1_Click" />
         </StackPanel>
 
-        <Grid Grid.Row="1"
+        <Grid
               x:Name="GameCreate_grid"
               Margin="10,10,10,10"
-              Grid.ColumnSpan="2"
+              Grid.ColumnSpan="4"
               Visibility="Hidden"
               IsEnabled="False"
               Panel.ZIndex="10"
-              Grid.RowSpan="2">
+              Grid.RowSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="2*" />
@@ -84,6 +85,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
         </Grid>
+        
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"

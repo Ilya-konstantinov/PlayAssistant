@@ -23,7 +23,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button x:Name="CreateNewGame_btn"
-                    Content="Create Game"
+                    Content="Создать игру"
                     Margin="20,20,20,20"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"

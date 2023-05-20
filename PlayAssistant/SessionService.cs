@@ -27,7 +27,7 @@ internal static class SessionService
     public static List<IReturnValue> GetParams()
     {
         var ans = new List<IReturnValue>();
-        foreach (var t in Assembly.GetAssembly(typeof(ControlClass)).GetTypes())
+        foreach (var t in Assembly.GetAssembly(typeof(PSModules.ControlClass)).GetTypes())
             if (t.GetInterface("IReturnValue") != null)
                 ans.Add((IReturnValue)Activator.CreateInstance(t));
 
