@@ -139,6 +139,12 @@ namespace PlayAssistant
         {
             var ans = new List<string>();
             var serializer = new JsonSerializer();
+
+            if (!File.Exists("titles.json"))
+            {
+                using (FileStream fs = File.Create("titles.json")) ;
+            }
+
             using (var fs = new StreamReader("titles.json"))
             {
                 ans = serializer.Deserialize(fs, typeof(List<string>)) as List<string>;

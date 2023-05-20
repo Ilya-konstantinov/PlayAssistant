@@ -79,6 +79,12 @@ namespace PlayAssistant
             {
                 Characteristic.Items.Add(attr);
             }
+
+            var t = Characteristic.Items.OfType<UIElement>().ToList();
+            foreach (var item in t)
+            {
+                item.IsEnabled = false;
+            }
         }
     }
 }
