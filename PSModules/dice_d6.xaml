@@ -38,7 +38,6 @@
         </Border>
         <CheckBox Foreground="White" x:Name="animation_checkbox" Grid.Column="1" Content="Animation" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="{DynamicResource LabelFontSize}"/>
         <Label Foreground="White" x:Name="ElTile" Grid.Column="1" Content="Title" HorizontalAlignment="Center" VerticalAlignment="Center" Height="73" Width="428"/>
-
         <Button x:Name="throw_btn" Content="throw" Margin="10,54,10,62" Click="throw_btn_Click" FontSize="{DynamicResource BtnFontSize}" Grid.Column="1" Grid.Row="2"/>
     </Grid>
 </UserControl>

@@ -22,6 +22,6 @@
         <TextBox Foreground="White" Name="To_textbox" TextWrapping="Wrap" Text="" Margin="10,10,10,10" Grid.Column="1" FontSize="{DynamicResource LabelFontSize}" Height="NaN" Width="NaN" Grid.Row="1"/>
         <Button Name="Generate_btn" Content="Generate" Grid.Row="2" Margin="10,10,10,10" Click="Generate_btn_Click" FontSize="{DynamicResource BtnFontSize}" Height="NaN" Width="NaN"/>
         <TextBlock Foreground="White" x:Name="Result_textblock" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="" Margin="10,10,10,10" FontSize="{DynamicResource LabelFontSize}" Height="NaN" Width="NaN"/>
-        <Label Foreground="White" x:Name="ElTitle" Content="Title" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="400" FontSize="18"/>
+        <Label Foreground="White" x:Name="ElTitle" Content="" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="400" FontSize="18"/>
     </Grid>
 </UserControl>
