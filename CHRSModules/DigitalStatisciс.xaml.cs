@@ -44,6 +44,7 @@ public partial class DigitalStatiscic : IReturnValue
         var text = ElValue.Text;
         if (ElValue.Text == "") text = "0";
         if (!char.IsDigit(text[text.Length - 1])) ElValue.Text = text.Substring(0, text.Length - 1);
+        if (!char.IsDigit(text[0])) ElValue.Text = text.Substring(1);
         Value = ElValue.Text;
     }
 

@@ -13,7 +13,7 @@ namespace PlayAssistant;
 /// </summary>
 using MdListDataType = List<Pair<Type, ReturnValue>>;
 using ChrListDataType = List<CharacterBase>;
-using SessinDataType =
+using SessionDataType =
     Pair<Pair<List<CharacterBase>, List<Pair<Type, ReturnValue>>>, List<Pair<Type, ReturnValue>>>;
 
 public partial class MainWindow : Window
@@ -38,6 +38,12 @@ public partial class MainWindow : Window
     {
         if (SessionService.SessionName == null) return;
 
+        
+        SessionService.SaveSession(SessionData());
+    }
+
+    public SessionDataType SessionData()
+    {
         var GenAttr = SessionService.IntRVtoStruct(Character.ListGeneralAttributes);
         var ChrData = new Pair<ChrListDataType, MdListDataType>(new ChrListDataType(
                 characters()),
@@ -46,7 +52,7 @@ public partial class MainWindow : Window
         var MdData = new MdListDataType(
             SessionService.IntRVtoStruct(PSMList.Items.OfType<IReturnValue>().ToList())
         );
-        SessionService.SaveSession(new SessinDataType(ChrData, MdData));
+        return new SessionDataType(ChrData, MdData);
     }
 
     public ChrListDataType characters()
@@ -80,6 +86,8 @@ public partial class MainWindow : Window
 
     public void OpenGameChoosePage()
     {
+        lb_players.Items.Clear();
+        PSMList.Items.Clear();
         Application.Current.MainWindow.Content = gcm;
     }
 
@@ -117,11 +125,8 @@ public partial class MainWindow : Window
         else
             list = SessionService.GetAttributes();
 
-        Stels();
         var listOfUserControls = new ListOfUserControls(list, IsPSList, InMainWindow, curCh);
-        listOfUserControls.SetValue(Grid.RowProperty, 1);
-        listOfUserControls.SetValue(Grid.ColumnProperty, 1);
-        MainGrid.Children.Add(listOfUserControls);
+        OpenOverlayed(listOfUserControls);
     }
 
     public void Stels()
@@ -165,15 +170,7 @@ public partial class MainWindow : Window
 
     public void OpenGameCreate(object sender, RoutedEventArgs e)
     {
-        Stels();
-        GameCreate_grid.Visibility = Visibility.Visible;
-        GameCreate_grid.IsEnabled = true;
-        var gcm = new GameCreateMenu();
-
-        Grid.SetRow(gcm, 1);
-        Grid.SetColumn(gcm, 1);
-
-        GameCreate_grid.Children.Add(gcm);
+        OpenOverlayed(new GameCreateMenu());
     }
 
     public void CloseGameCreate()
@@ -186,8 +183,33 @@ public partial class MainWindow : Window
         UnStels();
     }
 
+    public void OpenOverlayed(UIElement _content)
+    {
+        Stels();
+
+        GameCreate_grid.Visibility = Visibility.Visible;
+        GameCreate_grid.IsEnabled = true;
+
+        Grid.SetRow(_content, 1);
+        Grid.SetColumn(_content, 1);
+
+        GameCreate_grid.Children.Add(_content);
+    }
+
+    public void CloseOverlayed()
+    {
+        GameCreate_grid.Visibility = Visibility.Hidden;
+        GameCreate_grid.IsEnabled = false;
+
+        GameCreate_grid.Children.Clear();
+
+        UnStels();
+    }
+
     private void Exit_btn_Click(object sender, RoutedEventArgs e)
     {
+        SessionService.SaveSession(SessionData());
+        SessionService.SessionName = null;
         OpenGameChoosePage();
     }
 }

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSModules", "PSModules\PSMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHRSModules", "CHRSModules\CHRSModules.csproj", "{50098E9A-CB9C-46F0-AB3A-0570056B2246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLibrary", "ServiceLibrary\ServiceLibrary.csproj", "{2944154D-A544-42B6-B045-35653A20B621}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLibrary", "ServiceLibrary\ServiceLibrary.csproj", "{2944154D-A544-42B6-B045-35653A20B621}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

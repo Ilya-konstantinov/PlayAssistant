@@ -80,29 +80,11 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
         </Grid>
-        
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Grid.Column="1">
-            <Button Content="Добавить игровую статистику"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Margin="0, 0, 30, 0"
-                    Click="Button_Click_3" />
-            <Button x:Name="Exit_btn"
-                    Grid.Column="1"
-                    Content="Exit"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Click="Exit_btn_Click"
-                    Margin="0, 0, 30, 0"
-                    Grid.Row="2" />
-        </StackPanel>
+        <Button x:Name="Exit_btn" Grid.Column="1" Content="Exit" HorizontalAlignment="Left" Margin="53,681,0,0" VerticalAlignment="Top" Height="86" Width="91" Click="Exit_btn_Click"/>
     </Grid>
 </Window>

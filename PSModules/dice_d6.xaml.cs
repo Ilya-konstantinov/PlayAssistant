@@ -47,7 +47,7 @@ public partial class dice_d6 : IReturnValue
     public string Value
     {
         get => value.ToString();
-        set => SetValue(int.Parse(value));
+        set => SetValue(value);
     }
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
@@ -143,9 +143,14 @@ public partial class dice_d6 : IReturnValue
         animation_is_active = false;
     }
 
-    public void SetValue(int _value)
+    public void SetValue(string _value)
     {
-        value = Clamp(_value, 1, 6);
+        if (_value == "")
+        {
+            _value = "0";
+        }
+        var val = Int32.Parse(_value);
+        value = Clamp(val, 1, 6);
         dice_img.Source = new BitmapImage(new Uri($"/Images/{value}.png", UriKind.Relative));
     }
 

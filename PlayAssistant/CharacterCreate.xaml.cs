@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using ServiceLibrary;
 
@@ -14,8 +15,7 @@ public partial class CharacterCreate : UserControl
     public CharacterCreate()
     {
         InitializeComponent();
-        var lst = character.GetAttributes();
-        foreach (var attr in lst) Characteristic.Items.Add(attr);
+        Refrash();
     }
 
     public bool NameCorrect()
@@ -60,5 +60,10 @@ public partial class CharacterCreate : UserControl
         Characteristic.Items.Clear();
         var lst = character.GetAttributes();
         foreach (var attr in lst) Characteristic.Items.Add(attr);
+
+
+        var t = Characteristic.Items.OfType<UIElement>().ToList();
+        foreach (var attr in t)
+            attr.IsEnabled = false;
     }
 }

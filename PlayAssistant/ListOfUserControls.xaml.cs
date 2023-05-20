@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,11 @@ public partial class ListOfUserControls : UserControl
         IsPSList = _IsPSList;
         InMainWindow = _InMainWindow;
         curCh = _curCh;
+
+        var t = MainList.Items.OfType<UIElement>().ToList();
+        foreach (var item in t)
+            item.IsEnabled = false;
+
     }
 
     private void MainList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -63,5 +69,6 @@ public partial class ListOfUserControls : UserControl
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
         parentWindow.RemoveList(InMainWindow);
+        parentWindow.CloseOverlayed();
     }
 }

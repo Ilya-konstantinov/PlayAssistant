@@ -171,7 +171,7 @@ internal static class SessionService
         catch (FileNotFoundException e)
         {
             File.Create("titles.json");
-            return new List<string>();
+            ans = new List<string>();
         }
 
         if (ans == null)
