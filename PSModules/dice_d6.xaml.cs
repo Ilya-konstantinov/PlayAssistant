@@ -88,7 +88,7 @@ namespace PSModules
             {
                 int rand = new Random().Next(1, 7);
                 value = rand;
-                dice_img.Source = new BitmapImage(new Uri(exe_path + "/Images/" + rand.ToString() + ".png", UriKind.Absolute));
+                dice_img.Source = new BitmapImage(new Uri("/Images/" + rand.ToString() + ".png", UriKind.Relative));
             }
         }
 
@@ -134,11 +134,13 @@ namespace PSModules
             animation_is_active = false;
         }
         public string Title { get; set; }
-        public string Value { get => value.ToString(); set => SetValue(Int32.Parse(value)); }
+        public string Value { get => value.ToString(); set => SetValue(value); }
 
-        public void SetValue(int _value)
+        public void SetValue(string _value)
         {
-            value = Clamp(_value, 1, 6);
+            if (_value == "" || _value == null) _value = "1";
+            var val = Int32.Parse(_value);
+            value = Clamp(val, 1, 6);
             dice_img.Source = new BitmapImage(new Uri("/Images/" + value.ToString() + ".png", UriKind.Relative));
         }
 
