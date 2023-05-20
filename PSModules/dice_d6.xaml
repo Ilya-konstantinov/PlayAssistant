@@ -8,7 +8,7 @@
              Loaded="Element_Loaded"
              SizeChanged="Element_Resized"
              d:DesignHeight="800" d:DesignWidth="600">
-    <Grid>
+    <Grid Background="#2D283E">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
@@ -36,8 +36,8 @@
         <Border Name="dice_border" BorderThickness="1" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
             <Image x:Name="dice_img" Source="/Images/1.png"/>
         </Border>
-        <CheckBox x:Name="animation_checkbox" Grid.Column="1" Content="Animation" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="{DynamicResource LabelFontSize}"/>
-        <Label x:Name="ElTile" Grid.Column="1" Content="Title" HorizontalAlignment="Center" VerticalAlignment="Center" Height="73" Width="428"/>
+        <CheckBox Foreground="White" x:Name="animation_checkbox" Grid.Column="1" Content="Animation" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="{DynamicResource LabelFontSize}"/>
+        <Label Foreground="White" x:Name="ElTile" Grid.Column="1" Content="Title" HorizontalAlignment="Center" VerticalAlignment="Center" Height="73" Width="428"/>
 
     </Grid>
 </UserControl>

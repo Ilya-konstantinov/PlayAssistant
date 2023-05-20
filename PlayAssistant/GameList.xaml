@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameList">
 
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" Background="#2D283E">
         <Grid.ColumnDefinitions>
             
         </Grid.ColumnDefinitions>

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CHRSModules"
-             mc:Ignorable="d" Height="92" Width="264" Background="White">
+             mc:Ignorable="d" Height="92" Width="264" Background="#2D283E">
 
     <Grid>
         <Label x:Name="ElTitle" Content="Title&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" Width="162" Height="26" BorderBrush="#FFD81515" OpacityMask="#FFFF0F0F" Background="White"/>
