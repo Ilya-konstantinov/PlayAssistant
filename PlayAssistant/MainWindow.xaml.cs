@@ -107,7 +107,7 @@ public partial class MainWindow : Window
         var lst = MainGrid.Children.OfType<ListOfUserControls>().ToList();
         foreach (var item in lst) MainGrid.Children.Remove(item);
 
-        if (NeedToHide) UnStels();
+        if (NeedToHide) CloseOverlayed();
     }
 
     public void RemoveCreateCharacter()

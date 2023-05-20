@@ -42,11 +42,14 @@ public partial class ListOfUserControls : UserControl
         selected.Title = ElementTitle.Text;
         if (IsPSList)
         {
+            var instance = Activator.CreateInstance(
+                selected.GetType(),
+                selected.Title,
+                "");
+            ((UserControl)instance).SetValue(Grid.ColumnProperty, 1);
+            ((UserControl)instance).SetValue(Grid.RowProperty, 1);
             parentWindow.AddPS((IReturnValue)
-                Activator.CreateInstance(
-                    selected.GetType(),
-                    selected.Title,
-                    "")
+                instance
             );
         }
         else
