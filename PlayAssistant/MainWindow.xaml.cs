@@ -98,6 +98,7 @@ public partial class MainWindow : Window
 
     public void AddPS(IReturnValue PS)
     {
+        ((UIElement)PS).IsEnabled = true;
         PSMList.Items.Add(PS);
     }
 

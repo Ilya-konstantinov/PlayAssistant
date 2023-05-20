@@ -12,7 +12,7 @@
                  x:Name="Field"
                  HorizontalAlignment="Center"
                  TextWrapping="Wrap"
-                 Text="Field"
+                 Text=""
                  VerticalAlignment="Top"
                  Width="244"
                  Height="52"
