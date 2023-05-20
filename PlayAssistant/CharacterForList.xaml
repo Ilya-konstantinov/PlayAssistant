@@ -15,7 +15,9 @@
                Margin="197,10,0,0"
                VerticalAlignment="Top"
                Height="34"
-               Width="95" />
+               Width="95" 
+               Foreground="White"
+               />
         <Image x:Name="Avatar"
                HorizontalAlignment="Left"
                Height="77"
