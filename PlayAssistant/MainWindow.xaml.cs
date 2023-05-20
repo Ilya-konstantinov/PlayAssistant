@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +19,6 @@ using SessionDataType =
 
 public partial class MainWindow : Window
 {
-    private readonly GameChooseMenu _gcm = new(SessionService.SessionsList());
     private readonly object _mainWindow;
 
     public MainWindow()
@@ -27,7 +27,7 @@ public partial class MainWindow : Window
 
         _mainWindow = Application.Current.MainWindow.Content;
 
-        Application.Current.MainWindow.Content = _gcm;
+        Application.Current.MainWindow.Content = new GameChooseMenu(SessionService.SessionsList());
 
         Closing += MainWindow_Closing;
     }
@@ -38,7 +38,7 @@ public partial class MainWindow : Window
     {
         if (SessionService.SessionName == null) return;
 
-
+        Refrash();
         SessionService.SaveSession(SessionData());
     }
 
@@ -88,7 +88,7 @@ public partial class MainWindow : Window
     {
         LbPlayers.Items.Clear();
         PsmList.Items.Clear();
-        Application.Current.MainWindow.Content = _gcm;
+        Application.Current.MainWindow.Content = new GameChooseMenu(SessionService.SessionsList());
     }
 
     internal void AddCharacter(Character character)
@@ -104,16 +104,18 @@ public partial class MainWindow : Window
 
     public void RemoveList(bool needToHide)
     {
-        var lst = MainGrid.Children.OfType<ListOfUserControls>().ToList();
-        foreach (var item in lst) MainGrid.Children.Remove(item);
+        var lst = PsmPicker.Children.OfType<ListOfUserControls>().ToList();
+        foreach (var item in lst) PsmPicker.Children.Remove(item);
+        var another_lst = GameCreateGrid.Children.OfType<ListOfUserControls>().ToList();
+        foreach (var item in another_lst) GameCreateGrid.Children.Remove(item);
 
         if (needToHide) CloseOverlayed();
     }
 
     public void RemoveCreateCharacter()
     {
-        var lst = MainGrid.Children.OfType<CharacterCreate>().ToList();
-        foreach (var item in lst) MainGrid.Children.Remove(item);
+        var lst = PsmPicker.Children.OfType<CharacterCreate>().ToList();
+        foreach (var item in lst) PsmPicker.Children.Remove(item);
 
         CloseOverlayed();
 
@@ -135,6 +137,7 @@ public partial class MainWindow : Window
     {
         Hide.IsEnabled = true;
         Hide.Visibility = Visibility.Visible;
+        
     }
 
     public void UnStels()
@@ -150,20 +153,19 @@ public partial class MainWindow : Window
 
     private void Button_Click_2(object sender, RoutedEventArgs e)
     {
-        CreateList(true, true);
+        CreateList(false, true);
     }
 
     public void Refrash()
     {
-        foreach (var item in MainGrid.Children.OfType<CharacterCreate>()) item.Refrash();
+        foreach (var item in GameCreateGrid.Children.OfType<CharacterCreate>()) item.Refrash();
 
         foreach (var item in LbPlayers.Items.OfType<CharacterForList>()) item.Refresh();
     }
 
     private void Button_Click_3(object sender, RoutedEventArgs e)
     {
-        Stels();
-        CreateList(false, true);
+        CreateList(true, true);
     }
 
     public void OpenGameCreate(object sender, RoutedEventArgs e)
@@ -206,6 +208,7 @@ public partial class MainWindow : Window
 
     private void Exit_btn_Click(object sender, RoutedEventArgs e)
     {
+        Refrash();
         SessionService.SaveSession(SessionData());
         SessionService.SessionName = null;
         OpenGameChoosePage();

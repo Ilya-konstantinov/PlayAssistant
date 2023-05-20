@@ -28,13 +28,6 @@
                  x:Name="LbPlayers"
                  Grid.Column="2"
                  HorizontalAlignment="Stretch" />
-        <Rectangle Grid.Row="1"
-                   x:Name="Hide"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="2"
-                   Fill="#4CA9A9A9"
-                   IsEnabled="False"
-                   Visibility="Hidden" />
 
         <!-- Список игровых статистик -->
         <ListBox x:Name="PsmList"
@@ -57,7 +50,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="0, 0, 30, 0"
-                    Click="Button_Click_3" />
+                    Click="Button_Click_2" />
 
             <Button Content="Создать персонажа"
                     HorizontalAlignment="Left"
@@ -66,9 +59,9 @@
         </StackPanel>
 
         <Grid x:Name="GameCreateGrid"
-              Margin="10,10,10,10"
+              Margin="10,10,0,0"
               Grid.ColumnSpan="4"
-              Visibility="Hidden"
+              Visibility="Visible"
               IsEnabled="False"
               Panel.ZIndex="10"
               Grid.RowSpan="3">
@@ -82,6 +75,8 @@
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
+
+            
         </Grid>
 
         <StackPanel Grid.Row="2"
@@ -100,5 +95,12 @@
                     Click="Exit_btn_Click"
                     Margin="0, 0, 30, 0" />
         </StackPanel>
+        <Rectangle x:Name="Hide"
+                   Grid.ColumnSpan="4" 
+                   Grid.RowSpan="3"
+                   Fill="#4CA9A9A9"
+                   IsEnabled="False"
+                   Visibility="Hidden" />
+
     </Grid>
 </Window>

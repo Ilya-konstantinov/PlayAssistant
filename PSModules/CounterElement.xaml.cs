@@ -21,7 +21,7 @@ public partial class CounterElement : IReturnValue
     {
         InitializeComponent();
         Title = title;
-        if (value == "")
+        if (value == "" || value == null)
             value = "0";
         Value = value;
     }
@@ -35,7 +35,11 @@ public partial class CounterElement : IReturnValue
     public string Value
     {
         get => _value.ToString();
-        set => _value = int.Parse(value);
+        set
+        {
+            _value = int.Parse(value);
+            Update_text();
+        }
     }
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
@@ -81,15 +85,5 @@ public partial class CounterElement : IReturnValue
     private void Update_text()
     {
         ValueLabel.Content = _value.ToString();
-    }
-
-    public int GetValue()
-    {
-        return _value;
-    }
-
-    public void SetValue(int value)
-    {
-        _value = value;
     }
 }

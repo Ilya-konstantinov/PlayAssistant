@@ -46,7 +46,9 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Grid.Column="1"
-                        Margin="0,35,10,20" />
+                        Margin="0,35,10,20"
+                        Click="Search_btn_Click"
+                        />
             </Grid>
         </Grid>
         <Frame x:Name="GameListFrame"

@@ -35,7 +35,7 @@ public partial class GameList : Page
         MainGrid.ColumnDefinitions.Clear();
 
         for (var i = 0; i < _btnList.Count; i++)
-            if (_btnList[i].Game.ToLower().Contains(name.Trim().ToLower()))
+            if (_btnList[i].Game.Contains(name.Trim()))
             {
                 MainGrid.ColumnDefinitions.Add(new ColumnDefinition
                 {

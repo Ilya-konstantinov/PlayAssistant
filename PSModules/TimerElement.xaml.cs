@@ -53,7 +53,12 @@ public partial class TimerElement : IReturnValue
     public string Value
     {
         get => _tempTime.ToString();
-        set => _tempTime = int.Parse(value);
+        set
+        {
+
+            _time = int.Parse(value);
+            Update_text(_time);
+        }
     }
 
     private void Element_Loaded(object sender, RoutedEventArgs e)

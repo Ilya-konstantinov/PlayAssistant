@@ -17,12 +17,12 @@ public partial class ToggleSwitch : IReturnValue
         InitializeComponent();
     }
 
-    public ToggleSwitch(string title, string value = "0")
+    public ToggleSwitch(string title, string value = "false")
     {
         InitializeComponent();
         Title = title;
         if (value == "")
-            value = "0";
+            value = "false";
         Value = value;
     }
 
@@ -35,18 +35,22 @@ public partial class ToggleSwitch : IReturnValue
     public string Value
     {
         get => _state.ToString();
-        set => bool.Parse(value);
+        set => Change_st(_state = bool.Parse(value));
     }
 
     private void Circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         _state = !_state;
-
-        if (_state)
+        Change_st(_state);
+        
+    }
+    public void Change_st(bool st)
+    {
+        if (st)
         {
             Circle.Margin = new Thickness(ToggleUserControl.ActualWidth - ToggleUserControl.ActualHeight, 0, 0, 0);
             Rect.Fill = new SolidColorBrush(Colors.Blue);
-        }
+}
         else
         {
             Circle.Margin = new Thickness(0, 0, 0, 0);

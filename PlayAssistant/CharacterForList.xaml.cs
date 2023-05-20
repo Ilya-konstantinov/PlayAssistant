@@ -17,7 +17,7 @@ public enum Status
 
 public partial class CharacterForList : UserControl
 {
-    public readonly Character Character;
+    public Character Character;
     private Status _st = Status.Close;
 
     internal CharacterForList(Character character)
@@ -31,36 +31,51 @@ public partial class CharacterForList : UserControl
     {
         if (_st == Status.Open)
         {
-            _st = Status.Close;
-            var lst = Grid.Children.OfType<ListBox>().ToList();
-            Height /= 2;
-            Character.Refrash(lst[0].Items.OfType<IReturnValue>().ToList());
-            foreach (var item in lst) Grid.Children.Remove(item);
+            Close();
         }
         else
         {
-            _st = Status.Open;
-            var lst = new ListBox();
-            foreach (var item in Character.GetAttributes()) lst.Items.Add(item);
-
-            Height *= 2;
-            lst.Margin = new Thickness(
-                Width * 0.05, Avatar.Height * 1.2, Width * 0.05, Height * 0.05
-            );
-            Grid.Children.Add(lst);
+            Open();
         }
+    }
+    public void Close()
+    {
+        _st = Status.Close;
+        Height /= 2;
+        var lst = Grid.Children.OfType<ListBox>().ToList();
+        Character_Refresh();
+        foreach (var item in lst) Grid.Children.Remove(item);
+    }
+    public void Open()
+    {
+        _st = Status.Open;
+        var lst = new ListBox();
+        foreach (var item in Character.GetAttributes()) lst.Items.Add(item);
+
+        Height *= 2;
+        lst.Margin = new Thickness(
+            Width * 0.05, Avatar.Height * 1.2, Width * 0.05, Height * 0.05
+        );
+        Grid.Children.Add(lst);
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+        Close();
         var parentWindow = Window.GetWindow(this) as MainWindow;
         parentWindow.CreateList(false, true, Character);
+    }
+    public void Character_Refresh()
+    {
+        var lst = Grid.Children.OfType<ListBox>().ToList();
+        Character.Refrash(lst[0].Items.OfType<IReturnValue>().ToList());
     }
 
     public void Refresh()
     {
         if (_st == Status.Open)
         {
+            Character_Refresh();
             var lst = Grid.Children.OfType<ListBox>().ToList();
             foreach (var item in lst) Grid.Children.Remove(item);
 
