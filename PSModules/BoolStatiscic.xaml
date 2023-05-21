@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="PSModules.BoolStatiscic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Height="92"
+             Width="264"
+             Background="#2D283E">
+
+    <Grid>
+        <Label x:Name="ElTitle"
+               Content="Title&#xD;&#xA;"
+               HorizontalAlignment="Center"
+               Margin="0,4,0,0"
+               VerticalAlignment="Top"
+               Width="162"
+               Height="26"
+               BorderBrush="#FFD81515"
+               OpacityMask="#FFFF0F0F"
+               Background="White" />
+        <Button x:Name="Status"
+                Content="Button"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Height="47"
+                Width="244"
+                Margin="0,35,0,0"
+                Click="Status_Click" />
+
+    </Grid>
+</UserControl>

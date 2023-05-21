@@ -1,7 +1,21 @@
 using System.Linq;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using ServiceLibrary;
+using Microsoft.Win32;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+/*
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using ServiceLibrary; 
+*/
 
 namespace PlayAssistant;
 
@@ -10,7 +24,7 @@ namespace PlayAssistant;
 /// </summary>
 public partial class CharacterCreate : UserControl
 {
-    private readonly Character _character = new("");
+    private readonly Character _character = new("","");
 
     public CharacterCreate()
     {
@@ -34,6 +48,10 @@ public partial class CharacterCreate : UserControl
             var parentWindow = Window.GetWindow(this) as MainWindow;
 
             _character.Name = Name.Text;
+            if (_character.Pic_path == "")
+            {
+                _character.Pic_path = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\avatar-example.png";
+            }
 
             parentWindow.AddCharacter(_character);
             parentWindow.RemoveCreateCharacter();
@@ -63,5 +81,15 @@ public partial class CharacterCreate : UserControl
         var lst = _character.GetAttributes();
         foreach (var attr in lst) Characteristic.Items.Add(attr);
         foreach (var item in Characteristic.Items.OfType<UIElement>().ToList()) { item.IsEnabled = false; }
+    }
+
+    private void Avatar_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new OpenFileDialog();
+        dialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+        if (dialog.ShowDialog() == true) { 
+            _character.Pic_path = dialog.FileName;
+        }
+        Avatar.Background = new ImageBrush(new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)));
     }
 }

@@ -28,6 +28,6 @@
                Content=""
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
-               Width="92" />
+               Width="92" Foreground="White" />
     </Grid>
 </UserControl>

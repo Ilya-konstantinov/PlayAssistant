@@ -18,6 +18,7 @@ public struct CharacterBase
     public List<string> GenVal;
     public MdListDataType Attr;
     public string Name;
+    public string Pic_path;
 }
 
 internal static class SessionService
@@ -112,6 +113,7 @@ internal static class SessionService
     {
         var ans = new CharacterBase();
         ans.Name = chr.Name;
+        ans.Pic_path = chr.Pic_path;
         ans.Attr = IntRVtoStruct(chr.ListAttributes);
         ans.GenVal = chr.GeneralAttributesValue;
         ;
@@ -120,7 +122,7 @@ internal static class SessionService
 
     public static Character ChrLoad(CharacterBase chr)
     {
-        var ans = new Character(chr.Name);
+        var ans = new Character(chr.Name, chr.Pic_path);
         ans.GeneralAttributesValue = chr.GenVal;
         ans.ListAttributes = StructRvToInt(chr.Attr);
         return ans;
