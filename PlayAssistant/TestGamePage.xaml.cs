@@ -7,7 +7,7 @@ namespace PlayAssistant;
 /// <summary>
 ///     Логика взаимодействия для TestGamePage.xaml
 /// </summary>
-public partial class TestGamePage : Page
+public partial class TestGamePage
 {
     private readonly DateTime _startTime;
 
