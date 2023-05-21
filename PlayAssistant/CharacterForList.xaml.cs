@@ -27,7 +27,7 @@ public partial class CharacterForList : UserControl
         InitializeComponent();
         Character = character;
         Name.Content = character.Name;
-        Avatar.Source = new BitmapImage(new Uri(character.Pic_path, UriKind.Absolute));
+        Avatar.Source = new BitmapImage(new Uri(character.AvatarPath, UriKind.Absolute));
     }
 
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

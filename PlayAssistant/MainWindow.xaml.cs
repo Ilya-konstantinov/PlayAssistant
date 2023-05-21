@@ -111,7 +111,7 @@ public partial class MainWindow : Window
         if (needToHide) CloseOverlayed();
     }
 
-    public void RemoveCreateCharacter()
+    public void RemoveCharacterCreationPanel()
     {
         var lst = PsmPicker.Children.OfType<CharacterCreate>().ToList();
         foreach (var item in lst) PsmPicker.Children.Remove(item);
@@ -156,7 +156,7 @@ public partial class MainWindow : Window
 
     public void Refrash()
     {
-        foreach (var item in GameCreateGrid.Children.OfType<CharacterCreate>()) item.Refrash();
+        foreach (var item in GameCreateGrid.Children.OfType<CharacterCreate>()) item.Refresh();
 
         foreach (var item in LbPlayers.Items.OfType<CharacterForList>()) item.Refresh();
     }

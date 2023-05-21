@@ -6,16 +6,16 @@ public class Character
 {
     public static AttributeListType? ListGeneralAttributes = new();
 
-    public Character(string name, string _pic_path)
+    public Character(string name, string avatarPath)
     {
         Name = name;
-        Pic_path = _pic_path;
+        AvatarPath = avatarPath;
         ListAttributes = new AttributeListType();
         GeneralAttributesValue = new List<string>(ListGeneralAttributes.Count());
     }
 
     public string Name { get; set; }
-    public string Pic_path { get; set; }
+    public string AvatarPath { get; set; }
     public List<string> GeneralAttributesValue { get; set; }
     public AttributeListType ListAttributes { get; set; }
 

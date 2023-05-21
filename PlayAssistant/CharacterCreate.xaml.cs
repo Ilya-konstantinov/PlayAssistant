@@ -31,31 +31,29 @@ public partial class CharacterCreate : UserControl
     public CharacterCreate()
     {
         InitializeComponent();
-        var lst = _character.GetAttributes();
-        foreach (var attr in lst) Characteristic.Items.Add(attr);
+        var attributes = _character.GetAttributes();
+        foreach (var attribute in attributes) Characteristic.Items.Add(attribute);
         foreach (var item in Characteristic.Items.OfType<UIElement>().ToList()) item.IsEnabled = false;
     }
 
-    public bool NameCorrect()
+    public bool NameIsCorrect()
     {
-        if (Name.Text.Length > 0)
-            return true;
-        return false;
+        return Name.Text.Length > 0;
     }
 
     private void Add_Click(object sender, RoutedEventArgs e)
     {
-        if (NameCorrect())
+        if (NameIsCorrect())
         {
             var parentWindow = Window.GetWindow(this) as MainWindow;
 
             _character.Name = Name.Text;
-            if (_character.Pic_path == "")
-                _character.Pic_path = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) +
+            if (_character.AvatarPath == "")
+                _character.AvatarPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) +
                                       "\\avatar-example.png";
 
             parentWindow.AddCharacter(_character);
-            parentWindow.RemoveCreateCharacter();
+            parentWindow.RemoveCharacterCreationPanel();
         }
     }
 
@@ -70,17 +68,17 @@ public partial class CharacterCreate : UserControl
         Characteristic.Items.Add(chr);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void CloseClick(object sender, RoutedEventArgs e)
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
-        parentWindow.RemoveCreateCharacter();
+        parentWindow.RemoveCharacterCreationPanel();
     }
 
-    public void Refrash()
+    public void Refresh()
     {
         Characteristic.Items.Clear();
-        var lst = _character.GetAttributes();
-        foreach (var attr in lst) Characteristic.Items.Add(attr);
+        var listOfAttributes = _character.GetAttributes();
+        foreach (var attr in listOfAttributes) Characteristic.Items.Add(attr);
         foreach (var item in Characteristic.Items.OfType<UIElement>().ToList()) item.IsEnabled = false;
     }
 
@@ -88,7 +86,7 @@ public partial class CharacterCreate : UserControl
     {
         var dialog = new OpenFileDialog();
         dialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
-        if (dialog.ShowDialog() == true) _character.Pic_path = dialog.FileName;
+        if (dialog.ShowDialog() == true) _character.AvatarPath = dialog.FileName;
         Avatar.Background = new ImageBrush(new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)));
     }
 }

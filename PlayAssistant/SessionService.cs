@@ -113,7 +113,7 @@ internal static class SessionService
     {
         var ans = new CharacterBase();
         ans.Name = chr.Name;
-        ans.Pic_path = chr.Pic_path;
+        ans.Pic_path = chr.AvatarPath;
         ans.Attr = IntRVtoStruct(chr.ListAttributes);
         ans.GenVal = chr.GeneralAttributesValue;
         ;

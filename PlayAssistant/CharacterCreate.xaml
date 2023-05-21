@@ -76,7 +76,7 @@
                     HorizontalAlignment="Stretch"
                     Margin="10,10,10,10"
                     VerticalAlignment="Center"
-                    Click="Button_Click"
+                    Click="CloseClick"
                     Grid.Row="2" />
         </Grid>
     </Grid>
