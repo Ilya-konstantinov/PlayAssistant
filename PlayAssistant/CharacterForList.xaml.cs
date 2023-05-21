@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using ServiceLibrary;
 
 namespace PlayAssistant;
@@ -25,6 +27,7 @@ public partial class CharacterForList : UserControl
         InitializeComponent();
         Character = character;
         Name.Content = character.Name;
+        Avatar.Source = new BitmapImage(new Uri(character.Pic_path, UriKind.Absolute));
     }
 
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
