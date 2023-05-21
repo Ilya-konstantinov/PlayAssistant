@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -137,7 +136,6 @@ public partial class MainWindow : Window
     {
         Hide.IsEnabled = true;
         Hide.Visibility = Visibility.Visible;
-        
     }
 
     public void UnStels()

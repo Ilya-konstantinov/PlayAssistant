@@ -23,7 +23,7 @@ public partial class DigitalStatiscic : IReturnValue
     {
         InitializeComponent();
         ElTitle.Content = title;
-        if (value == null || value == "") { value = "0"; }
+        if (value == null || value == "") value = "0";
         ElValue.Text = value;
     }
 

@@ -42,15 +42,15 @@ public partial class ToggleSwitch : IReturnValue
     {
         _state = !_state;
         Change_st(_state);
-        
     }
+
     public void Change_st(bool st)
     {
         if (st)
         {
             Circle.Margin = new Thickness(ToggleUserControl.ActualWidth - ToggleUserControl.ActualHeight, 0, 0, 0);
             Rect.Fill = new SolidColorBrush(Colors.Blue);
-}
+        }
         else
         {
             Circle.Margin = new Thickness(0, 0, 0, 0);

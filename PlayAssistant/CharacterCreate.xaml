@@ -30,10 +30,10 @@
                     <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
 
-                <Button x:Name="AddGeneralCharacteriscit"
+                <Button x:Name="AddGeneralCharacteristic"
                         Content="Добавить Характеристику"
                         Margin="5"
-                        Click="AddCharacteriscit_Click"
+                        Click="AddCharacteristic_Click"
                         Grid.Row="1"
                         Grid.Column="0" />
 
@@ -47,9 +47,15 @@
                          Foreground="White"
                          FontSize="20" />
             </Grid>
-            <Button x:Name="Avatar" Content="Выбирете Аватар" HorizontalAlignment="Center" VerticalAlignment="Center" Height="98" Width="230" Click="Avatar_Click">
+            <Button x:Name="Avatar"
+                    Content="Выбирете Аватар"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="98"
+                    Width="230"
+                    Click="Avatar_Click">
                 <Button.Background>
-                    <ImageBrush/>
+                    <ImageBrush />
                 </Button.Background>
             </Button>
         </Grid>

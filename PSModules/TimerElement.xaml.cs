@@ -55,7 +55,6 @@ public partial class TimerElement : IReturnValue
         get => _tempTime.ToString();
         set
         {
-
             _time = int.Parse(value);
             Update_text(_time);
         }

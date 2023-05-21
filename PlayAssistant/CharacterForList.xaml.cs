@@ -19,8 +19,8 @@ public enum Status
 
 public partial class CharacterForList : UserControl
 {
-    public Character Character;
     private Status _st = Status.Close;
+    public Character Character;
 
     internal CharacterForList(Character character)
     {
@@ -33,14 +33,11 @@ public partial class CharacterForList : UserControl
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (_st == Status.Open)
-        {
             Close();
-        }
         else
-        {
             Open();
-        }
     }
+
     public void Close()
     {
         _st = Status.Close;
@@ -49,6 +46,7 @@ public partial class CharacterForList : UserControl
         Character_Refresh();
         foreach (var item in lst) Grid.Children.Remove(item);
     }
+
     public void Open()
     {
         _st = Status.Open;
@@ -68,6 +66,7 @@ public partial class CharacterForList : UserControl
         var parentWindow = Window.GetWindow(this) as MainWindow;
         parentWindow.CreateList(false, true, Character);
     }
+
     public void Character_Refresh()
     {
         var lst = Grid.Children.OfType<ListBox>().ToList();
