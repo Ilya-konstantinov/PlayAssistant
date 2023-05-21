@@ -25,17 +25,17 @@
 
         <!-- Список игроков -->
         <ListBox Grid.Row="1"
-                 x:Name="LbPlayers"
+                 x:Name="ListOfPlayers"
                  Grid.Column="2"
                  HorizontalAlignment="Stretch" />
 
         <!-- Список игровых статистик -->
-        <ListBox x:Name="PsmList"
+        <ListBox x:Name="ListOfPlayStaticModules"
                  Grid.Row="1"
                  Grid.Column="1"
                  Margin="10,10,10,15" />
 
-        <Grid x:Name="PsmPicker"
+        <Grid x:Name="PlayStaticModulesPicker"
               Grid.Row="1"
               Grid.Column="1"
               ZIndex="1" />
@@ -50,12 +50,12 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="0, 0, 30, 0"
-                    Click="Button_Click_2" />
+                    Click="AddGlobalCharacteristic_Click" />
 
             <Button Content="Создать персонажа"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Click="btn1_Click" />
+                    Click="CreateCharacter_Click" />
         </StackPanel>
 
         <Grid x:Name="GameCreateGrid"
@@ -87,7 +87,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="0, 0, 30, 0"
-                    Click="Button_Click_3" />
+                    Click="AddGameStatistic" />
             <Button x:Name="ExitBtn"
                     Content="Exit"
                     HorizontalAlignment="Left"

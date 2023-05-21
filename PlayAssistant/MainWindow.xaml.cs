@@ -11,12 +11,12 @@ namespace PlayAssistant;
 /// <summary>
 /// Логика взаимодействия для MainWindow.xaml
 /// </summary>
-using MdListDataType = List<Pair<Type, ReturnValue>>;
-using ChrListDataType = List<CharacterBase>;
+using ModuleListDataType = List<Pair<Type, ReturnValue>>;
+using CharacterListDataType = List<CharacterBase>;
 using SessionDataType =
     Pair<Pair<List<CharacterBase>, List<Pair<Type, ReturnValue>>>, List<Pair<Type, ReturnValue>>>;
 
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     private readonly object _mainWindow;
 
@@ -37,45 +37,45 @@ public partial class MainWindow : Window
     {
         if (SessionService.SessionName == null) return;
 
-        Refrash();
+        Refresh();
         SessionService.SaveSession(SessionData());
     }
 
-    public SessionDataType SessionData()
+    private SessionDataType SessionData()
     {
-        var genAttr = SessionService.IntRVtoStruct(Character.ListGeneralAttributes);
-        var chrData = new Pair<ChrListDataType, MdListDataType>(new ChrListDataType(
+        var generalAttributes = SessionService.InterfaceToStructure(Character.ListGeneralAttributes);
+        var chrData = new Pair<CharacterListDataType, ModuleListDataType>(new CharacterListDataType(
                 Characters()),
-            genAttr
+            generalAttributes
         );
-        var mdData = new MdListDataType(
-            SessionService.IntRVtoStruct(PsmList.Items.OfType<IReturnValue>().ToList())
+        var moduleData = new ModuleListDataType(
+            SessionService.InterfaceToStructure(ListOfPlayStaticModules.Items.OfType<IReturnValue>().ToList())
         );
-        return new SessionDataType(chrData, mdData);
+        return new SessionDataType(chrData, moduleData);
     }
 
-    public ChrListDataType Characters()
+    private CharacterListDataType Characters()
     {
-        var list = new ChrListDataType();
-        var lstchr = LbPlayers.Items.OfType<CharacterForList>().ToList();
-        foreach (var item in lstchr) list.Add(SessionService.ChrSave(item.Character));
+        var list = new CharacterListDataType();
+        var listOfCharacters = ListOfPlayers.Items.OfType<CharacterForList>().ToList();
+        foreach (var item in listOfCharacters) list.Add(SessionService.ChrSave(item.Character));
 
         return list;
     }
 
     public void StartSession()
     {
-        var arg = SessionService.LoadSession();
-        var chrData = arg.First;
-        var mdData = arg.Second;
-        Character.ListGeneralAttributes = SessionService.StructRvToInt(chrData.Second);
-        if (chrData.First != null)
-            foreach (var item in chrData.First)
-                LbPlayers.Items.Add(new CharacterForList(SessionService.ChrLoad(item)));
+        var arguments = SessionService.LoadSession();
+        var characterData = arguments.First;
+        var moduleData = arguments.Second;
+        Character.ListGeneralAttributes = SessionService.StructureToInterface(characterData.Second);
+        if (characterData.First != null)
+            foreach (var item in characterData.First)
+                ListOfPlayers.Items.Add(new CharacterForList(SessionService.ChrLoad(item)));
 
-        if (mdData != null)
-            foreach (var item in SessionService.StructRvToInt(mdData))
-                PsmList.Items.Add(item);
+        if (moduleData != null)
+            foreach (var item in SessionService.StructureToInterface(moduleData))
+                ListOfPlayStaticModules.Items.Add(item);
     }
 
     public void OpenGameCreationWindow()
@@ -83,105 +83,97 @@ public partial class MainWindow : Window
         Application.Current.MainWindow.Content = _mainWindow;
     }
 
-    public void OpenGameChoosePage()
+    private void OpenGameChoosePage()
     {
-        LbPlayers.Items.Clear();
-        PsmList.Items.Clear();
+        ListOfPlayers.Items.Clear();
+        ListOfPlayStaticModules.Items.Clear();
         Application.Current.MainWindow.Content = new GameChooseMenu(SessionService.SessionsList());
     }
 
     internal void AddCharacter(Character character)
     {
-        LbPlayers.Items.Add(new CharacterForList(character));
+        ListOfPlayers.Items.Add(new CharacterForList(character));
     }
 
-    public void AddPs(IReturnValue ps)
+    public void AddPlayStatic(IReturnValue playStatic)
     {
-        ((UIElement)ps).IsEnabled = true;
-        PsmList.Items.Add(ps);
+        ((UIElement)playStatic).IsEnabled = true;
+        ListOfPlayStaticModules.Items.Add(playStatic);
     }
 
     public void RemoveList(bool needToHide)
     {
-        var lst = PsmPicker.Children.OfType<ListOfUserControls>().ToList();
-        foreach (var item in lst) PsmPicker.Children.Remove(item);
+        var listOfUserControls = PlayStaticModulesPicker.Children.OfType<ListOfUserControls>().ToList();
+        foreach (var item in listOfUserControls)
+        {
+            PlayStaticModulesPicker.Children.Remove(item);
+        }
+        
         var another_lst = GameCreateGrid.Children.OfType<ListOfUserControls>().ToList();
-        foreach (var item in another_lst) GameCreateGrid.Children.Remove(item);
+        foreach (var item in another_lst)
+        {
+            GameCreateGrid.Children.Remove(item);
+        }
 
         if (needToHide) CloseOverlayed();
     }
 
     public void RemoveCharacterCreationPanel()
     {
-        var lst = PsmPicker.Children.OfType<CharacterCreate>().ToList();
-        foreach (var item in lst) PsmPicker.Children.Remove(item);
+        var listOfCharacterCreates = PlayStaticModulesPicker.Children.OfType<CharacterCreate>().ToList();
+        foreach (var item in listOfCharacterCreates) PlayStaticModulesPicker.Children.Remove(item);
 
         CloseOverlayed();
 
         UnStels();
     }
 
-    public void CreateList(bool isPsList, bool inMainWindow, Character curCh = null)
+    public void CreateList(bool isPlayStaticList, bool inMainWindow, Character currentCharacter = null)
     {
         var list = new List<IReturnValue>();
-        if (isPsList)
+        if (isPlayStaticList)
             list = SessionService.GetParams();
         else
             list = SessionService.GetAttributes();
 
-        OpenOverlayed(new ListOfUserControls(list, isPsList, inMainWindow, curCh));
+        OpenOverlayed(new ListOfUserControls(list, isPlayStaticList, inMainWindow, currentCharacter));
     }
 
-    public void Stels()
+    private void Stels()
     {
         Hide.IsEnabled = true;
         Hide.Visibility = Visibility.Visible;
     }
 
-    public void UnStels()
+    private void UnStels()
     {
         Hide.IsEnabled = false;
         Hide.Visibility = Visibility.Hidden;
     }
 
-    private void btn1_Click(object sender, RoutedEventArgs e)
+    private void CreateCharacter_Click(object sender, RoutedEventArgs e)
     {
         OpenOverlayed(new CharacterCreate());
     }
 
-    private void Button_Click_2(object sender, RoutedEventArgs e)
+    private void AddGlobalCharacteristic_Click(object sender, RoutedEventArgs e)
     {
         CreateList(false, true);
     }
 
-    public void Refrash()
+    public void Refresh()
     {
         foreach (var item in GameCreateGrid.Children.OfType<CharacterCreate>()) item.Refresh();
 
-        foreach (var item in LbPlayers.Items.OfType<CharacterForList>()) item.Refresh();
+        foreach (var item in ListOfPlayers.Items.OfType<CharacterForList>()) item.Refresh();
     }
 
-    private void Button_Click_3(object sender, RoutedEventArgs e)
+    private void AddGameStatistic(object sender, RoutedEventArgs e)
     {
         CreateList(true, true);
     }
 
-    public void OpenGameCreate(object sender, RoutedEventArgs e)
-    {
-        OpenOverlayed(new GameCreationMenu());
-    }
-
-    public void CloseGameCreate()
-    {
-        GameCreateGrid.Visibility = Visibility.Hidden;
-        GameCreateGrid.IsEnabled = false;
-
-        GameCreateGrid.Children.Clear();
-
-        UnStels();
-    }
-
-    public void OpenOverlayed(UIElement content)
+    private void OpenOverlayed(UIElement content)
     {
         Stels();
 
@@ -206,7 +198,7 @@ public partial class MainWindow : Window
 
     private void Exit_btn_Click(object sender, RoutedEventArgs e)
     {
-        Refrash();
+        Refresh();
         SessionService.SaveSession(SessionData());
         SessionService.SessionName = null;
         OpenGameChoosePage();

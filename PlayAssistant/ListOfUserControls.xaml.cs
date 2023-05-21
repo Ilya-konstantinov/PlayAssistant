@@ -47,7 +47,7 @@ public partial class ListOfUserControls
                 "");
             ((UserControl)instance).SetValue(Grid.ColumnProperty, 1);
             ((UserControl)instance).SetValue(Grid.RowProperty, 1);
-            parentWindow.AddPs((IReturnValue)
+            parentWindow.AddPlayStatic((IReturnValue)
                 instance
             );
         }
@@ -58,7 +58,7 @@ public partial class ListOfUserControls
             else
                 _currentCharacter.AddAttribute(selected);
 
-            parentWindow.Refrash();
+            parentWindow.Refresh();
         }
 
         parentWindow.RemoveList(_inMainWindow);

@@ -114,7 +114,7 @@ internal static class SessionService
         var ans = new CharacterBase();
         ans.Name = chr.Name;
         ans.Pic_path = chr.AvatarPath;
-        ans.Attr = IntRVtoStruct(chr.ListAttributes);
+        ans.Attr = InterfaceToStructure(chr.ListAttributes);
         ans.GenVal = chr.GeneralAttributesValue;
         ;
         return ans;
@@ -124,11 +124,11 @@ internal static class SessionService
     {
         var ans = new Character(chr.Name, chr.Pic_path);
         ans.GeneralAttributesValue = chr.GenVal;
-        ans.ListAttributes = StructRvToInt(chr.Attr);
+        ans.ListAttributes = StructureToInterface(chr.Attr);
         return ans;
     }
 
-    public static MdListDataType IntRVtoStruct(List<IReturnValue> values)
+    public static MdListDataType InterfaceToStructure(List<IReturnValue> values)
     {
         var ans = new MdListDataType();
         foreach (var item in values)
@@ -141,7 +141,7 @@ internal static class SessionService
         return ans;
     }
 
-    public static List<IReturnValue> StructRvToInt(MdListDataType values)
+    public static List<IReturnValue> StructureToInterface(MdListDataType values)
     {
         var ans = new List<IReturnValue>();
         if (values != null)
