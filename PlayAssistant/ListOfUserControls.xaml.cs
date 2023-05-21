@@ -11,24 +11,24 @@ namespace PlayAssistant;
 /// <summary>
 ///     Логика взаимодействия для ListOfUserControls.xaml
 /// </summary>
-public partial class ListOfUserControls : UserControl
+public partial class ListOfUserControls
 {
-    private readonly bool _isPsList;
-    public readonly Character CurCh;
-    public readonly bool InMainWindow;
+    private readonly bool _isPlayStaticList;
+    private readonly Character _currentCharacter;
+    private readonly bool _inMainWindow;
 
-    public ListOfUserControls(List<IReturnValue> userControls, bool isPsList, bool inMainWindow,
-        Character curCh = null)
+    public ListOfUserControls(List<IReturnValue> userControls, bool isPlayStaticList, bool inMainWindow,
+        Character currentCharacter = null)
     {
         InitializeComponent();
         foreach (var item in userControls) MainList.Items.Add(item);
 
-        _isPsList = isPsList;
-        InMainWindow = inMainWindow;
-        CurCh = curCh;
+        _isPlayStaticList = isPlayStaticList;
+        _inMainWindow = inMainWindow;
+        _currentCharacter = currentCharacter;
 
-        var t = MainList.Items.OfType<UIElement>().ToList();
-        foreach (var item in t)
+        var modules = MainList.Items.OfType<UIElement>().ToList();
+        foreach (var item in modules)
             item.IsEnabled = false;
     }
 
@@ -39,7 +39,7 @@ public partial class ListOfUserControls : UserControl
         if (selected == null)
             return;
         selected.Title = ElementTitle.Text;
-        if (_isPsList)
+        if (_isPlayStaticList)
         {
             var instance = Activator.CreateInstance(
                 selected.GetType(),
@@ -53,21 +53,21 @@ public partial class ListOfUserControls : UserControl
         }
         else
         {
-            if (CurCh == null)
+            if (_currentCharacter == null)
                 Character.AddGeneralAttributes(selected);
             else
-                CurCh.AddAttribute(selected);
+                _currentCharacter.AddAttribute(selected);
 
             parentWindow.Refrash();
         }
 
-        parentWindow.RemoveList(InMainWindow);
+        parentWindow.RemoveList(_inMainWindow);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void CloseButtonClick(object sender, RoutedEventArgs e)
     {
         var parentWindow = Window.GetWindow(this) as MainWindow;
-        parentWindow.RemoveList(InMainWindow);
+        parentWindow.RemoveList(_inMainWindow);
         parentWindow.CloseOverlayed();
     }
 }

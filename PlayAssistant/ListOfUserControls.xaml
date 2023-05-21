@@ -20,7 +20,7 @@
                 RenderTransformOrigin="-0.31,0.39"
                 Width="174"
                 Height="54"
-                Click="Button_Click"
+                Click="CloseButtonClick"
                 Grid.Row="1" />
         <TextBox x:Name="ElementTitle"
                  Text="Title"
