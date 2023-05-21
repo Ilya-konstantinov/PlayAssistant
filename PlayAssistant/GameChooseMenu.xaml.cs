@@ -39,7 +39,7 @@ public partial class GameChooseMenu
         Stels();
         GameCreateGrid.Visibility = Visibility.Visible;
         GameCreateGrid.IsEnabled = true;
-        var gcm = new GameCreateMenu();
+        var gcm = new GameCreationMenu();
 
         Grid.SetRow(gcm, 1);
         Grid.SetColumn(gcm, 1);

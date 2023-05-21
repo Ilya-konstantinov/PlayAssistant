@@ -168,7 +168,7 @@ public partial class MainWindow : Window
 
     public void OpenGameCreate(object sender, RoutedEventArgs e)
     {
-        OpenOverlayed(new GameCreateMenu());
+        OpenOverlayed(new GameCreationMenu());
     }
 
     public void CloseGameCreate()

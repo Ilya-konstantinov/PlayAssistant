@@ -8,18 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MaterialDesignColors" Version="2.1.4"/>
-        <PackageReference Include="MaterialDesignThemes" Version="4.9.0"/>
+        <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+        <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CHRSModules\CHRSModules.csproj"/>
-        <ProjectReference Include="..\PSModules\PSModules.csproj"/>
-        <ProjectReference Include="..\ServiceLibrary\ServiceLibrary.csproj"/>
+        <ProjectReference Include="..\CHRSModules\CHRSModules.csproj" />
+        <ProjectReference Include="..\PSModules\PSModules.csproj" />
+        <ProjectReference Include="..\ServiceLibrary\ServiceLibrary.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="avatar-example.png"/>
+        <Resource Include="avatar-example.png" />
     </ItemGroup>
 
 

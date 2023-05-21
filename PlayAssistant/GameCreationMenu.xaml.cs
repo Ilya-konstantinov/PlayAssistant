@@ -6,9 +6,9 @@ namespace PlayAssistant;
 /// <summary>
 ///     Логика взаимодействия для GameCreateMenu.xaml
 /// </summary>
-public partial class GameCreateMenu : UserControl
+public partial class GameCreationMenu
 {
-    public GameCreateMenu()
+    public GameCreationMenu()
     {
         InitializeComponent();
     }
