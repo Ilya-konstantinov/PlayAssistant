@@ -8,15 +8,15 @@ using ServiceLibrary;
 
 namespace PlayAssistant;
 
-using MdListDataType = List<Pair<Type, ReturnValue>>;
-using ChrListDataType = List<CharacterBase>;
-using SessinDataType =
+using ModuleListDataType = List<Pair<Type, ReturnValue>>;
+using CharacterListDataType = List<CharacterBase>;
+using SessionDataType =
     Pair<Pair<List<CharacterBase>, List<Pair<Type, ReturnValue>>>, List<Pair<Type, ReturnValue>>>;
 
 public struct CharacterBase
 {
-    public List<string> GenVal;
-    public MdListDataType Attr;
+    public List<string> GeneralValues;
+    public ModuleListDataType Attributes;
     public string Name;
     public string Pic_path;
 }
@@ -27,22 +27,22 @@ internal static class SessionService
 
     public static List<IReturnValue> GetParams()
     {
-        var ans = new List<IReturnValue>();
+        var result = new List<IReturnValue>();
         foreach (var t in Assembly.GetAssembly(typeof(ControlClass)).GetTypes())
             if (t.GetInterface("IReturnValue") != null)
-                ans.Add((IReturnValue)Activator.CreateInstance(t));
+                result.Add((IReturnValue)Activator.CreateInstance(t));
 
-        return ans;
+        return result;
     }
 
     public static List<IReturnValue> GetAttributes()
     {
-        var ans = new List<IReturnValue>();
+        var result = new List<IReturnValue>();
         foreach (var t in Assembly.GetAssembly(typeof(CHRSModules.ControlClass)).GetTypes())
             if (t.GetInterface("IReturnValue") != null)
-                ans.Add((IReturnValue)Activator.CreateInstance(t));
+                result.Add((IReturnValue)Activator.CreateInstance(t));
 
-        return ans;
+        return result;
     }
 
     public static void CreateSession(string sessionName)
@@ -50,134 +50,130 @@ internal static class SessionService
         SessionName = sessionName;
         Directory.CreateDirectory(SessionName);
         var serializer = new JsonSerializer();
-        using (FileStream chr = File.Create($@"{SessionName}/Characters.json"),
-               md = File.Create($@"{SessionName}/Modules.json"))
+        using (FileStream characterFile = File.Create($@"{SessionName}/Characters.json"),
+               modulesFile = File.Create($@"{SessionName}/Modules.json"))
         {
-            var tmpChr = new ChrListDataType();
-            var tmpMd = new MdListDataType();
-            serializer.Serialize(new StreamWriter(chr), tmpChr);
-            serializer.Serialize(new StreamWriter(md), tmpMd);
+            var characterList = new CharacterListDataType();
+            var moduleList = new ModuleListDataType();
+            serializer.Serialize(new StreamWriter(characterFile), characterList);
+            serializer.Serialize(new StreamWriter(modulesFile), moduleList);
         }
 
-        List<string> tmpTl;
+        List<string> titleList;
         using (var fs = new StreamReader("titles.json"))
         {
-            tmpTl = serializer.Deserialize(fs, typeof(List<string>)) as List<string>;
+            titleList = serializer.Deserialize(fs, typeof(List<string>)) as List<string>;
         }
 
-        if (tmpTl == null)
-            tmpTl = new List<string>();
-        tmpTl.Add(sessionName);
+        if (titleList == null)
+            titleList = new List<string>();
+        titleList.Add(sessionName);
         using (var fs = new StreamWriter("titles.json"))
         {
-            serializer.Serialize(fs, tmpTl);
+            serializer.Serialize(fs, titleList);
         }
     }
 
-    public static void SaveSession(SessinDataType chrAndMd)
+    public static void SaveSession(SessionDataType chrAndMd)
     {
-        var chrData = chrAndMd.First;
-        var mdData = chrAndMd.Second;
+        var characterData = chrAndMd.First;
+        var moduleData = chrAndMd.Second;
         using (StreamWriter chr = new(@$"{SessionName}/Characters.json"),
                md = new($@"{SessionName}/Modules.json"))
         {
             var serializer = new JsonSerializer();
             serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            serializer.Serialize(chr, chrData);
-            serializer.Serialize(md, mdData);
+            serializer.Serialize(chr, characterData);
+            serializer.Serialize(md, moduleData);
         }
     }
 
-    public static SessinDataType LoadSession()
+    public static SessionDataType LoadSession()
     {
-        SessinDataType ans;
-        using (StreamReader chr = new(@$"{SessionName}/Characters.json"),
-               md = new($@"{SessionName}/Modules.json"))
+        SessionDataType result;
+        using (StreamReader characters = new(@$"{SessionName}/Characters.json"),
+               modules = new($@"{SessionName}/Modules.json"))
         {
             var serializer = new JsonSerializer();
-            var chrData =
-                serializer.Deserialize(chr, typeof(Pair<ChrListDataType, MdListDataType>)) as
-                    Pair<ChrListDataType, MdListDataType>;
-            if (chrData == null) chrData = new Pair<ChrListDataType, MdListDataType>();
+            var characterData =
+                serializer.Deserialize(characters, typeof(Pair<CharacterListDataType, ModuleListDataType>)) as
+                    Pair<CharacterListDataType, ModuleListDataType>;
+            if (characterData == null) characterData = new Pair<CharacterListDataType, ModuleListDataType>();
 
-            var mdData = serializer.Deserialize(md, typeof(MdListDataType)) as MdListDataType;
-            if (mdData == null) mdData = new MdListDataType();
+            var moduleData = serializer.Deserialize(modules, typeof(ModuleListDataType)) as ModuleListDataType;
+            if (moduleData == null) moduleData = new ModuleListDataType();
 
-            ans = new SessinDataType(chrData, mdData);
+            result = new SessionDataType(characterData, moduleData);
         }
 
-        return ans;
+        return result;
     }
 
-    public static CharacterBase ChrSave(Character chr)
+    public static CharacterBase SaveCharacter(Character chr)
     {
-        var ans = new CharacterBase();
-        ans.Name = chr.Name;
-        ans.Pic_path = chr.AvatarPath;
-        ans.Attr = InterfaceToStructure(chr.ListAttributes);
-        ans.GenVal = chr.GeneralAttributesValue;
-        ;
-        return ans;
+        var result = new CharacterBase();
+        result.Name = chr.Name;
+        result.Pic_path = chr.AvatarPath;
+        result.Attributes = InterfaceToStructure(chr.ListAttributes);
+        result.GeneralValues = chr.GeneralAttributesValue;
+        return result;
     }
 
-    public static Character ChrLoad(CharacterBase chr)
+    public static Character LoadCharacter(CharacterBase character)
     {
-        var ans = new Character(chr.Name, chr.Pic_path);
-        ans.GeneralAttributesValue = chr.GenVal;
-        ans.ListAttributes = StructureToInterface(chr.Attr);
-        return ans;
+        var result = new Character(character.Name, character.Pic_path);
+        result.GeneralAttributesValue = character.GeneralValues;
+        result.ListAttributes = StructureToInterface(character.Attributes);
+        return result;
     }
 
-    public static MdListDataType InterfaceToStructure(List<IReturnValue> values)
+    public static ModuleListDataType InterfaceToStructure(List<IReturnValue> values)
     {
-        var ans = new MdListDataType();
+        var result = new ModuleListDataType();
         foreach (var item in values)
         {
-            var t = item.GetType();
-            var pr = new ReturnValue(item.Title, item.Value);
-            ans.Add(new Pair<Type, ReturnValue>(t, pr));
+            var type = item.GetType();
+            var parameters = new ReturnValue(item.Title, item.Value);
+            result.Add(new Pair<Type, ReturnValue>(type, parameters));
         }
 
-        return ans;
+        return result;
     }
 
-    public static List<IReturnValue> StructureToInterface(MdListDataType values)
+    public static List<IReturnValue> StructureToInterface(ModuleListDataType values)
     {
-        var ans = new List<IReturnValue>();
-        if (values != null)
-            foreach (var item in values)
-            {
-                var tmp = Activator.CreateInstance(
-                    item.First,
-                    item.Second.Title,
-                    item.Second.Value
-                );
-                ans.Add(tmp as IReturnValue);
-            }
+        var result = new List<IReturnValue>();
+        foreach (var item in values)
+        {
+            var tmp = Activator.CreateInstance(
+                item.First,
+                item.Second.Title,
+                item.Second.Value
+            );
+            result.Add(tmp as IReturnValue);
+        }
 
-        return ans;
+        return result;
     }
 
     public static List<string> SessionsList()
     {
-        var ans = new List<string>();
+        var result = new List<string>();
         var serializer = new JsonSerializer();
         try
         {
-            using (var fs = new StreamReader("titles.json"))
-            {
-                ans = serializer.Deserialize(fs, typeof(List<string>)) as List<string>;
-            }
+            using var fs = new StreamReader("titles.json");
+            result = serializer.Deserialize(fs, typeof(List<string>)) as List<string>;
         }
         // На случай, если файла titles.json не существует
         catch (FileNotFoundException)
         {
             File.Create("titles.json");
-            ans = new List<string>();
+            result = new List<string>();
         }
 
-        if (ans == null)
-            ans = new List<string>();
-        return ans;
+        if (result == null)
+            result = new List<string>();
+        return result;
     }
 }

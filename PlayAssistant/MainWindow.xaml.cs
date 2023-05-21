@@ -58,7 +58,7 @@ public partial class MainWindow
     {
         var list = new CharacterListDataType();
         var listOfCharacters = ListOfPlayers.Items.OfType<CharacterForList>().ToList();
-        foreach (var item in listOfCharacters) list.Add(SessionService.ChrSave(item.Character));
+        foreach (var item in listOfCharacters) list.Add(SessionService.SaveCharacter(item.Character));
 
         return list;
     }
@@ -71,7 +71,7 @@ public partial class MainWindow
         Character.ListGeneralAttributes = SessionService.StructureToInterface(characterData.Second);
         if (characterData.First != null)
             foreach (var item in characterData.First)
-                ListOfPlayers.Items.Add(new CharacterForList(SessionService.ChrLoad(item)));
+                ListOfPlayers.Items.Add(new CharacterForList(SessionService.LoadCharacter(item)));
 
         if (moduleData != null)
             foreach (var item in SessionService.StructureToInterface(moduleData))
