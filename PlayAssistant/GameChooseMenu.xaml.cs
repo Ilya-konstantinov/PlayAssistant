@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace PlayAssistant;
 
 /// <summary>
 ///     Логика взаимодействия для GameChooseMenu.xaml
 /// </summary>
-public partial class GameChooseMenu : Page
+public partial class GameChooseMenu
 {
     public GameChooseMenu(List<string> titles)
     {
@@ -23,7 +22,7 @@ public partial class GameChooseMenu : Page
         GameListFrame.Content = page;
     }
 
-    public void Stels()
+    private void Stels()
     {
         Hide.IsEnabled = true;
         Hide.Visibility = Visibility.Visible;
@@ -60,16 +59,6 @@ public partial class GameChooseMenu : Page
 
     private void Search_btn_Click(object sender, RoutedEventArgs e)
     {
-        if (SearchTextbox.Text.Trim() == "")
-            ((GameList)GameListFrame.Content).ResetSearch();
-        else
-            ((GameList)GameListFrame.Content).Search(SearchTextbox.Text.Trim());
-    }
-
-    private void Search_textbox_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.Key != Key.Enter) return;
-
         if (SearchTextbox.Text.Trim() == "")
             ((GameList)GameListFrame.Content).ResetSearch();
         else
