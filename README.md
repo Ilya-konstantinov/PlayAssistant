@@ -6,7 +6,7 @@
 
 WPF
 
-.NET Framework 4.8
+.NET Core 7.0
 
 Список участников:
 
