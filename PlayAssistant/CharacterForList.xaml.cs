@@ -17,10 +17,10 @@ public enum Status
     Close
 }
 
-public partial class CharacterForList : UserControl
+public partial class CharacterForList
 {
-    private Status _st = Status.Close;
-    public Character Character;
+    private Status _status = Status.Close;
+    public readonly Character Character;
 
     internal CharacterForList(Character character)
     {
@@ -32,35 +32,35 @@ public partial class CharacterForList : UserControl
 
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (_st == Status.Open)
+        if (_status == Status.Open)
             Close();
         else
             Open();
     }
 
-    public void Close()
+    private void Close()
     {
-        _st = Status.Close;
+        _status = Status.Close;
         Height /= 2;
-        var lst = Grid.Children.OfType<ListBox>().ToList();
+        var listOfAttributes = Grid.Children.OfType<ListBox>().ToList();
         Character_Refresh();
-        foreach (var item in lst) Grid.Children.Remove(item);
+        foreach (var item in listOfAttributes) Grid.Children.Remove(item);
     }
 
-    public void Open()
+    private void Open()
     {
-        _st = Status.Open;
-        var lst = new ListBox();
-        foreach (var item in Character.GetAttributes()) lst.Items.Add(item);
+        _status = Status.Open;
+        var listOfAttributes = new ListBox();
+        foreach (var item in Character.GetAttributes()) listOfAttributes.Items.Add(item);
 
         Height *= 2;
-        lst.Margin = new Thickness(
+        listOfAttributes.Margin = new Thickness(
             Width * 0.05, Avatar.Height * 1.2, Width * 0.05, Height * 0.05
         );
-        Grid.Children.Add(lst);
+        Grid.Children.Add(listOfAttributes);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void AddAttribute(object sender, RoutedEventArgs e)
     {
         Close();
         var parentWindow = Window.GetWindow(this) as MainWindow;
@@ -69,22 +69,22 @@ public partial class CharacterForList : UserControl
 
     public void Character_Refresh()
     {
-        var lst = Grid.Children.OfType<ListBox>().ToList();
-        Character.Refrash(lst[0].Items.OfType<IReturnValue>().ToList());
+        var listOfAttributes = Grid.Children.OfType<ListBox>().ToList();
+        Character.Refrash(listOfAttributes[0].Items.OfType<IReturnValue>().ToList());
     }
 
     public void Refresh()
     {
-        if (_st == Status.Open)
+        if (_status == Status.Open)
         {
             Character_Refresh();
             var lst = Grid.Children.OfType<ListBox>().ToList();
             foreach (var item in lst) Grid.Children.Remove(item);
 
-            var lstt = new ListBox();
-            foreach (var item in Character.GetAttributes()) lstt.Items.Add(item);
+            var listOfAttributes = new ListBox();
+            foreach (var item in Character.GetAttributes()) listOfAttributes.Items.Add(item);
 
-            lstt.Margin = new Thickness(
+            listOfAttributes.Margin = new Thickness(
                 Width * 0.05, Avatar.Height * 1.2, Width * 0.05, Height * 0.05
             );
         }
