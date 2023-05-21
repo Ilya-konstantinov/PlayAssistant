@@ -47,7 +47,7 @@
                          Foreground="White"
                          FontSize="20" />
             </Grid>
-            <Button x:Name="Avatar" Content="Выбирете Аватар" HorizontalAlignment="Center" VerticalAlignment="Center" Height="98" Width="230">
+            <Button x:Name="Avatar" Content="Выбирете Аватар" HorizontalAlignment="Center" VerticalAlignment="Center" Height="98" Width="230" Click="Avatar_Click">
                 <Button.Background>
                     <ImageBrush/>
                 </Button.Background>
