@@ -6,9 +6,9 @@ namespace PlayAssistant;
 /// <summary>
 ///     Логика взаимодействия для GameBtn.xaml
 /// </summary>
-public partial class GameBtn : UserControl
+public partial class GameBtn
 {
-    public readonly string Game = "TestGame";
+    public readonly string Game;
 
     public GameBtn(string gameName = "Game")
     {
