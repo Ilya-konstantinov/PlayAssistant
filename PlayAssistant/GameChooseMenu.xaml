@@ -53,6 +53,8 @@
         <Frame x:Name="GameListFrame"
                Content=""
                Grid.Row="1"
+               HorizontalAlignment="Center"
+               Margin="0,200,0,0"
                NavigationUIVisibility="Hidden" />
         <Rectangle x:Name="Hide"
                    Grid.ColumnSpan="3"
