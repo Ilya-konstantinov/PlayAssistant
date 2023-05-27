@@ -2,8 +2,14 @@
 
 public interface IReturnValue
 {
+    /// <summary>
+    /// Название характеристики
+    /// </summary>
     string Title { get; set; }
 
+    /// <summary>
+    /// Ее значение
+    /// </summary>
     string Value { get; set; }
 }
 
