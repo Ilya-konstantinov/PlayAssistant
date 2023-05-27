@@ -10,5 +10,11 @@
       Title="GameList">
 
     <Grid x:Name="MainGrid"
-          Background="#2D283E" />
+          Background="#2D283E">
+        <ListView x:Name="ListOfGames"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Background="White"
+            ></ListView>
+    </Grid>
 </Page>

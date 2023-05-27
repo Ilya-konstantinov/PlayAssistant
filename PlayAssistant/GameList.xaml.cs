@@ -16,16 +16,14 @@ public partial class GameList
         InitializeComponent();
 
         foreach (var title in titles)
-            _games.Add(new GameBtn(title));
+            _games.Add(new GameBtn(title)
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            });
 
         for (var i = 0; i < titles.Count; i++)
         {
-            MainGrid.ColumnDefinitions.Add(new ColumnDefinition
-            {
-                Width = new GridLength(1, GridUnitType.Star)
-            });
-            _games[i].SetValue(Grid.ColumnProperty, i);
-            MainGrid.Children.Add(_games[i]);
+            ListOfGames.Items.Add(_games[i]);
         }
     }
 
