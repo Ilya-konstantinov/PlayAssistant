@@ -61,7 +61,7 @@
         <Grid x:Name="GameCreateGrid"
               Margin="10,10,0,0"
               Grid.ColumnSpan="4"
-              Visibility="Visible"
+              Visibility="Hidden"
               IsEnabled="False"
               Panel.ZIndex="10"
               Grid.RowSpan="3">

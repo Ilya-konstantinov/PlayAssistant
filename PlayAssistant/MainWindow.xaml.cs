@@ -203,4 +203,12 @@ public partial class MainWindow
         SessionService.SessionName = null;
         OpenGameChoosePage();
     }
+
+    public void update_toggle_values()
+    {
+        foreach (IReturnValue item in ListOfPlayStaticModules.Items)
+        {
+            item.Value = item.Value;
+        }
+    }
 }

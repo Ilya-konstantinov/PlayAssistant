@@ -40,7 +40,8 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Click="throw_btn_Click"
-                    FontSize="{DynamicResource BtnFontSize}" />
+                    Panel.ZIndex="10"
+                    FontSize="20" />
         </Grid>
         <Border Name="DiceBorder"
                 BorderThickness="1"
@@ -48,8 +49,8 @@
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
-            <Image x:Name="DiceImg"
-                   Source="/Images/1.png" />
+            <TextBox x:Name="DiceImg" TextAlignment="Center" HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" Text="1" FontSize="200" IsEnabled="False"/>
         </Border>
         <CheckBox Foreground="White"
                   x:Name="AnimationCheckbox"
@@ -60,7 +61,7 @@
                   Grid.Row="3"
                   VerticalAlignment="Stretch"
                   VerticalContentAlignment="Center"
-                  FontSize="{DynamicResource LabelFontSize}" />
+                  FontSize="20" />
         <Label Foreground="White"
                x:Name="ElTile"
                Grid.Column="1"

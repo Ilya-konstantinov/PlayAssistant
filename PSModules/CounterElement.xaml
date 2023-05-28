@@ -23,7 +23,7 @@
                Grid.ColumnSpan="3"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"
-               FontSize="{DynamicResource LabelFontSize}" />
+               FontSize="200" />
         <Label Foreground="White"
                x:Name="ElTitle"
                Content="Title"
@@ -36,7 +36,7 @@
                 Grid.Row="1"
                 VerticalAlignment="Stretch"
                 Margin="10, 10, 10, 10"
-                FontSize="{DynamicResource BtnFontSize}"
+                FontSize="20"
                 Click="Minus_btn_Click" />
         <Button x:Name="ResetBtn"
                 Grid.Column="1"
@@ -45,7 +45,7 @@
                 HorizontalAlignment="Stretch"
                 Grid.Row="1"
                 VerticalAlignment="Stretch"
-                FontSize="{DynamicResource BtnFontSize}"
+                FontSize="20"
                 Click="Reset_btn_Click" />
         <Button x:Name="PlusBtn"
                 Grid.Column="2"
@@ -54,7 +54,7 @@
                 Grid.Row="1"
                 VerticalAlignment="Stretch"
                 Margin="10, 10, 10, 10"
-                FontSize="{DynamicResource BtnFontSize}"
+                FontSize="20"
                 Click="Plus_btn_Click" />
     </Grid>
 </UserControl>

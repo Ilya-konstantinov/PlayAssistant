@@ -28,7 +28,7 @@ public partial class DiceD6 : IReturnValue
     public DiceD6(string title, string value)
     {
         InitializeComponent();
-        ThrowBtn.IsEnabled = false;
+        ThrowBtn.IsEnabled = true;
         Title = title;
         if (value == "")
             Value = "0";
@@ -38,7 +38,7 @@ public partial class DiceD6 : IReturnValue
     public DiceD6()
     {
         InitializeComponent();
-        ThrowBtn.IsEnabled = false;
+        ThrowBtn.IsEnabled = true;
     }
 
     public string Title { get; set; }
@@ -51,24 +51,12 @@ public partial class DiceD6 : IReturnValue
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
     {
-        /*
-                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
-                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
-                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
-                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
-                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
-                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+
     }
 
     private void Element_Resized(object sender, SizeChangedEventArgs e)
     {
-        /*
-                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
-                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
-                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
-                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
-                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
-                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+
     }
 
     private void throw_btn_Click(object sender, RoutedEventArgs e)
@@ -90,7 +78,7 @@ public partial class DiceD6 : IReturnValue
         {
             var rand = new Random().Next(1, 7);
             _value = rand;
-            DiceImg.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
+            DiceImg.Text = rand.ToString();
         }
     }
 
@@ -108,7 +96,7 @@ public partial class DiceD6 : IReturnValue
             _value = rand;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                DiceImg.Source = new BitmapImage(new Uri($"/Images/{rand}.png", UriKind.Relative));
+                DiceImg.Text = rand.ToString();
             }));
 
             _animationTimestamp = Stopwatch.GetTimestamp();
@@ -147,7 +135,7 @@ public partial class DiceD6 : IReturnValue
         if (value == "") value = "0";
         var val = int.Parse(value);
         _value = Clamp(val, 1, 6);
-        DiceImg.Source = new BitmapImage(new Uri($"/Images/{_value}.png", UriKind.Relative));
+        DiceImg.Text = _value.ToString();
     }
 
 

@@ -44,24 +44,12 @@ public partial class CounterElement : IReturnValue
 
     private void Element_Loaded(object sender, RoutedEventArgs e)
     {
-        /*
-                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
-                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
-                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
-                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
-                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
-                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+
     }
 
     private void Element_Resized(object sender, SizeChangedEventArgs e)
     {
-        /*
-                    double labelfontsize = Application.Current.MainWindow.Height * (labelFontSize / 100);
-                    double btnfontsize = App.Current.MainWindow.Height * (btnFontSize / 100);
-                    System.Windows.Application.Current.Resources.Remove("LabelFontSize");
-                    System.Windows.Application.Current.Resources.Add("LabelFontSize", labelfontsize);
-                    System.Windows.Application.Current.Resources.Remove("BtnFontSize");
-                    System.Windows.Application.Current.Resources.Add("BtnFontSize", btnfontsize);*/
+
     }
 
     private void Minus_btn_Click(object sender, RoutedEventArgs e)

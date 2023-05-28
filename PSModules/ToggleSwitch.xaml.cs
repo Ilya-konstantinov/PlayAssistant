@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ServiceLibrary;
@@ -35,7 +38,7 @@ public partial class ToggleSwitch : IReturnValue
     public string Value
     {
         get => _state.ToString();
-        set => Change_st(_state = bool.Parse(value));
+        set => Change_st(_state = Convert.ToBoolean(value));
     }
 
     private void Circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -56,5 +59,22 @@ public partial class ToggleSwitch : IReturnValue
             Circle.Margin = new Thickness(0, 0, 0, 0);
             Rect.Fill = new SolidColorBrush(Colors.Gray);
         }
+    }
+
+    public void Set_on()
+    {
+        Circle.Margin = new Thickness(ToggleUserControl.ActualWidth - ToggleUserControl.ActualHeight, 0, 0, 0);
+        Rect.Fill = new SolidColorBrush(Colors.Blue);
+    }
+
+    public void Set_off()
+    {
+        Circle.Margin = new Thickness(0, 0, 0, 0);
+        Rect.Fill = new SolidColorBrush(Colors.Gray);
+    }
+
+    private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        ToggleUserControl.Value = ToggleUserControl.Value;
     }
 }

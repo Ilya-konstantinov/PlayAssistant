@@ -23,7 +23,7 @@
                  TextWrapping="Wrap"
                  Text=""
                  Margin="10,10,10,10"
-                 FontSize="{DynamicResource LabelFontSize}"
+                 FontSize="30"
                  Height="NaN"
                  Width="NaN"
                  Grid.Row="1" />
@@ -33,7 +33,7 @@
                  Text=""
                  Margin="10,10,10,10"
                  Grid.Column="1"
-                 FontSize="{DynamicResource LabelFontSize}"
+                 FontSize="30"
                  Height="NaN"
                  Width="NaN"
                  Grid.Row="1" />
@@ -42,7 +42,7 @@
                 Grid.Row="2"
                 Margin="10,10,10,10"
                 Click="Generate_btn_Click"
-                FontSize="{DynamicResource BtnFontSize}"
+                FontSize="20"
                 Height="NaN"
                 Width="NaN" />
         <TextBlock Foreground="White"
