@@ -78,13 +78,20 @@ internal static class SessionService
     {
         var characterData = chrAndMd.First;
         var moduleData = chrAndMd.Second;
-        using (StreamWriter chr = new(@$"{SessionName}/Characters.json"),
-               md = new($@"{SessionName}/Modules.json"))
+        try
         {
-            var serializer = new JsonSerializer();
-            serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            serializer.Serialize(chr, characterData);
-            serializer.Serialize(md, moduleData);
+            using (StreamWriter chr = new(@$"{SessionName}/Characters.json"),
+               md = new($@"{SessionName}/Modules.json"))
+            {
+                var serializer = new JsonSerializer();
+                serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                serializer.Serialize(chr, characterData);
+                serializer.Serialize(md, moduleData);
+            }
+        }
+        catch (Exception ex)
+        {
+            return;
         }
     }
 
@@ -175,5 +182,34 @@ internal static class SessionService
         if (result == null)
             result = new List<string>();
         return result;
+    }
+
+    public static void Delete_current_session(string game_name)
+    {
+        var result = new List<string>();
+        var serializer = new JsonSerializer();
+        try
+        {
+            using var fs = new StreamReader("titles.json");
+            result = serializer.Deserialize(fs, typeof(List<string>)) as List<string>;
+            fs.Close();
+            result.Remove(game_name);
+            using (var _fs = new StreamWriter("titles.json"))
+            {
+                serializer.Serialize(_fs, result);
+                _fs.Close();
+            }
+            var dir = new DirectoryInfo($@"{game_name}/");
+            foreach (string file in Directory.EnumerateFiles($@"./{game_name}/", "*.*", SearchOption.AllDirectories))
+            {
+                File.Delete(file);
+            }
+            dir.Delete();
+        }
+        catch (FileNotFoundException)
+        {
+            File.Create("titles.json");
+        }
+
     }
 }

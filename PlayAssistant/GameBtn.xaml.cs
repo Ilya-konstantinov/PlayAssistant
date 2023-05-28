@@ -21,9 +21,17 @@ public partial class GameBtn
 
     private void Select_btn_Click(object sender, RoutedEventArgs e)
     {
-        SessionService.SessionName = Game;
-        var parentWindow = Window.GetWindow(this) as MainWindow;
-        ((MainWindow)Application.Current.MainWindow).OpenGameCreationWindow();
-        parentWindow.StartSession();
+        if (((GameChooseMenu)Application.Current.MainWindow.Content).delete_mode)
+        {
+            SessionService.Delete_current_session(Game);
+            ((MainWindow)Application.Current.MainWindow).OpenGameChoosePage();
+        }
+        else
+        {
+            SessionService.SessionName = Game;
+            var parentWindow = Window.GetWindow(this) as MainWindow;
+            ((MainWindow)Application.Current.MainWindow).OpenGameCreationWindow();
+            parentWindow.StartSession();
+        }
     }
 }

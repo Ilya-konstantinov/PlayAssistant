@@ -94,6 +94,12 @@
                     VerticalAlignment="Center"
                     Click="Exit_btn_Click"
                     Margin="0, 0, 30, 0" />
+            <Button x:Name="Delete_btn" 
+                    Content="Delete"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Click="Delete_btn_Click"
+                    Margin="0, 0, 30, 0"/>
         </StackPanel>
         <Rectangle x:Name="Hide"
                    Grid.ColumnSpan="4"

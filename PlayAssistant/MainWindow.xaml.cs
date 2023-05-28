@@ -83,7 +83,7 @@ public partial class MainWindow
         Application.Current.MainWindow.Content = _mainWindow;
     }
 
-    private void OpenGameChoosePage()
+    public void OpenGameChoosePage()
     {
         ListOfPlayers.Items.Clear();
         ListOfPlayStaticModules.Items.Clear();
@@ -210,5 +210,12 @@ public partial class MainWindow
         {
             item.Value = item.Value;
         }
+    }
+
+    private void Delete_btn_Click(object sender, RoutedEventArgs e)
+    {
+        var _game_name = SessionService.SessionName;
+        SessionService.Delete_current_session(_game_name);
+        OpenGameChoosePage();
     }
 }

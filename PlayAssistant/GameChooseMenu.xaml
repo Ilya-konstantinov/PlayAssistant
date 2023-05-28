@@ -49,6 +49,12 @@
                         Margin="0,35,10,20"
                         Click="Search_btn_Click" />
             </Grid>
+            <Button x:Name="DeleteGame_btn" 
+                    Grid.Column="2" 
+                    Margin="10" 
+                    Content="Delete" 
+                    Click="DeleteGame_btn_Click"
+                    Background="Transparent"/>
         </Grid>
         <Frame x:Name="GameListFrame"
                Content=""

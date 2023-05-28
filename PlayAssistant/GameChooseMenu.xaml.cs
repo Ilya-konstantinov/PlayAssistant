@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace PlayAssistant;
 
@@ -9,6 +10,8 @@ namespace PlayAssistant;
 /// </summary>
 public partial class GameChooseMenu
 {
+    public bool delete_mode = false;
+
     public GameChooseMenu(List<string> titles)
     {
         InitializeComponent();
@@ -63,5 +66,14 @@ public partial class GameChooseMenu
             ((GameList)GameListFrame.Content).ResetSearch();
         else
             ((GameList)GameListFrame.Content).Search(SearchTextbox.Text.Trim());
+    }
+
+    private void DeleteGame_btn_Click(object sender, RoutedEventArgs e)
+    {
+        delete_mode = !delete_mode;
+        if (delete_mode)
+            DeleteGame_btn.Background = Brushes.Red;
+        else
+            DeleteGame_btn.Background = Brushes.Transparent;
     }
 }
