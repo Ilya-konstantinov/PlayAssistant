@@ -19,7 +19,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="avatar-example.png" />
+      <None Include="bin\Debug\net7.0-windows\GameTemplates\Пустая игра\Characters.json" />
+      <None Include="bin\Debug\net7.0-windows\GameTemplates\Пустая игра\Modules.json" />
+      <None Include="bin\Debug\net7.0-windows\GameTemplates\Пустая игра\Parameters.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="bin\Debug\net7.0-windows\avatar-example.png" />
     </ItemGroup>
 
 

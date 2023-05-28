@@ -29,6 +29,7 @@ public partial class MainWindow
         Application.Current.MainWindow.Content = new GameChooseMenu(SessionService.SessionsList());
 
         Closing += MainWindow_Closing;
+
     }
 
     //  1 -- персонажи 2 -- лист генеральных характеристик 3 -- лист игровых модулей
@@ -81,6 +82,13 @@ public partial class MainWindow
     public void OpenGameCreationWindow()
     {
         Application.Current.MainWindow.Content = _mainWindow;
+        if (GameCreationSettings.ShouldRun)
+        {
+            for (int i = 0; i < GameCreationSettings.NumberOfPlayers; i++)
+            {
+                OpenOverlayed(new CharacterCreate());
+            }
+        }
     }
 
     private void OpenGameChoosePage()
@@ -120,12 +128,22 @@ public partial class MainWindow
 
     public void RemoveCharacterCreationPanel()
     {
-        var listOfCharacterCreates = PlayStaticModulesPicker.Children.OfType<CharacterCreate>().ToList();
-        foreach (var item in listOfCharacterCreates) PlayStaticModulesPicker.Children.Remove(item);
+        var listOfCharacterCreates = GameCreateGrid.Children.OfType<CharacterCreate>().ToList();
+        // foreach (var item in listOfCharacterCreates) PlayStaticModulesPicker.Children.Remove();
+        try
+        {
+            GameCreateGrid.Children.Remove(listOfCharacterCreates.Last());
+        }
+        catch (Exception e)
+        {
+        }
 
-        CloseOverlayed();
-
-        UnStels();
+        if (listOfCharacterCreates.Count() == 0)
+        {
+            CloseOverlayed();
+            UnStels();    
+        }
+        
     }
 
     public void CreateList(bool isPlayStaticList, bool inMainWindow, Character currentCharacter = null)
